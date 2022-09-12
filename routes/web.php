@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('auth.login');
 })->name('home');
+
+Route::get('/admin-dashboard', [DashboardController::class, 'adminIndex'])->name('admin-dashboard');
+Route::get('/sales-dashboard', [DashboardController::class, 'saleIndex'])->name('sale-dashboard');
