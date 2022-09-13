@@ -101,8 +101,7 @@
                 </p>
               </div>
               <div>
-                <form id="loginForm" action="{{ route('loginPost') }}" method="POST"">
-                  @csrf
+                <form id="loginForm" action="{{ route('loginPost') }}" method="post"">
                   <div class="mb-3 filled form-group tooltip-end-top">
                     <i data-acorn-icon="email"></i>
                     <input class="form-control" placeholder="Email" name="email" />
