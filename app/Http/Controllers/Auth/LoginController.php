@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\http\Requests\LoginRequest;
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -19,7 +19,7 @@ class LoginController extends Controller
     }
 
     //login controller methods
-    // POST endpoint 
+    // POST endpoint
     //Route admin.login.post
     public function Login(LoginRequest $request)
     {
@@ -33,9 +33,9 @@ class LoginController extends Controller
                     return redirect()->route('sale_dashboard');
                 }
             }
-        
+
         } catch (\Exception $e) {
             return redirect()->back()->withError(['message' => $e->getMessage]);
         }
-    } 
+    }
 }
