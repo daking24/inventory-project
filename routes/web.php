@@ -15,14 +15,14 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-})->name('home');
+// Route::get('/', function () {
+//     return view('auth.login');
+// })->name('home');
 
 Route::get('/admin-dashboard', [DashboardController::class, 'adminIndex'])->name('admin-dashboard');
 Route::get('/sales-dashboard', [DashboardController::class, 'saleIndex'])->name('sale-dashboard');
-
-Route::group(['prefix'=>'admin','as'=>'admin.'], function() {
-    Route::post('/login-post', [LoginController::class, 'login'])->name('login-post');
+Route::get('/', [LoginController::class, 'Index']);
+Route::prefix('admin')->group(function() {
+    Route::post('/login-post', [LoginController::class, 'Login'])->name('loginPost');
     
 });

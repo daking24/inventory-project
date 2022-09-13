@@ -101,7 +101,7 @@
                 </p>
               </div>
               <div>
-                <form id="loginForm" method="POST" action="{{ route('admin.login-post')}}" class="tooltip-end-bottom" novalidate>
+                <form id="loginForm" action="{{ route('loginPost') }}" method="POST"">
                   @csrf
                   <div class="mb-3 filled form-group tooltip-end-top">
                     <i data-acorn-icon="email"></i>

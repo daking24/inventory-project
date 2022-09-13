@@ -9,6 +9,17 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
+    // Get Endpoint
+    //route auth.login
+    public function Index()
+    {
+        return view('auth\login');
+
+    }
+
+    //login controller methods
+    // POST endpoint 
+    //Route admin.login.post
     public function Login(LoginRequest $request)
     {
         try {
