@@ -52,9 +52,12 @@
 <div id="root">
     {{-- Navbar -> Start --}}
     {{-- Admin Sidebar --}}
+    @role('admin')
     @include('layouts.navbar.admin.sidebar')
+    @else
     {{-- Sales Manager Sidebar --}}
-    {{-- @include('layouts.navbar.sales.sidebar') --}}
+    @include('layouts.navbar.sales.sidebar')
+    @endrole
     {{-- Navbar -> End --}}
     <main>
         {{-- Contents -> Start--}}

@@ -193,34 +193,25 @@
                 </a>
             </li>
             <li>
-                <a href="#apps" data-href="/Apps">
+                <a href="#transactions" data-href="/Transactions">
                     <i data-acorn-icon="screen" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Inventory</span>
+                    <span class="label">Transactions</span>
                 </a>
-                <ul id="apps">
-                    <li>
-                        <a href="{{asset('temp')}}/Apps/Calendar.html">
-                            <span class="label">Calendar</span>
-                        </a>
-                    </li>
+                <ul id="transactions">
+
                     <li>
                         <a href="{{asset('temp')}}/Apps/Chat.html">
-                            <span class="label">Chat</span>
+                            <span class="label">Payments</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{asset('temp')}}/Apps/Contacts.html">
-                            <span class="label">Contacts</span>
+                            <span class="label">Income</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{asset('temp')}}/Apps/Mailbox.html">
-                            <span class="label">Mailbox</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{asset('temp')}}/Apps/Tasks.html">
-                            <span class="label">Tasks</span>
+                            <span class="label">Expense</span>
                         </a>
                     </li>
                 </ul>
