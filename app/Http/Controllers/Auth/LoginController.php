@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
 {
@@ -23,19 +24,15 @@ class LoginController extends Controller
     //Route admin.login.post
     public function Login(LoginRequest $request)
     {
-        try {
-            if(Auth::attempt($request->only('email', 'password')))
-            {
-                if(Auth::user->hasRole(User::Role_Admin)){
-                    return redirect()->route('admin_dashboard');
-                }
-                elseif(Auth::user->hasRole(User::Role_Sale)){
-                    return redirect()->route('sale_dashboard');
-                }
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $user = Auth::user();
+            if($user->hasRole('Admin Manager')){
+                return redirect()->route('admin-dashboard');
+            }elseif ($user->hasRole('Sales Manager')){
+                return redirect()->route('admin-dashboard');                # code...
             }
-
-        } catch (\Exception $e) {
-            return redirect()->back()->withError(['message' => $e->getMessage]);
         }
+    
+    
     }
 }

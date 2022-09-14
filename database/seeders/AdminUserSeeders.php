@@ -17,46 +17,30 @@ class AdminUserSeeders extends Seeder
      */
     public function run()
     {
-        $user = User::create([
+        $user1 = User::create([
             'name' => 'admin',
-            'email' => 'AustinKcgmail.com',
+            'email' => 'AustinKc@gmail.com',
             'password' => bcrypt('08037019120')
         ]);
 
-        $user = User::create([
+        $user2 = User::create([
             'name' => 'sales',
             'email' => 'sales@gmail.com',
             'password' => bcrypt('1234567890')
         ]);
 
-        // Reset cached roles and permissions
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
-         // Create Permissions
-        Permission::create(['name' => User::Permission_Create]);
-        Permission::create(['name' => User::Permission_Update]);
-        Permission::create(['name' => User::Permission_Edit]);
-        Permission::create(['name' => User::Permission_Delete]);
-        Permission::create(['name' => User::Permission_View]);
-
         // Create roles and assign created permissions
-        $admin_user = Role::create(['name' => User::Role_Admin]);
-        $sales_role =  Role::create(['name' => User::Role_Sale]);
+        $role1 = Role::create(['name' => 'Admin Manager']);
+        $role2 = Role::create(['name' => 'Sales Manager']);
+     
+        $permissions = Permission::pluck('id','id')->all();
+   
+        $role1->syncPermissions($permissions);
+        // $role2->givePermissionTo('role-list', 'role-edit');
 
-        $sales_role->givePermissionTo(User::Permission_View);
-
-
-        // Assign roles to demo users
-        $executive_admin = User::where('id',1)->first();
-
-        $executive_admin->assignRole(User::Role_Admin);
-
-        $sales_admin = User::where('id',2)->first();
-
-        $sales_admin->assignRole(User::Role_Sale);
-
-
-
+     
+        $user1->assignRole([$role1->id]);
+        $user2->assignRole([$role2->id]);
 
 
     }

@@ -16,16 +16,6 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
-    const Role_Admin = 'admin';
-    const Role_Sale = 'sale';
-    
-
-    const Permission_Create = 'create';
-    const Permission_Update = 'update';
-    const Permission_View = 'view';
-    const Permission_Delete = 'delete';
-    const Permission_Edit = 'edit';
-
     /**
      * The attributes that are mass assignable.
      *
