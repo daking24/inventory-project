@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <title>Acorn Admin Template | Vertical Menu</title>
+    <title>{{ $page }} | {{ config('app.name') }}</title>
     <meta name="description" content="Standard vertical menu that can be pinned for larger screens, switches to semi-hidden state for tablet sizes and shows mobile menu for smaller screens."/>
     <!-- Favicon Tags Start -->
 <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{asset('temp')}}/img/favicon/apple-touch-icon-57x57.png"/>

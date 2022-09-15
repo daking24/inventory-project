@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sale;
-use App\Http\Requests\StoreSaleRequest;
-use App\Http\Requests\UpdateSaleRequest;
+use Illuminate\Http\Request;
 
-class SaleController extends Controller
+class IncomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +13,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return view('sales.index');
+        return view('transactions.income.index');
     }
 
     /**
@@ -31,10 +29,10 @@ class SaleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSaleRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSaleRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +40,10 @@ class SaleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sale  $sale
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Sale $sale)
+    public function show($id)
     {
         //
     }
@@ -53,10 +51,10 @@ class SaleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sale  $sale
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sale $sale)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +62,11 @@ class SaleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSaleRequest  $request
-     * @param  \App\Models\Sale  $sale
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSaleRequest $request, Sale $sale)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +74,10 @@ class SaleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sale  $sale
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sale $sale)
+    public function destroy($id)
     {
         //
     }

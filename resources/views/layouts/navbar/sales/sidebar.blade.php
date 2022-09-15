@@ -193,33 +193,38 @@
                 </a>
                 <ul id="transactions">
                     <li>
-                        <a href="{{asset('temp')}}/Apps/Mailbox.html">
+                        <a href="{{route('transaction-stats')}}">
+                            <span class="label">Statistics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('transactions')}}">
+                            <span class="label">All</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('transfer')}}">
                             <span class="label">Transfers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{asset('temp')}}/Apps/Mailbox.html">
+                        <a href="{{route('sales')}}">
                             <span class="label">Sales</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{asset('temp')}}/Apps/Chat.html">
+                        <a href="{{route('payment')}}">
                             <span class="label">Payments</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{asset('temp')}}/Apps/Contacts.html">
+                        <a href="{{route('income')}}">
                             <span class="label">Income</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{asset('temp')}}/Apps/Mailbox.html">
+                        <a href="{{route('expense')}}">
                             <span class="label">Expense</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{asset('temp')}}/Apps/Mailbox.html">
-                            <span class="label">Transfers</span>
                         </a>
                     </li>
                 </ul>

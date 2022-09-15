@@ -200,8 +200,8 @@
                 <ul id="transactions">
 
                     <li>
-                        <a href="{{asset('temp')}}/Apps/Chat.html">
-                            <span class="label">Payments</span>
+                        <a href="{{route('transfer')}}">
+                            <span class="label">Transfers</span>
                         </a>
                     </li>
                     <li>
