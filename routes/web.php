@@ -41,6 +41,7 @@ Route::prefix('admin')->group(function() {
         Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
         Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
         Route::get('/sales', [SaleController::class, 'index'])->name('sales');
+        Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
         Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
     });
