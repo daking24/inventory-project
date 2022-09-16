@@ -18,7 +18,8 @@
             <button type="submit" class="btn btn-lg btn-primary">Save</button>
             </form>
             <hr >
-            <form action="" method="post">
+            <form action="{{ route('client') }}" method="post">
+                @csrf
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="client_name" placeholder="Customer's Name" value="Customer-N">
                     <label>Customer's Name</label>

@@ -38,7 +38,7 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request, Client  $client)
     {
-        dd('asssssssdfhgfd');
+        dd($request);
         $client->create($request->all());
 
         return redirect()->route('clients.index')->withStatus('Successfully registered customer.');
