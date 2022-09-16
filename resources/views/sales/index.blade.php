@@ -1,4 +1,4 @@
-@extends('layouts.app', ['pageSlug' => 'dashboard', 'page' => 'Dashboard', 'section' => ''])
+@extends('layouts.app', ['pageSlug' => 'transactions_sales', 'page' => 'Transactions | Sales', 'section' => ''])
 
 @section('content')
 <div class="page-title-container">
@@ -8,7 +8,7 @@
         </div>
         <div class="col-12 col-sm-6 d-flex align-items-start justify-content-end">
                     <!-- Tour Button Start -->
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createClient">Register Sale</button>
+            <a type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createClient">Register Sale</a>
             <!-- Tour Button End -->
         </div>
     </div>
@@ -56,46 +56,6 @@
 </div>
 
 {{-- Create Client Modal --}}
-<div class="modal modal-right large fade" id="createClient" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Register/Select Client</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-            <form class="mb-3" action="" method="post">
-            <div class="mb-3">
-                <label for="method" class="form-label">Select Customer</label>
-                <select id="method" name="method" class="form-control form-select">
-                    <option selected="">Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-lg btn-primary">Save</button>
-            </form>
-            <hr >
-            <form action="{{ route('client') }}" method="POST">
-                @csrf
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="client_name" placeholder="Customer's Name" value="Customer-N">
-                    <label>Customer's Name</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="client_phone" placeholder="Phone Number">
-                    <label>Phone Number(Optional)</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="client_email" placeholder="Email">
-                    <label>Email(Optional)</label>
-                </div>
-                <button type="submit" class="btn btn-lg btn-primary">Save</button>
-
-            </form>
-            </div>
-        </div>
-    </div>
-</div>
+@include('sales.modal.create-client')
 @endsection
 
