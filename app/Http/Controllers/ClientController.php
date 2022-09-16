@@ -38,7 +38,7 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request, Client  $client)
     {
-        dd($request);
+        dd('whalla');
         $client->create($request->all());
 
         return redirect()->route('clients.index')->withStatus('Successfully registered customer.');
@@ -98,4 +98,7 @@ class ClientController extends Controller
             ->withStatus('Customer successfully removed.');
 
     }
+
+
+    
 }

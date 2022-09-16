@@ -22,20 +22,21 @@
             <button class="btn btn-primary" type="submit">Save</button>
         </form>
         <hr>
-        <form method="POST" action="" >
+        <form method="POST" action="{{ route('createClient') }}" >
+            @csrf
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="client_name" placeholder="Customer's Name">
+                <input type="text" class="form-control" name="name" placeholder="Customer's Name">
                 <label>Customer's Name</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="client_phone" placeholder="Phone Number">
+                <input type="text" class="form-control" name="phone" placeholder="Phone Number">
                 <label>Phone Number</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" name="client_email" placeholder="email" >
+                <input type="email" class="form-control" name="email" placeholder="email" >
                 <label>Email (Optional)</label>
             </div>
-            <button class="btn btn-primary" type="submit">Save</button>
+            <button class="btn btn-primary " type="submit">Save</button>
         </form>
     </div>
 </div>
