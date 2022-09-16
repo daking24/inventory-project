@@ -1,16 +1,21 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\TestController;
-use App\Http\Controllers\TransferController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\SaleController;
-use App\Http\Controllers\ExpenseController;
-use App\Http\Controllers\IncomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\TransactionStatsController;
+use App\Http\Controllers\{
+    DashboardController,
+    TestController,
+    TransferController,
+    PaymentController,
+    SaleController,
+    ExpenseController,
+    IncomeController,
+    TransactionController,
+    TransactionStatsController,
+    ClientController,
+
+};
+
 
 
 /*
@@ -44,6 +49,10 @@ Route::prefix('admin')->group(function() {
         Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
         Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
+
+        //post endpoint
+        Route::post('/client', [ClientController::class, 'store'])->name('client');
+
     });
 
 
