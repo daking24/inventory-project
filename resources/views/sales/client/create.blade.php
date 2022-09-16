@@ -11,16 +11,17 @@
 
 <div class="card mb-5">
     <div class="card-body">
-        <form method="POST" action="" >
-            <div class="form-floating mb-3">
+        <form class="mb-3" method="POST" action="" >
+            <div class="mb-3">
                 <label for="client-name" class="form-label">Select Customer</label>
                 <select id="client-name" name="client_name" class="form-select">
                     <option selected="">Choose...</option>
                     <option value="">Joe</option>
                 </select>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" type="submit">Save</button>
         </form>
+        <hr>
         <form method="POST" action="" >
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="client_name" placeholder="Customer's Name">
@@ -34,7 +35,7 @@
                 <input type="email" class="form-control" name="client_email" placeholder="email" >
                 <label>Email (Optional)</label>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" type="submit">Save</button>
         </form>
     </div>
 </div>
