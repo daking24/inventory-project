@@ -8,8 +8,8 @@
         </div>
         <div class="col-12 col-sm-6 d-flex align-items-start justify-content-end">
                     <!-- Tour Button Start -->
-            {{-- <a type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createClient">Register Sale</a> --}}
-            <a href="{{ route('client-create') }}" type="button" class="btn btn-outline-primary">Register Sale</a>
+            <a type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createClient">Register Sale</a>
+            {{-- <a href="{{ route('client-create') }}" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#expensesRegister">Register Sale</a> --}}
             <!-- Tour Button End -->
         </div>
     </div>
@@ -57,6 +57,6 @@
 </div>
 
 {{-- Create Client Modal --}}
-{{-- @include('sales.modal.create-client') --}}
+@include('sales.modal.create-client')
 @endsection
 
