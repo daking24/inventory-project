@@ -15,7 +15,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::paginate(25);
+
+        return view('clients.index', compact('clients'));
     }
 
     /**
@@ -25,7 +27,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('clients.create');
     }
 
     /**
@@ -34,9 +36,12 @@ class ClientController extends Controller
      * @param  \App\Http\Requests\StoreClientRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreClientRequest $request)
+    public function store(StoreClientRequest $request, Client  $client)
     {
-        //
+        dd('asssssssdfhgfd');
+        $client->create($request->all());
+
+        return redirect()->route('clients.index')->withStatus('Successfully registered customer.');
     }
 
     /**
@@ -47,7 +52,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return view('clients.show', compact('client'));
     }
 
     /**
@@ -58,7 +63,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -70,7 +75,12 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        $client->update($request->all());
+
+        return redirect()
+            ->route('clients.index')
+            ->withStatus('Successfully modified customer.');
+
     }
 
     /**
@@ -81,6 +91,11 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+
+        return redirect()
+            ->route('clients.index')
+            ->withStatus('Customer successfully removed.');
+
     }
 }
