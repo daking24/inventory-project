@@ -229,6 +229,49 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="#inventory" data-href="/Inventory">
+                    <i data-acorn-icon="notebook-1" class="icon" data-acorn-size="18"></i>
+                    <span class="label">Inventory</span>
+                </a>
+                <ul id="inventory">
+                    <li>
+                        <a href="{{route('inventory-stats')}}">
+                            <span class="label">Statistics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('transactions')}}">
+                            <span class="label">All</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('transfer')}}">
+                            <span class="label">Transfers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('sales')}}">
+                            <span class="label">Sales</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('payment')}}">
+                            <span class="label">Payments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('income')}}">
+                            <span class="label">Income</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('expense')}}">
+                            <span class="label">Expense</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
         </ul>
     </div>
