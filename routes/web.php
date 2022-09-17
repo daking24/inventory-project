@@ -13,6 +13,7 @@ use App\Http\Controllers\{
     TransactionController,
     TransactionStatsController,
     ClientController,
+    InventoryStatsController,
 
 };
 
@@ -46,7 +47,8 @@ Route::prefix('admin')->group(function() {
         Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
         Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
         Route::get('/sales', [SaleController::class, 'index'])->name('sales');
-        Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
+        Route::get('/sales/create', [SaleController::class, 'create'])->name('sales-create');
+        // Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
         Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
 
@@ -54,7 +56,22 @@ Route::prefix('admin')->group(function() {
         Route::post('/client', [ClientController::class, 'store'])->name('client');
 
     });
+    Route::prefix('/inventory')->group(function()
+    {
+        // Route::get('/expenses', [ExpenseController::class, 'index'])->name('expense');
+        // Route::get('/income', [IncomeController::class, 'index'])->name('income');
+        // Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
+        // Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
+        // Route::get('/sales', [SaleController::class, 'index'])->name('sales');
+        // Route::get('/sales/create', [SaleController::class, 'create'])->name('sales-create');
+        // Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
+        // Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
+        Route::get('/stats', [InventoryStatsController::class, 'index'])->name('inventory-stats');
 
+        //post endpoint
+        // Route::post('/client', [ClientController::class, 'store'])->name('client');
+
+    });
 
 });
 

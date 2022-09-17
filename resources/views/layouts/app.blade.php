@@ -459,5 +459,6 @@
 <script src="{{asset('temp')}}/js/common.js"></script>
 <script src="{{asset('temp')}}/js/scripts.js"></script>
 <!-- Page Specific Scripts End -->
+@stack('js')
 </body>
 </html>

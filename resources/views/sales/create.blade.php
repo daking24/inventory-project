@@ -1,290 +1,178 @@
 @extends('layouts.app', ['pageSlug' => 'transactions_sales', 'page' => 'Transactions | Sales', 'section' => ''])
 
 @section('content')
-<div class="container">
-        <div class="row">
-            <div class="col">
-                <!-- Title and Top Buttons Start -->
-                <div class="page-title-container">
-                    <div class="row">
-                        <!-- Title Start -->
-                        <div class="col-12 col-md-7">
-                            <h1 class="mb-0 pb-0 display-4" id="title">Editable Rows Datatables</h1>
-                            <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
-        <ul class="breadcrumb pt-0">
-                            <li class="breadcrumb-item"><a href="../../../index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="../../../Interface.html">Interface</a></li>
-                            <li class="breadcrumb-item"><a href="../../Plugins.html">Plugins</a></li>
-                            <li class="breadcrumb-item"><a href="../Datatables.html">Datatables</a></li>
-                    </ul>
-    </nav>
-                        </div>
-                        <!-- Title End -->
+<div class="page-title-container">
+    <div class="row">
+        <!-- Title Start -->
+        <div class="col-12 col-md-7">
+            <h1 class="mb-0 pb-0 display-4" id="title">Sale Summary</h1>
+        </div>
+        <!-- Title End -->
 
-                        <!-- Top Buttons Start -->
-                        <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
-                            <!-- Add New Button Start -->
-                            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable">
-                                <i data-acorn-icon="plus"></i>
-                                <span>Add New</span>
+        <!-- Top Buttons Start -->
+        <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
+            <!-- Add New Button Start -->
+            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-bin undefined"><path d="M4 5V14.5C4 15.9045 4 16.6067 4.33706 17.1111C4.48298 17.3295 4.67048 17.517 4.88886 17.6629C5.39331 18 6.09554 18 7.5 18H12.5C13.9045 18 14.6067 18 15.1111 17.6629C15.3295 17.517 15.517 17.3295 15.6629 17.1111C16 16.6067 16 15.9045 16 14.5V5"></path><path d="M14 5L13.9424 4.74074C13.6934 3.62043 13.569 3.06028 13.225 2.67266C13.0751 2.50368 12.8977 2.36133 12.7002 2.25164C12.2472 2 11.6734 2 10.5257 2L9.47427 2C8.32663 2 7.75281 2 7.29981 2.25164C7.10234 2.36133 6.92488 2.50368 6.77496 2.67266C6.43105 3.06028 6.30657 3.62044 6.05761 4.74074L6 5"></path><path d="M2 5H18M12 9V13M8 9V13"></path></svg>
+                <span>Delete Sale</span>
+            </button>
+            <!-- Add New Button End -->
+
+        </div>
+        <!-- Top Buttons End -->
+    </div>
+</div>
+<div class="col-12 mb-5">
+    <div class="card mb-5">
+        <div class="card-body">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Handler</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Products</th>
+                    <th scope="col">Total Stock</th>
+                    <th scope="col">Total Cost</th>
+                    <th scope="col">Status</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>22 Sept 2022</td>
+                    <td>Sales Manager</td>
+                    <td>John Doe</td>
+                    <td>50</td>
+                    <td>200</td>
+                    <td>200000</td>
+                    <td>ON HOLD</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="page-title-container">
+    <div class="row">
+        <!-- Title Start -->
+        <div class="col-12 col-md-7">
+            <h1 class="mb-0 pb-0 display-4" id="title">Cart</h1>
+        </div>
+        <!-- Title End -->
+
+        <!-- Top Buttons Start -->
+        <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
+            <!-- Add New Button Start -->
+            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto add-datatable" data-bs-toggle="modal" data-bs-target="#modalTitle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-plus undefined"><path d="M10 17 10 3M3 10 17 10"></path></svg>
+                <span>Add New</span>
+            </button>
+            <!-- Add New Button End -->
+        </div>
+        <!-- Top Buttons End -->
+    </div>
+</div>
+
+<div class="card mb-2 bg-transparent no-shadow d-none d-md-block sh-3">
+    <div class="card-body pt-0 pb-0 h-100">
+        <div class="row g-0 h-100 align-content-center">
+            <div class="col-12 col-md-1 d-flex align-items-center mb-2 mb-md-0 text-muted text-small">ID</div>
+            <div class="col-6 col-md-2 d-flex align-items-center text-alternate text-medium justify-content-end text-muted text-small">
+                Category
+            </div>
+            <div class="col-6 col-md-2 d-flex align-items-center justify-content-end text-alternate text-medium justify-content-end text-muted text-small">
+                Product
+            </div>
+            <div class="col-6 col-md-2 d-flex align-items-center text-alternate text-medium justify-content-end text-muted text-small">Quantity</div>
+            <div class="col-6 col-md-2 d-flex align-items-center text-alternate text-medium justify-content-end text-muted text-small">Price C/U</div>
+            <div class="col-6 col-md-2 d-flex align-items-center text-alternate text-medium justify-content-end text-muted text-small">Total</div>
+        </div>
+    </div>
+</div>
+<div class="scroll-out">
+    <div class="scroll-by-count os-host os-theme-dark os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition" data-count="4" id="checkboxTable" style="height: 288px; margin-bottom: -8px;"><div class="os-resize-observer-host observed"><div class="os-resize-observer" style="left: 0px; right: auto;"></div></div><div class="os-size-auto-observer observed" style="height: calc(100% + 1px); float: left;"><div class="os-resize-observer"></div></div><div class="os-content-glue" style="margin: 0px -15px; width: 829px; height: 295px;"></div><div class="os-padding"><div class="os-viewport os-viewport-native-scrollbars-invisible os-viewport-native-scrollbars-overlaid" style="overflow-y: scroll;"><div class="os-content" style="padding: 0px 15px; height: 100%; width: 100%;">
+        <div class="card mb-2 sh-19 sh-md-8">
+            <div class="card-body pt-0 pb-0 h-100">
+                <div class="row g-0 h-100 align-content-center">
+                    <div class="col-11 col-md-1 d-flex flex-column justify-content-center mb-1 mb-md-0 order-1 order-md-1">
+                        <div class="text-muted text-small d-md-none">ID</div>
+                        <a href="#" class="text-truncate">1</a>
+                    </div>
+                    <div class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-2 order-md-2">
+                        <div class="text-muted text-small d-md-none">Category</div>
+                        <div class="text-alternate">Phones</div>
+                    </div>
+                    <div class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-3 order-md-3">
+                        <div class="text-muted text-small d-md-none">Product</div>
+                        <div class="text-alternate">Samsung A12</div>
+                    </div>
+                    <div class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-4 order-md-4">
+                        <div class="text-muted text-small d-md-none">Quantity</div>
+                        <div class="text-alternate">1</div>
+                    </div>
+                    <div class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-5 order-md-5">
+                        <div class="text-muted text-small d-md-none">Price C/U</div>
+                        <div class="text-alternate">
+                            <span>
+                                <span class="text-small">₦</span>
+                                3.25
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-5 order-md-5">
+                        <div class="text-muted text-small d-md-none">Total</div>
+                        <div class="text-alternate">
+                            <span>
+                                <span class="text-small">₦</span>
+                                30.25
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-1 col-md-1 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-2 text-end order-md-last">
+                        <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-end">
+                            <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-edit-square undefined"><path d="M11 2L5.5 2C4.09554 2 3.39331 2 2.88886 2.33706C2.67048 2.48298 2.48298 2.67048 2.33706 2.88886C2 3.39331 2 4.09554 2 5.5L2 14.5C2 15.9045 2 16.6067 2.33706 17.1111C2.48298 17.3295 2.67048 17.517 2.88886 17.6629C3.39331 18 4.09554 18 5.5 18L14.5 18C15.9045 18 16.6067 18 17.1111 17.6629C17.3295 17.517 17.517 17.3295 17.6629 17.1111C18 16.6067 18 15.9045 18 14.5L18 11"></path><path d="M15.4978 3.06224C15.7795 2.78052 16.1616 2.62225 16.56 2.62225C16.9585 2.62225 17.3405 2.78052 17.6223 3.06224C17.904 3.34396 18.0623 3.72605 18.0623 4.12446C18.0623 4.52288 17.904 4.90497 17.6223 5.18669L10.8949 11.9141L8.06226 12.6223L8.7704 9.78966L15.4978 3.06224Z"></path></svg>
+                                <span class="d-none d-xxl-inline-block">Edit</span>
                             </button>
-                            <!-- Add New Button End -->
-
-                            <!-- Check Button Start -->
-                            <div class="btn-group ms-1 check-all-container">
-                                <div class="btn btn-outline-primary btn-custom-control p-0 ps-3 pe-2" id="datatableCheckAllButton">
-                <span class="form-check float-end">
-                  <input type="checkbox" class="form-check-input" id="datatableCheckAll" />
-                </span>
-                                </div>
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                                        data-bs-offset="0,3"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        data-submenu
-                                ></button>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div class="dropdown dropstart dropdown-submenu">
-                                        <button class="dropdown-item dropdown-toggle tag-datatable caret-absolute disabled" type="button">Tag</button>
-                                        <div class="dropdown-menu">
-                                            <button class="dropdown-item tag-done" type="button">Done</button>
-                                            <button class="dropdown-item tag-new" type="button">New</button>
-                                            <button class="dropdown-item tag-sale" type="button">Sale</button>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item disabled delete-datatable" type="button">Delete</button>
-                                </div>
-                            </div>
-                            <!-- Check Button End -->
-                        </div>
-                        <!-- Top Buttons End -->
-                    </div>
-                </div>
-                <!-- Title and Top Buttons End -->
-
-                <!-- Content Start -->
-                <div class="data-table-rows slim">
-                    <!-- Controls Start -->
-                    <div class="row">
-                        <!-- Search Start -->
-                        <div class="col-sm-12 col-md-5 col-lg-3 col-xxl-2 mb-1">
-                            <div class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
-                                <input class="form-control datatable-search" placeholder="Search" data-datatable="#datatableRows" />
-                                <span class="search-magnifier-icon">
-                <i data-acorn-icon="search"></i>
-              </span>
-                                <span class="search-delete-icon d-none">
-                <i data-acorn-icon="close"></i>
-              </span>
-                            </div>
-                        </div>
-                        <!-- Search End -->
-
-                        <div class="col-sm-12 col-md-7 col-lg-9 col-xxl-10 text-end mb-1">
-                            <div class="d-inline-block me-0 me-sm-3 float-start float-md-none">
-                                <!-- Add Button Start -->
-                                <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow add-datatable"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Add"
-                                        type="button"
-                                        data-bs-delay="0"
-                                >
-                                    <i data-acorn-icon="plus"></i>
-                                </button>
-                                <!-- Add Button End -->
-
-                                <!-- Edit Button Start -->
-                                <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow edit-datatable disabled"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Edit"
-                                        type="button"
-                                        data-bs-delay="0"
-                                >
-                                    <i data-acorn-icon="edit"></i>
-                                </button>
-                                <!-- Edit Button End -->
-
-                                <!-- Delete Button Start -->
-                                <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow disabled delete-datatable"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        title="Delete"
-                                        type="button"
-                                        data-bs-delay="0"
-                                >
-                                    <i data-acorn-icon="bin"></i>
-                                </button>
-                                <!-- Delete Button End -->
-                            </div>
-                            <div class="d-inline-block">
-                                <!-- Print Button Start -->
-                                <button
-                                        class="btn btn-icon btn-icon-only btn-foreground-alternate shadow datatable-print"
-                                        data-datatable="#datatableRows"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        data-bs-delay="0"
-                                        title="Print"
-                                        type="button"
-                                >
-                                    <i data-acorn-icon="print"></i>
-                                </button>
-                                <!-- Print Button End -->
-
-                                <!-- Export Dropdown Start -->
-                                <div class="d-inline-block datatable-export" data-datatable="#datatableRows">
-                                    <button class="btn p-0" data-bs-toggle="dropdown" type="button" data-bs-offset="0,3">
-                  <span
-                          class="btn btn-icon btn-icon-only btn-foreground-alternate shadow dropdown"
-                          data-bs-delay="0"
-                          data-bs-placement="top"
-                          data-bs-toggle="tooltip"
-                          title="Export"
-                  >
-                    <i data-acorn-icon="download"></i>
-                  </span>
-                                    </button>
-                                    <div class="dropdown-menu shadow dropdown-menu-end">
-                                        <button class="dropdown-item export-copy" type="button">Copy</button>
-                                        <button class="dropdown-item export-excel" type="button">Excel</button>
-                                        <button class="dropdown-item export-cvs" type="button">Cvs</button>
-                                    </div>
-                                </div>
-                                <!-- Export Dropdown End -->
-
-                                <!-- Length Start -->
-                                <div class="dropdown-as-select d-inline-block datatable-length" data-datatable="#datatableRows" data-childSelector="span">
-                                    <button class="btn p-0 shadow" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="0,3">
-                  <span
-                          class="btn btn-foreground-alternate dropdown-toggle"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          data-bs-delay="0"
-                          title="Item Count"
-                  >
-                    10 Items
-                  </span>
-                                    </button>
-                                    <div class="dropdown-menu shadow dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">5 Items</a>
-                                        <a class="dropdown-item active" href="#">10 Items</a>
-                                        <a class="dropdown-item" href="#">20 Items</a>
-                                    </div>
-                                </div>
-                                <!-- Length End -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Controls End -->
-
-                    <!-- Table Start -->
-                    <div class="data-table-responsive-wrapper">
-                        <table id="datatableRows" class="data-table nowrap hover">
-                            <thead>
-                            <tr>
-                                <th class="text-muted text-small text-uppercase">Name</th>
-                                <th class="text-muted text-small text-uppercase">Sales</th>
-                                <th class="text-muted text-small text-uppercase">Stock</th>
-                                <th class="text-muted text-small text-uppercase">Category</th>
-                                <th class="text-muted text-small text-uppercase">Tag</th>
-                                <th class="empty">&nbsp;</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Bazlama</td>
-                                <td>858</td>
-                                <td>34</td>
-                                <td>Whole Wheat</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Bolillo</td>
-                                <td>333</td>
-                                <td>24</td>
-                                <td>Whole Wheat</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Table End -->
-                </div>
-                <!-- Content End -->
-
-                <!-- Add Edit Modal Start -->
-                <div class="modal modal-right fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalTitle">Add New</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label class="form-label">Name</label>
-                                        <input name="Name" type="text" class="form-control" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Sales</label>
-                                        <input name="Sales" type="number" class="form-control" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Stock</label>
-                                        <input name="Stock" type="number" class="form-control" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Category</label>
-                                        <div class="form-check">
-                                            <input type="radio" id="category1" name="Category" value="Whole Wheat" class="form-check-input" />
-                                            <label class="form-check-label" for="category1">Whole Wheat</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" id="category2" name="Category" value="Sourdough" class="form-check-input" />
-                                            <label class="form-check-label" for="category2">Sourdough</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" id="category3" name="Category" value="Multigrain" class="form-check-input" />
-                                            <label class="form-check-label" for="category3">Multigrain</label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Tag</label>
-                                        <div class="form-check">
-                                            <input type="radio" id="tag1" name="Tag" value="New" class="form-check-input" />
-                                            <label class="form-check-label" for="tag1">New</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" id="tag2" name="Tag" value="Sale" class="form-check-input" />
-                                            <label class="form-check-label" for="tag2">Sale</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" id="tag3" name="Tag" value="Done" class="form-check-input" />
-                                            <label class="form-check-label" for="tag3">Done</label>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" id="addEditConfirmButton">Add</button>
-                            </div>
+                            <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-bin undefined"><path d="M4 5V14.5C4 15.9045 4 16.6067 4.33706 17.1111C4.48298 17.3295 4.67048 17.517 4.88886 17.6629C5.39331 18 6.09554 18 7.5 18H12.5C13.9045 18 14.6067 18 15.1111 17.6629C15.3295 17.517 15.517 17.3295 15.6629 17.1111C16 16.6067 16 15.9045 16 14.5V5"></path><path d="M14 5L13.9424 4.74074C13.6934 3.62043 13.569 3.06028 13.225 2.67266C13.0751 2.50368 12.8977 2.36133 12.7002 2.25164C12.2472 2 11.6734 2 10.5257 2L9.47427 2C8.32663 2 7.75281 2 7.29981 2.25164C7.10234 2.36133 6.92488 2.50368 6.77496 2.67266C6.43105 3.06028 6.30657 3.62044 6.05761 4.74074L6 5"></path><path d="M2 5H18M12 9V13M8 9V13"></path></svg>
+                                <span class="d-none d-xxl-inline-block">Delete</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <!-- Add Edit Modal End -->
             </div>
         </div>
     </div>
+    <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
+        <div class="os-scrollbar-track os-scrollbar-track-off">
+            <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div>
+        </div>
+    </div>
+    <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-auto-hidden" style="height: calc(100% - 8px);">
+        <div class="os-scrollbar-track os-scrollbar-track-off">
+            <div class="os-scrollbar-handle" style="height: 81.8182%; transform: translate(0px, 0px);"></div>
+        </div>
+    </div>
+    <div class="os-scrollbar-corner"></div>
+</div>
+
+{{--Add Products Modal Start --}}
+@include('sales.modal.add-product')
+{{-- Add Products Modal End --}}
+@endsection
+
+@push('js')
+<!-- Page Specific Scripts Start -->
+    {{-- <script src="{{ asset('temp/js') }}/cs/datatable.extend.js"></script> --}}
+    <script src="{{ asset('temp/js/cs/checkall.js') }}"></script>
+    <script src="{{ asset('temp/js/pages/blocks.tabulardata.js') }}"></script>
+    <script src="{{ asset('temp/js/plugins/datatable.editablerows.js') }}"></script>
+<script src="{{ asset('temp/js') }}/common.js"></script>
+<script src="{{ asset('temp/js') }}/scripts.js"></script>
+<!-- Page Specific Scripts End -->
+@endpush('js')
