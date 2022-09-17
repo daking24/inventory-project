@@ -38,10 +38,9 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request, Client  $client)
     {
-        dd('whalla');
-        $client->create($request->all());
+        $cli = $client->create($request->all());
 
-        return redirect()->route('clients.index')->withStatus('Successfully registered customer.');
+        return redirect()->route('sales.index')->withStatus('Successfully registered customer.');
     }
 
     /**
@@ -52,6 +51,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
+        dd($client);
         return view('clients.show', compact('client'));
     }
 
