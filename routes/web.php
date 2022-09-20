@@ -44,7 +44,7 @@ Route::get('/sales-dashboard', [DashboardController::class, 'saleIndex'])->name(
 Route::get('/', [LoginController::class, 'Index']);
 Route::prefix('admin')->group(function() {
     Route::post('/login-post', [LoginController::class, 'Login'])->name('loginPost');
-    
+
 
     Route::prefix('/transactions')->group(function()
     {
@@ -62,15 +62,10 @@ Route::prefix('admin')->group(function() {
 
         //post endpoint
         Route::post('/client', [ClientController::class, 'store'])->name('createClient');
-        
+
     });
     Route::prefix('/inventory')->group(function()
     {
-        // Route::get('/expenses', [ExpenseController::class, 'index'])->name('expense');
-        // Route::get('/income', [IncomeController::class, 'index'])->name('income');
-        // Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
-        // Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
-        // Route::get('/sales', [SaleController::class, 'index'])->name('sales');
         Route::get('/receipts', [ReceiptController::class, 'index'])->name('inventory-receipt');
         Route::get('/receipts/create', [ReceiptController::class, 'create'])->name('receipt-create');
         Route::get('/receipts/view/1', [ReceiptController::class, 'show'])->name('receipt-view');
@@ -80,8 +75,6 @@ Route::prefix('admin')->group(function() {
         Route::get('/products/view/1', [ProductsController::class, 'show'])->name('product-view');
         Route::get('/stats', [InventoryStatsController::class, 'index'])->name('inventory-stats');
 
-        //post endpoint
-        // Route::post('/client', [ClientController::class, 'store'])->name('client');
 
     });
     Route::get('/suppliers', [ProviderController::class, 'index'])->name('supplier');
