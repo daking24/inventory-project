@@ -14,6 +14,10 @@ use App\Http\Controllers\{
     TransactionStatsController,
     ClientController,
     InventoryStatsController,
+    ProductsController,
+    ProductCategoriesController,
+    ReceiptController,
+    ProviderController,
 
 };
 
@@ -63,15 +67,20 @@ Route::prefix('admin')->group(function() {
         // Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
         // Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
         // Route::get('/sales', [SaleController::class, 'index'])->name('sales');
-        // Route::get('/sales/create', [SaleController::class, 'create'])->name('sales-create');
-        // Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
-        // Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
+        Route::get('/receipts', [ReceiptController::class, 'index'])->name('inventory-receipt');
+        Route::get('/receipts/create', [ReceiptController::class, 'create'])->name('receipt-create');
+        Route::get('/receipts/view/1', [ReceiptController::class, 'show'])->name('receipt-view');
+        Route::get('/categories', [ProductCategoriesController::class, 'index'])->name('inventory-category');
+        Route::get('/products', [ProductsController::class, 'index'])->name('inventory-product');
         Route::get('/stats', [InventoryStatsController::class, 'index'])->name('inventory-stats');
 
         //post endpoint
         // Route::post('/client', [ClientController::class, 'store'])->name('client');
 
     });
+    Route::get('/suppliers', [ProviderController::class, 'index'])->name('supplier');
+    Route::get('/suppliers/view/1', [ProviderController::class, 'show'])->name('supplier-view');
+
 
 });
 

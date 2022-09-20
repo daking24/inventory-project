@@ -15,7 +15,7 @@ class ReceiptController extends Controller
      */
     public function index()
     {
-        //
+        return view('inventory.receipts.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class ReceiptController extends Controller
      */
     public function create()
     {
-        //
+        return view('inventory.receipts.summary');
     }
 
     /**
@@ -41,13 +41,13 @@ class ReceiptController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     *receipt $receipt
      * @param  \App\Models\receipt  $receipt
      * @return \Illuminate\Http\Response
      */
-    public function show(receipt $receipt)
+    public function show()
     {
-        //
+        return view('inventory.receipts.finalized-summary');
     }
 
     /**

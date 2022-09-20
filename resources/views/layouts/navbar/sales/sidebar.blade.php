@@ -241,36 +241,28 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('transactions')}}">
-                            <span class="label">All</span>
+                        <a href="{{route('inventory-product')}}">
+                            <span class="label">Products</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('transfer')}}">
-                            <span class="label">Transfers</span>
+                        <a href="{{route('inventory-category')}}">
+                            <span class="label">Categories</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('sales')}}">
-                            <span class="label">Sales</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('payment')}}">
-                            <span class="label">Payments</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('income')}}">
-                            <span class="label">Income</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('expense')}}">
-                            <span class="label">Expense</span>
+                        <a href="{{route('inventory-receipt')}}">
+                            <span class="label">Receipts</span>
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{ route('supplier') }}">
+                    {{-- <i data-acorn-icon="delivery-truck" class="icon" data-acorn-size="18"></i> --}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-shipping icon"><path d="M2 2H3.33333C4.38252 2 5.37049 2.49398 6 3.33333V3.33333C6.32456 3.76607 6.5 4.29241 6.5 4.83333V11.5C6.5 12.6046 7.39543 13.5 8.5 13.5H17"></path><path d="M15.25 4C15.9522 4 16.3033 4 16.5556 4.16853C16.6648 4.24149 16.7585 4.33524 16.8315 4.44443C17 4.69665 17 5.04777 17 5.75L17 9.25C17 9.95223 17 10.3033 16.8315 10.5556C16.7585 10.6648 16.6648 10.7585 16.5556 10.8315C16.3033 11 15.9522 11 15.25 11L10.75 11C10.0478 11 9.69665 11 9.44443 10.8315C9.33524 10.7585 9.24149 10.6648 9.16853 10.5556C9 10.3033 9 9.95223 9 9.25L9 5.75C9 5.04777 9 4.69665 9.16853 4.44443C9.24149 4.33524 9.33524 4.24149 9.44443 4.16853C9.69665 4 10.0478 4 10.75 4L15.25 4Z"></path><path d="M13 4V7"></path><path d="M7 15.5C7 14.6716 7.67158 14 8.5 14V14C9.32843 14 10 14.6716 10 15.5V15.5C10 16.3284 9.32842 17 8.5 17V17C7.67157 17 7 16.3284 7 15.5V15.5zM13 15.5C13 14.6716 13.6716 14 14.5 14V14C15.3284 14 16 14.6716 16 15.5V15.5C16 16.3284 15.3284 17 14.5 17V17C13.6716 17 13 16.3284 13 15.5V15.5z"></path></svg>
+                    <span class="label">Supplier</span>
+                </a>
             </li>
 
         </ul>

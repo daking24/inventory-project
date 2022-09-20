@@ -15,7 +15,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return view('inventory.products.index');
     }
 
     /**
