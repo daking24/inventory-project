@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class StoreClientRequest extends FormRequest
 {
@@ -27,12 +28,16 @@ class StoreClientRequest extends FormRequest
             'name' => [
                 'required', 'min:3'
             ],
+
             'email' => [
-                'required', 'email', 'exists:clients,email'
+                'required', 'email'
             ],
-            'document_type' => [
-                'required', 'max:3'
-            ],
+
+            'phone' => [
+                'required'
+            ]
+
+            
             
     
         ];

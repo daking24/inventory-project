@@ -44,6 +44,7 @@ Route::get('/sales-dashboard', [DashboardController::class, 'saleIndex'])->name(
 Route::get('/', [LoginController::class, 'Index']);
 Route::prefix('admin')->group(function() {
     Route::post('/login-post', [LoginController::class, 'Login'])->name('loginPost');
+    
 
     Route::prefix('/transactions')->group(function()
     {
@@ -57,9 +58,11 @@ Route::prefix('admin')->group(function() {
         Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
 
-        //post endpoint
-        Route::post('/client', [ClientController::class, 'store'])->name('client');
+        Route::get('/show', [ClientController::class, 'show'])->name('clientShow');
 
+        //post endpoint
+        Route::post('/client', [ClientController::class, 'store'])->name('createClient');
+        
     });
     Route::prefix('/inventory')->group(function()
     {
