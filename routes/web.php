@@ -18,6 +18,7 @@ use App\Http\Controllers\{
     ProductCategoriesController,
     ReceiptController,
     ProviderController,
+    PaymentMethodsController,
 
 };
 
@@ -71,7 +72,9 @@ Route::prefix('admin')->group(function() {
         Route::get('/receipts/create', [ReceiptController::class, 'create'])->name('receipt-create');
         Route::get('/receipts/view/1', [ReceiptController::class, 'show'])->name('receipt-view');
         Route::get('/categories', [ProductCategoriesController::class, 'index'])->name('inventory-category');
+        Route::get('/categories/view/1', [ProductCategoriesController::class, 'show'])->name('category-view');
         Route::get('/products', [ProductsController::class, 'index'])->name('inventory-product');
+        Route::get('/products/view/1', [ProductsController::class, 'show'])->name('product-view');
         Route::get('/stats', [InventoryStatsController::class, 'index'])->name('inventory-stats');
 
         //post endpoint
@@ -80,6 +83,8 @@ Route::prefix('admin')->group(function() {
     });
     Route::get('/suppliers', [ProviderController::class, 'index'])->name('supplier');
     Route::get('/suppliers/view/1', [ProviderController::class, 'show'])->name('supplier-view');
+    Route::get('/methods', [PaymentMethodsController::class, 'index'])->name('payment-methods');
+    Route::get('/methods/view/1', [PaymentMethodsController::class, 'show'])->name('method-view');
 
 
 });

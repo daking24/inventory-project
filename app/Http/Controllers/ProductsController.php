@@ -41,13 +41,13 @@ class ProductsController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     *Products $products
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function show(Products $products)
+    public function show()
     {
-        //
+        return view('inventory.products.view');
     }
 
     /**

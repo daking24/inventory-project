@@ -15,7 +15,7 @@ class PaymentMethodsController extends Controller
      */
     public function index()
     {
-        //
+        return view('payment-methods.index');
     }
 
     /**
@@ -41,13 +41,13 @@ class PaymentMethodsController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     *Payment_methods $payment_methods
      * @param  \App\Models\Payment_methods  $payment_methods
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment_methods $payment_methods)
+    public function show()
     {
-        //
+        return view('payment-methods.view');
     }
 
     /**
