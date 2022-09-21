@@ -82,6 +82,14 @@ Route::prefix('admin')->group(function() {
     Route::get('/methods', [PaymentMethodsController::class, 'index'])->name('payment-methods');
     Route::get('/methods/view/1', [PaymentMethodsController::class, 'show'])->name('method-view');
 
+    //post endpoint
+
+    Route::post('/create/methods', [PaymentMethodsController::class, 'store'])->name('createMethod');
+    Route::post('/category/create',[ProductCategoriesController::class, 'store'])->name('createCategory');
+    Route::post('/product/create',[ProductsController::class, 'store'])->name('createProduct');
+
+    Route::post('/create/provider',[ProviderController::class, 'store'])->name('createSupplier');
+
 
 });
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
+use App\Models\Client;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
 
@@ -15,7 +16,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return view('sales.index');
+        $client = Client::all();
+        return view('sales.index', compact('client'));
     }
 
     /**

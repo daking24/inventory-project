@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product_categories;
+use App\Models\ProductCategory;
 use App\Http\Requests\StoreProduct_categoriesRequest;
 use App\Http\Requests\UpdateProduct_categoriesRequest;
 
@@ -34,9 +34,11 @@ class ProductCategoriesController extends Controller
      * @param  \App\Http\Requests\StoreProduct_categoriesRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProduct_categoriesRequest $request)
+    public function store(StoreProduct_categoriesRequest $request, ProductCategory $category)
     {
-        //
+        $category->create($request->all());
+
+        return redirect()->route('inventory-category')->withStatus('Category Created Succesfully');
     }
 
     /**

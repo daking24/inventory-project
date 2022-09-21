@@ -7,15 +7,17 @@
             </div>
             <div class="modal-body">
 
-            <form class="mb-3" action="" method="post">
+            <form class="mb-3" action="{{ route('sales-create') }}" method="GET">
+                @csrf
             <div class="mb-3">
                 <label for="method" class="form-label">Select Customer</label>
-                <select id="method" name="name" class="form-control customer-select">
-                    <option selected="">Choose...</option>
-                    <option>...</option>
+                <select id="method" name="client" class="form-control customer-select">
+                    @foreach ($client as $item)
+                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                    @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-lg btn-primary">Save</button>
+            <button type="" class="btn btn-lg btn-primary">Make Sales</button>
             </form>
             <hr >
             <form action="{{ route('createClient') }}" method="post">

@@ -34,9 +34,10 @@ class ProviderController extends Controller
      * @param  \App\Http\Requests\StoreProviderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProviderRequest $request)
+    public function store(StoreProviderRequest $request, Provider $provider)
     {
-        //
+        $provider->create($request->all());
+        return redirect()->route('supplier')->withStatus('Successfully Register a Vendor');
     }
 
     /**

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Payment_methods;
-use App\Http\Requests\StorePayment_methodsRequest;
+use App\Models\PaymentMethods;
+// use App\Http\Requests\StorePayment_methodsRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdatePayment_methodsRequest;
+
 
 class PaymentMethodsController extends Controller
 {
@@ -34,9 +36,11 @@ class PaymentMethodsController extends Controller
      * @param  \App\Http\Requests\StorePayment_methodsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePayment_methodsRequest $request)
+    public function store(Request $request, PaymentMethods $payment)
     {
-        //
+        $payment->create($request->all());
+
+        return redirect()->route('payment-methods')->withStatus('Payment Method is created successfully');
     }
 
     /**

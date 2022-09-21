@@ -13,7 +13,7 @@ class StoreProduct_categoriesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

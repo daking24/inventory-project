@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="{{ route('client') }}" method="post">
+            <form action="{{ route('createProduct') }}" method="post">
                 @csrf
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="name" placeholder="Name">
@@ -14,20 +14,10 @@
                 </div>
                 <div class="mb-3" >
                     <label class="form-label">Category</label>
-                    <select class="form-selected">
-                        {{-- <option label="&nbsp;"></option> --}}
-                        <option value="Breadstick">Breadstick</option>
-                        <option value="Biscotti">Biscotti</option>
-                        <option value="Fougasse">Fougasse</option>
-                        <option value="Lefse">Lefse</option>
-                        <option value="Melonpan">Melonpan</option>
-                        <option value="Naan">Naan</option>
-                        <option value="Panbrioche">Panbrioche</option>
-                        <option value="Rewena">Rewena</option>
-                        <option value="Shirmal">Shirmal</option>
-                        <option value="Tunnbröd">Tunnbröd</option>
-                        <option value="Vánočka">Vánočka</option>
-                        <option value="Zopf">Zopf</option>
+                    <select class="form-selected" name="product_category_id">
+                        @foreach ($categories as $item)
+                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-floating mb-3">
@@ -45,11 +35,11 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="cost_price" placeholder="Cost Price">
+                    <input type="number" class="form-control" name="base_price" placeholder="Cost Price">
                     <label>Cost Price</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="sell_price" placeholder="Selling Price">
+                    <input type="number" class="form-control" name="selling_price" placeholder="Selling Price">
                     <label>Selling Price</label>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Save</button>

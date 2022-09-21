@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Products;
 use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateProductsRequest;
+use App\Models\Product;
+use App\Models\ProductCategory;
 
 class ProductsController extends Controller
 {
@@ -15,7 +16,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('inventory.products.index');
+        $categories = ProductCategory::all();
+
+        return view('inventory.products.index', compact('categories'));
     }
 
     /**
@@ -34,9 +37,11 @@ class ProductsController extends Controller
      * @param  \App\Http\Requests\StoreProductsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductsRequest $request)
+    public function store(StoreProductsRequest $request, Product $products)
     {
-        //
+        $products->create($request->all());
+
+        return redirect()->route('inventory-product')->withStatus('Product Created Successful');
     }
 
     /**

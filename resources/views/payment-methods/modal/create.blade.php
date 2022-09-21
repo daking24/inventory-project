@@ -6,7 +6,8 @@
                 <h5 class="modal-title">Register New Method</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="post">
+            <form action="{{ route('createMethod') }}" method="post">
+                @csrf
             <div class="modal-body">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="name" placeholder="Name">
