@@ -31,11 +31,12 @@
             </tr>
             </thead>
             <tbody>
+            @foreach ($provider as $item)
             <tr>
-                <th scope="row">22 Sept 2022</th>
-                <td>Phone Supply</td>
-                <td>Samsung</td>
-                <td>200</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->description }}</td>
+                <td>{{ $item->email }}</td>
+                <td>{{ $item->phone }}</td>
                 <td>1000</td>
                 <td>10</td>
                 <td>
@@ -65,6 +66,9 @@
                 </div>
                 </td>
             </tr>
+
+                
+            @endforeach
             </tbody>
         </table>
     </div>

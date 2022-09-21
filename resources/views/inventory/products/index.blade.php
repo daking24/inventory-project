@@ -32,13 +32,14 @@
             </tr>
             </thead>
             <tbody>
+            @foreach ($product as $item)
             <tr>
-                <th scope="row">Phones</th>
-                <td>iPhone14 Pro</td>
-                <td>800000</td>
-                <td>850000</td>
-                <td>50</td>
-                <td>10</td>
+                <td> consumer</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->base_price }}</td>
+                <td>{{ $item->selling_price }}</td>
+                <td>{{ $item->stock }}</td>
+                <td>{{ $item->defective }}</td>
                 <td>40</td>
                 <td>
                 <div class="d-flex align-items-center justify-content-end">
@@ -57,6 +58,7 @@
                 </div>
                 </td>
             </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

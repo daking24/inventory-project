@@ -38,7 +38,18 @@ class SaleController extends Controller
      */
     public function store(StoreSaleRequest $request)
     {
-        //
+        $existent = Sale::where('client_id', $request->get('client_id'))->where('finalized_at', null)->get();
+
+        if($existent->count()) {
+            return back()->withError('There is already an unfinished sale belonging to this customer. <a href="'.route('sales.show', $existent->first()).'">Click here to go to it</a>');
+        }
+
+        $sale = $model->create($request->all());
+
+        return redirect()
+            ->route('sales.show', ['sale' => $sale->id])
+            ->withStatus('Sale registered successfully, you can start registering products and transactions.');
+
     }
 
     /**

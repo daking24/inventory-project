@@ -31,8 +31,9 @@
             </tr>
             </thead>
             <tbody>
+            @foreach ($clients as $item)
             <tr>
-                <td>Mark</td>
+                <td>{{ $item->name }}</td>
                 <td>Otto</td>
                 <td>@mdo</td>
                 <td>o12qqwcvcv</td>
@@ -49,6 +50,7 @@
                 </div>
                 </td>
             </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
