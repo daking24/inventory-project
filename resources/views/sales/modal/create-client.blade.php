@@ -11,13 +11,13 @@
                 @csrf
             <div class="mb-3">
                 <label for="method" class="form-label">Select Customer</label>
-                <select id="method" name="client" class="form-control customer-select">
+                <select id="method" name="client" class="customer-select">
                     @foreach ($client as $item)
                             <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
                     @endforeach
                 </select>
             </div>
-            <button type="" class="btn btn-lg btn-primary">Make Sales</button>
+            <button type="" class="btn btn-lg btn-primary">Continue</button>
             </form>
             <hr >
             <form action="{{ route('createClient') }}" method="post">
