@@ -89,6 +89,7 @@ Route::prefix('admin')->group(function() {
     Route::post('/product/create',[ProductsController::class, 'store'])->name('createProduct');
 
     Route::post('/create/provider',[ProviderController::class, 'store'])->name('createSupplier');
+    Route::post('/sold/product',[SaleController::class, 'storeProduct'])->name('storeProduct');
 
 
 });

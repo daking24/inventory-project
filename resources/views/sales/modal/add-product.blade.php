@@ -7,12 +7,14 @@
       </div>
       <div class="modal-body">
 
-        <form class="mb-3" action="" method="post">
+        <form class="mb-3" action="{{ route('storeProduct') }}" method="post">
+          @csrf
           <div class="mb-3">
             <label for="receiver_method" class="form-label">Select Product</label>
             <select id="receiver_method" name="product" class="select-product">
-              <option selected="">Choose...</option>
-              <option>...</option>
+              @foreach ($products as $item)
+              <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+             @endforeach
             </select>
           </div>
           <fieldset disabled="">
