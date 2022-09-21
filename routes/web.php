@@ -54,6 +54,7 @@ Route::prefix('admin')->group(function() {
         Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
         Route::get('/sales', [SaleController::class, 'index'])->name('sales');
         Route::get('/sales/create', [SaleController::class, 'create'])->name('sales-create');
+        Route::get('/sales/view/1', [SaleController::class, 'show'])->name('sales-view');
         // Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
         Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
