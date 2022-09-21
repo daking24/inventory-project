@@ -15,7 +15,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        //
+        return view('supplier.index');
     }
 
     /**
@@ -41,13 +41,14 @@ class ProviderController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     *Provider $provider
      * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function show(Provider $provider)
+    public function show()
     {
-        //
+        // Remember to add id
+        return view('supplier.view');
     }
 
     /**

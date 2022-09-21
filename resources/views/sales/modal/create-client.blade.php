@@ -10,7 +10,7 @@
             <form class="mb-3" action="" method="post">
             <div class="mb-3">
                 <label for="method" class="form-label">Select Customer</label>
-                <select id="method" name="name" class="form-control form-select">
+                <select id="method" name="name" class="form-control customer-select">
                     <option selected="">Choose...</option>
                     <option>...</option>
                 </select>
@@ -39,3 +39,10 @@
         </div>
     </div>
 </div>
+@push('js')
+<script>
+    new SlimSelect({
+        select: '.customer-select'
+    })
+</script>
+@endpush('js')

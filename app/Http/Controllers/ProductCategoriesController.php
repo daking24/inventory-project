@@ -15,7 +15,7 @@ class ProductCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return view('inventory.categories.index');
     }
 
     /**
@@ -45,9 +45,9 @@ class ProductCategoriesController extends Controller
      * @param  \App\Models\Product_categories  $product_categories
      * @return \Illuminate\Http\Response
      */
-    public function show(Product_categories $product_categories)
+    public function show()
     {
-        //
+        return view('inventory.categories.view');
     }
 
     /**

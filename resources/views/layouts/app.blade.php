@@ -37,10 +37,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="{{asset('temp')}}/font/CS-Interface/style.css"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet">
+
 <!-- Font Tags End -->
 <!-- Vendor Styles Start -->
 <link rel="stylesheet" href="{{asset('temp')}}/css/vendor/bootstrap.min.css"/>
 <link rel="stylesheet" href="{{asset('temp')}}/css/vendor/OverlayScrollbars.min.css"/>
+{{-- <link rel="stylesheet" href="{{asset('temp')}}/css/vendor/select2.min.css"/>
+<link rel="stylesheet" href="{{asset('temp')}}/css/vendor/select2-bootstrap4.min.css"/> --}}
 <!-- Vendor Styles End -->
 <!-- Template Base Styles Start -->
 <link rel="stylesheet" href="{{asset('temp')}}/css/styles.css"/>
@@ -447,6 +451,7 @@
 <script src="{{asset('temp')}}/js/vendor/clamp.min.js"></script>
 <script src="{{asset('temp')}}/icon/acorn-icons.js"></script>
 <script src="{{asset('temp')}}/icon/acorn-icons-interface.js"></script>
+
 <!-- Vendor Scripts End -->
 <!-- Template Base Scripts Start -->
 <script src="{{asset('temp')}}/js/base/helpers.js"></script>
@@ -459,6 +464,8 @@
 <script src="{{asset('temp')}}/js/common.js"></script>
 <script src="{{asset('temp')}}/js/scripts.js"></script>
 <!-- Page Specific Scripts End -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.js"></script>
 @stack('js')
+
 </body>
 </html>

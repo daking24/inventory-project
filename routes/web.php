@@ -14,6 +14,11 @@ use App\Http\Controllers\{
     TransactionStatsController,
     ClientController,
     InventoryStatsController,
+    ProductsController,
+    ProductCategoriesController,
+    ReceiptController,
+    ProviderController,
+    PaymentMethodsController,
 
 };
 
@@ -39,7 +44,7 @@ Route::get('/sales-dashboard', [DashboardController::class, 'saleIndex'])->name(
 Route::get('/', [LoginController::class, 'Index']);
 Route::prefix('admin')->group(function() {
     Route::post('/login-post', [LoginController::class, 'Login'])->name('loginPost');
-    
+
 
     Route::prefix('/transactions')->group(function()
     {
@@ -57,24 +62,26 @@ Route::prefix('admin')->group(function() {
 
         //post endpoint
         Route::post('/client', [ClientController::class, 'store'])->name('createClient');
-        
+
     });
     Route::prefix('/inventory')->group(function()
     {
-        // Route::get('/expenses', [ExpenseController::class, 'index'])->name('expense');
-        // Route::get('/income', [IncomeController::class, 'index'])->name('income');
-        // Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
-        // Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
-        // Route::get('/sales', [SaleController::class, 'index'])->name('sales');
-        // Route::get('/sales/create', [SaleController::class, 'create'])->name('sales-create');
-        // Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
-        // Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
+        Route::get('/receipts', [ReceiptController::class, 'index'])->name('inventory-receipt');
+        Route::get('/receipts/create', [ReceiptController::class, 'create'])->name('receipt-create');
+        Route::get('/receipts/view/1', [ReceiptController::class, 'show'])->name('receipt-view');
+        Route::get('/categories', [ProductCategoriesController::class, 'index'])->name('inventory-category');
+        Route::get('/categories/view/1', [ProductCategoriesController::class, 'show'])->name('category-view');
+        Route::get('/products', [ProductsController::class, 'index'])->name('inventory-product');
+        Route::get('/products/view/1', [ProductsController::class, 'show'])->name('product-view');
         Route::get('/stats', [InventoryStatsController::class, 'index'])->name('inventory-stats');
 
-        //post endpoint
-        // Route::post('/client', [ClientController::class, 'store'])->name('client');
 
     });
+    Route::get('/suppliers', [ProviderController::class, 'index'])->name('supplier');
+    Route::get('/suppliers/view/1', [ProviderController::class, 'show'])->name('supplier-view');
+    Route::get('/methods', [PaymentMethodsController::class, 'index'])->name('payment-methods');
+    Route::get('/methods/view/1', [PaymentMethodsController::class, 'show'])->name('method-view');
+
 
 });
 
