@@ -6,7 +6,8 @@
                 <h5 class="modal-title">Register New Transfers</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="post">
+            <form action="{{ route('transfer.store') }}" method="post">
+                @csrf
             <div class="modal-body">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="title" placeholder="Title">
@@ -14,24 +15,26 @@
                 </div>
                 <div class="mb-3">
                     <label for="sender_method" class="form-label">Sender Payment Method</label>
-                    <select id="sender_method" name="sender_method" class="form-control sender-method">
-                        <option selected="">Choose...</option>
-                        <option>...</option>
+                    <select id="sender_method" name="sender_method_id" class="form-control sender-method">
+                        @foreach ($payment as $item)
+                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="receiver_method" class="form-label">Receiver Payment Method</label>
-                    <select id="receiver_method" name="receiver_method" class="form-control receiver-method">
-                        <option selected="">Choose...</option>
-                        <option>...</option>
+                    <select id="receiver_method" name="receiver_method_id" class="form-control receiver-method">
+                        @foreach ($payment as $item)
+                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="amount-sent" placeholder="Amount Sent">
+                    <input type="number" class="form-control" name="sender_method" placeholder="Amount Sent">
                     <label>Amount Sent</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="amount-received" placeholder="Amount Received">
+                    <input type="number" class="form-control" name="receiver_method" placeholder="Amount Received">
                     <label>Amount Received</label>
                 </div>
                 <div class="form-floating mb-3">

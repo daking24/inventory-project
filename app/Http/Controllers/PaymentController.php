@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PaymentMethods;
+use App\Models\Provider;
 
 class PaymentController extends Controller
 {
@@ -13,7 +15,10 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('transactions.payment.index');
+        $payment = PaymentMethods::all();
+        $provider = Provider::all();
+
+        return view('transactions.payment.index', ['payment' => $payment, 'provider' => $provider]);
     }
 
     /**

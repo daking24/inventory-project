@@ -99,5 +99,8 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::post('sales/{sale}/product', ['as' => 'sales.product.store', 'uses' => 'App\Http\Controllers\SaleController@storeProduct']);
-
+Route::get('transactions/{type}', ['as' => 'transactions.type', 'uses' => 'App\Http\Controllers\TransactionController@type']);
+Route::get('transactions/{type}/create', ['as' => 'transactions.create', 'uses' => 'App\Http\Controllers\TransactionController@create']);
+Route::post('transactions/store', ['as' => 'transactions.store', 'uses' => 'App\Http\Controllers\TransactionController@store']);
+Route::post('transfer/store', ['as' => 'transfer.store', 'uses' => 'App\Http\Controllers\TransferController@store']);
 
