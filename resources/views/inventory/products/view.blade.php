@@ -24,7 +24,7 @@
                     <th scope="col">Stock</th>
                     <th scope="col">Defective Stock</th>
                     <th scope="col">Base Price</th>
-                    <th scope="col">Average Price</th>
+                    <th scope="col">Selling Price</th>
                     <th scope="col">Total Sales</th>
                     <th scope="col">Income Produced</th>
 
@@ -32,14 +32,15 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>22 Sept 2022</td>
-                    <td>Phone Supply</td>
-                    <td>Sales Manager</td>
-                    <td>Samsung</td>
-                    <td>50</td>
-                    <td>2000</td>
-                    <td>20</td>
+                    <th scope="row">{{ $products->id }}</th>
+                    <td><a href="{{ route('category-view', $products->category) }}">{{ $products->category->name }}</a></td>
+                    <td>{{ $products->name }}</td>
+                    <td>{{ $products->stock }}</td>
+                    <td>{{ $products->stock_defective }}</td>
+                    <td>₦{{ $products->base_price }}</td>
+                    <td>₦{{ $products->selling_price }}</td>
+                    <td>{{ $products->solds->sum('qty') }}</td>
+                    <td>₦{{ __($products->solds->sum('total_amount')) }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -71,12 +72,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>22 Sept 2022</td>
-                    <td><a href="#">Income</a></td>
-                    <td>Some payments</td>
-                    <td>210.66</td>
+                    @forelse ($solds as $sold)
+                    <tr>
+                    <th scope="row">{{ date('d-m-y', strtotime($sold->created_at)) }}</th>
+                    <td><a href="{{ route('sales-view', $sold->sale_id) }}">{{ $sold->sale_id }}</a></td>
+                    <td>{{ $sold->quantity }}</td>
+                    <td>{{ __($sold->unit_price) }}</td>
+                    <td>{{ __($sold->total_amount) }}</td>
                     <td>
 
                 <div class="d-flex align-items-center justify-content-end">
@@ -88,6 +90,17 @@
                 </div>
                     </td>
                 </tr>
+                    @empty
+                    <th>...</th>
+                    <th>...</th>
+                    <th>...</th>
+                    <th>
+                       <span> No Data Available</span>
+                    </th>
+                    <th>....</th>
+                    <th>.....</th>
+
+                    @endforelse
                 </tbody>
             </table>
         </div>

@@ -34,13 +34,13 @@
             <tbody>
             @foreach ($product as $item)
             <tr>
-                <td> consumer</td>
+                <td><a href="{{ route('category-view', $item->category) }}">{{ $item->category->name }}</a></td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->base_price }}</td>
                 <td>{{ $item->selling_price }}</td>
                 <td>{{ $item->stock }}</td>
-                <td>{{ $item->defective }}</td>
-                <td>40</td>
+                <td>{{ $item->stock_defective }}</td>
+                <td>{{ $item->solds->sum('qty') }}</td>
                 <td>
                 <div class="d-flex align-items-center justify-content-end">
                     <a href="{{ route('product-view') }}" type="button" class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" >

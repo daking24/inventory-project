@@ -54,10 +54,8 @@ Route::prefix('admin')->group(function() {
         Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
         Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
         Route::get('/sales', [SaleController::class, 'index'])->name('sales');
-        // Route::get('/sales/create', [SaleController::class, 'create'])->name('sales-create');
         Route::get('sales/{sale}', ['as' => 'sales.product.create', 'uses' => 'App\Http\Controllers\SaleController@createProductSale']);
-        Route::get('/sales/product/view', [SaleController::class, 'show'])->name('sales-view');
-        // Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
+        Route::get('/sales/{sale}/view', [SaleController::class, 'show'])->name('sales-view');
         Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
 
@@ -74,9 +72,9 @@ Route::prefix('admin')->group(function() {
         Route::get('/receipts/create', [ReceiptController::class, 'create'])->name('receipt-create');
         Route::get('/receipts/view/1', [ReceiptController::class, 'show'])->name('receipt-view');
         Route::get('/categories', [ProductCategoriesController::class, 'index'])->name('inventory-category');
-        Route::get('/categories/view/1', [ProductCategoriesController::class, 'show'])->name('category-view');
+        Route::get('/categories/{product_categories}/view', [ProductCategoriesController::class, 'show'])->name('category-view');
         Route::get('/products', [ProductsController::class, 'index'])->name('inventory-product');
-        Route::get('/products/view/1', [ProductsController::class, 'show'])->name('product-view');
+        Route::get('/products/view/{products}', [ProductsController::class, 'show'])->name('product-view');
         Route::get('/stats', [InventoryStatsController::class, 'index'])->name('inventory-stats');
 
 

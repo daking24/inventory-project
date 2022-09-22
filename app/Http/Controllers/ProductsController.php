@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateProductsRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ReceivedProduct;
 
 class ProductsController extends Controller
 {
@@ -18,7 +19,7 @@ class ProductsController extends Controller
     {
         $categories = ProductCategory::all();
         $product = Product::paginate(25);
-
+        // dd($product->product_category_id);
         return view('inventory.products.index', compact('categories','product'));
     }
 
@@ -55,12 +56,15 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *Products $products
-     * @param  \App\Models\Products  $products
+     * @param  \App\Models\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Product $products)
     {
-        return view('inventory.products.view');
+        $solds = $products->solds()->latest()->limit(25)->get();
+
+        $receiveds = $products->receiveds()->latest()->limit(25)->get();
+        return view('inventory.products.view', compact('products', 'solds', 'receiveds'));
     }
 
     /**

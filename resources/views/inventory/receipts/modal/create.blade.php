@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="{{ route('client') }}" method="post">
+            <form action="" method="post">
                 @csrf
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="title" placeholder="Title">
