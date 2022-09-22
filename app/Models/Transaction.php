@@ -13,7 +13,7 @@ class Transaction extends Model
         'title', 
         'reference', 
         'amount', 
-        'payment_method_id', 
+        'payment_methods_id', 
         'type', 
         'client_id', 
         'user_id', 

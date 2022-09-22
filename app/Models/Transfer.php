@@ -11,8 +11,8 @@ class Transfer extends Model
 
     protected $fillable = [
         'title', 
-        'sended_amount', 
-        'received_amount', 
+        'sender_method', 
+        'receiver_method', 
         'sender_method_id', 
         'receiver_method_id', 
         'reference'

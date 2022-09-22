@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\PaymentMethods;
 class ExpenseController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        return view('transactions.expense.index');
+        $payment = PaymentMethods::all();
+        return view('transactions.expense.index', compact('payment'));
     }
 
     /**

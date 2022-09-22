@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transfer;
+use App\Models\Transaction;
 use App\Http\Requests\StoreTransferRequest;
 use App\Http\Requests\UpdateTransferRequest;
-
+use Illuminate\Http\Request;
+use App\Models\PaymentMethods;
+use Auth;
 class TransferController extends Controller
 {
     /**
@@ -15,7 +18,9 @@ class TransferController extends Controller
      */
     public function index()
     {
-        return view('transactions.transfer.index');
+        return view('transactions.transfer.index',[
+            'payment' => PaymentMethods::all()
+        ]);
     }
 
     /**
@@ -34,9 +39,33 @@ class TransferController extends Controller
      * @param  \App\Http\Requests\StoreTransferRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTransferRequest $request)
+    public function store(Request $request, Transfer $transfer, Transaction $transaction)
     {
-        //
+        $transfer = $transfer->create($request->all());
+
+        $transaction->create([
+            "type" => "expense",
+            "title" => "TransferID: ".$transfer->id,
+            "transfer_id" => $transfer->id,
+            "payment_methods_id" => $transfer->sender_method_id,
+            "amount" => ((float) abs($transfer->sender_method) * (-1)),
+            "user_id" => Auth::id(),
+            "reference" => $transfer->reference
+        ]);
+
+        $transaction->create([
+            "type" => "income",
+            "title" => "TransferID: ".$transfer->id,
+            "transfer_id" => $transfer->id,
+            "payment_methods_id" => $transfer->receiver_method_id,
+            "amount" => abs($transfer->receiver_method),
+            "user_id" => Auth::id(),
+            "reference" => $transfer->reference
+        ]);
+
+        return redirect()
+            ->route('transfer')
+            ->withStatus('Transaction registered successfully.');
     }
 
     /**
