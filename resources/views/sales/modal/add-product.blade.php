@@ -18,22 +18,18 @@
               <option value="5">...</option>
             </select>
           </div>
-          <fieldset disabled="">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" placeholder="Selling Price" id="product-price" name="selling_price" value="₦2000" disabled="">
+                    <input type="number" class="form-control" placeholder="Selling Price" id="product-price" name="selling_price" value="2000" disabled="">
                     <label>Selling Price</label>
                 </div>
-            </fieldset>
             <div class="form-floating mb-3">
                 <input type="number" class="form-control" placeholder="Quantity" name="quantity">
                 <label>Quantity</label>
             </div>
-            <fieldset disabled="">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" placeholder="Total Price" name="total_price" value="₦2000" disabled="">
+                    <input type="text" class="form-control" placeholder="Total Price" name="total_price" value="₦2000" disabled>
                     <label>Total Price</label>
                 </div>
-            </fieldset>
                 <button type="submit" class="btn btn-lg btn-primary">Continue</button>
 
         </form>
@@ -43,12 +39,13 @@
 </div>
 @push('js')
   <script>
-    
-  
+
+
     new SlimSelect({
       select: '.select-product'
-    })
-
+    });
+    </script>
+    <script>
      $('#product').change(function() {
         let id = $(this).val();
         console.log(id);
