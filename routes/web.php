@@ -41,6 +41,7 @@ use App\Http\Controllers\{
 
 Route::get('/admin-dashboard', [DashboardController::class, 'adminIndex'])->name('admin-dashboard');
 Route::get('/sales-dashboard', [DashboardController::class, 'saleIndex'])->name('sale-dashboard');
+Route::post('sale/store', ['as' => 'sales.store', 'uses' => 'App\Http\Controllers\SaleController@store']);
 Route::get('/', [LoginController::class, 'Index']);
 Route::prefix('admin')->group(function() {
     Route::post('/login-post', [LoginController::class, 'Login'])->name('loginPost');
@@ -53,8 +54,9 @@ Route::prefix('admin')->group(function() {
         Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
         Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
         Route::get('/sales', [SaleController::class, 'index'])->name('sales');
-        Route::get('/sales/create', [SaleController::class, 'create'])->name('sales-create');
-        Route::get('/sales/view/1', [SaleController::class, 'show'])->name('sales-view');
+        // Route::get('/sales/create', [SaleController::class, 'create'])->name('sales-create');
+        Route::get('sales/{sale}', ['as' => 'sales.product.create', 'uses' => 'App\Http\Controllers\SaleController@createProductSale']);
+        Route::get('/sales/product/view', [SaleController::class, 'show'])->name('sales-view');
         // Route::get('/sales/client', [ClientController::class, 'create'])->name('client-create');
         Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
@@ -90,9 +92,12 @@ Route::prefix('admin')->group(function() {
     Route::post('/product/create',[ProductsController::class, 'store'])->name('createProduct');
 
     Route::post('/create/provider',[ProviderController::class, 'store'])->name('createSupplier');
-    Route::post('/sold/product',[SaleController::class, 'storeProduct'])->name('storeProduct');
 
+   
+    
 
 });
+
+Route::post('sales/{sale}/product', ['as' => 'sales.product.store', 'uses' => 'App\Http\Controllers\SaleController@storeProduct']);
 
 

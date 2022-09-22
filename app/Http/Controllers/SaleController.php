@@ -9,6 +9,7 @@ use App\Models\SoldProduct;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
+use Auth;
 
 class SaleController extends Controller
 {
@@ -28,11 +29,11 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Sale $sale)
+    public function createProductSale(Sale $sale)
     {
         $products = Product::all();
 
-        return view('sales.create', compact('sale','products'));
+        return view('sales.create', ['sale' => $sale, 'products' => $products]);
     }
 
     /**
@@ -41,18 +42,18 @@ class SaleController extends Controller
      * @param  \App\Http\Requests\StoreSaleRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Sale $sale)
-    {
+    public function store(Request $request, Sale $model)
+    {  
         $existent = Sale::where('client_id', $request->get('client_id'))->where('finalized_at', null)->get();
 
         if($existent->count()) {
-            return back()->withError('There is already an unfinished sale belonging to this customer. <a href="'.route('sales.show', $existent->first()).'">Click here to go to it</a>');
+            return back()->withError('There is already an unfinished sale belonging to this customer. <a href="'.route('sales.product.create', $existent->first()).'">Click here to go to it</a>');
         }
 
-        $sales = $sale->create($request->all());
+        $sale = $model->create($request->all());
 
         return redirect()
-            ->route()
+            ->route('sales.product.create', ['sale' => $sale->id])
             ->withStatus('Sale registered successfully, you can start registering products and transactions.');
 
     }
@@ -63,10 +64,10 @@ class SaleController extends Controller
      * @param  \App\Models\Sale  $sale
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Sale $sale)
     {
         
-        return view('sales.view');
+        return view('sales.view', ['sale'=>$sale]);
     }
 
     /**
@@ -128,17 +129,14 @@ class SaleController extends Controller
 
     }
 
-    public function storeProduct(Request $request, Sale $sale, SoldProduct $soldProduct)
+    public function storeProduct(Request $request, SoldProduct $soldProduct, Sale $sale)
     {
         $request->merge(['total_amount' => $request->get('selling_price') * $request->get('quantity')]);
 
-       $s = $soldProduct->create($request->all());
-       dd($s);
-
-        return redirect()
-            ->route()
-            ->withStatus('Product successfully registered.');
-
+        $soldProduct->create($request->all());
+            return redirect()
+                ->route('sales.product.create', ['sale' => $sale])
+                ->withStatus('Product successfully registered.');
 
     }
 
