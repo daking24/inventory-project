@@ -32,7 +32,7 @@
                     <input type="number" class="form-control form-control-alternative" placeholder="Total Amount" name="total_amount" value="0" readonly>
                     <label>Total Price</label>
           </div>
-          
+
                 <button type="submit" class="btn btn-lg btn-primary">Continue</button>
 
         </form>
@@ -42,8 +42,30 @@
 </div>
 @push('js')
   <script>
+
+
     new SlimSelect({
       select: '.select-product'
-    })
+    });
+    </script>
+    <script>
+     $('#product').change(function() {
+        let id = $(this).val();
+        console.log(id);
+        let url = '{{ route('json-product', ':id') }}';
+        url = url.replace(':id', id);
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+            success: function(response) {
+                if (response !== null) {
+                    $('#product-price').val('');
+                    $('#product-price').val(response.selling_price);
+                }
+            }
+        });
+    });
   </script>
 @endpush('js')

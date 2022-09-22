@@ -15,7 +15,8 @@ class ProductCategoriesController extends Controller
      */
     public function index()
     {
-        return view('inventory.categories.index');
+        $categories = ProductCategory::get();
+        return view('inventory.categories.index', compact('categories'));
     }
 
     /**
@@ -47,9 +48,9 @@ class ProductCategoriesController extends Controller
      * @param  \App\Models\Product_categories  $product_categories
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(ProductCategory $product_categories)
     {
-        return view('inventory.categories.view');
+        return view('inventory.categories.view', compact('product_categories'));
     }
 
     /**

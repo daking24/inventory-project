@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ReceivedPproduct extends Model
+
+use App\Models\Receipt;
+use App\Models\Product;
+
+class ReceivedProduct extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'receipt_id', 
-        'product_id', 
-        'stock', 
+        'receipt_id',
+        'product_id',
+        'stock',
         'stock_defective'
     ];
 

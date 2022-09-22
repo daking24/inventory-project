@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProductCategory;
+use App\Models\ReceivedProduct;
+use App\Models\SoldProduct;
 
 class Product extends Model
 {
@@ -21,7 +24,7 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(ProductCategory::class, 'product_category_id')->withTrashed();
+        return $this->belongsTo(ProductCategory::class, 'product_category_id');
     }
 
     public function solds()
