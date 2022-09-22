@@ -7,17 +7,21 @@
             </div>
             <div class="modal-body">
 
-            <form class="mb-3" action="{{ route('sales-create') }}" method="GET">
+            <form class="mb-3" action="{{ route('sales.store') }}" method="POST">
                 @csrf
             <div class="mb-3">
                 <label for="method" class="form-label">Select Customer</label>
-                <select id="method" name="client" class="customer-select">
+                <select id="method" name="client_id" class="customer-select">
                     @foreach ($client as $item)
                             <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
                     @endforeach
                 </select>
+                <div class="form-floating mb-3">
+                    <input type="hidden" class="form-control" name="user_id" value="{{ Auth::id() }}">
+                </div>
+                
             </div>
-            <button type="" class="btn btn-lg btn-primary">Continue</button>
+            <button type="submit" class="btn btn-lg btn-primary">Continue</button>
             </form>
             <hr >
             <form action="{{ route('createClient') }}" method="post">

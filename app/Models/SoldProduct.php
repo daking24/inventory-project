@@ -12,7 +12,7 @@ class SoldProduct extends Model
     protected $fillable = [
         'sale_id', 
         'product_id', 
-        'price', 
+        'unit_price', 
         'quantity', 
         'total_amount'
     ];
