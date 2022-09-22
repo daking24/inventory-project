@@ -31,6 +31,13 @@ class ProductsController extends Controller
         //
     }
 
+
+    public function fetchProduct($id)
+    {
+        $data = Product::find($id);
+        echo json_encode($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
