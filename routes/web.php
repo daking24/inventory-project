@@ -61,7 +61,8 @@ Route::prefix('admin')->group(function() {
         Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
 
-        Route::get('/show', [ClientController::class, 'show'])->name('clientShow');
+        Route::get('/show/{client}', [ClientController::class, 'show'])->name('clientShow');
+        Route::get('/clients', [ClientController::class, 'index'])->name('clients');
 
         //post endpoint
         Route::post('/client', [ClientController::class, 'store'])->name('createClient');

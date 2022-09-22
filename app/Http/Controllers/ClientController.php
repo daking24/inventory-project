@@ -52,7 +52,7 @@ class ClientController extends Controller
     public function show(Client $client)
     {
 
-        return view('clients.show', compact('client'));
+        return view('clients.view', compact('client'));
     }
 
     /**
@@ -100,5 +100,5 @@ class ClientController extends Controller
     }
 
 
-    
+
 }
