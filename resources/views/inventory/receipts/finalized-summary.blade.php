@@ -43,15 +43,21 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>22 Sept 2022</td>
-                    <td>Phone Supply</td>
-                    <td>Sales Manager</td>
-                    <td>Samsung</td>
-                    <td>50</td>
-                    <td>2000</td>
-                    <td>20</td>
-                    <td>Finalized</td>
+                    <th scope="row">{{ $receipt->id }}</th>
+                    <td>{{ date('d-m-y', strtotime($receipt->created_at)) }}</td>
+                    <td style="max-width:150px;">{{ $receipt->title }}</td>
+                    <td>{{ $receipt->user->name }}</td>
+                    <td>
+                        @if($receipt->provider_id)
+                            <a href="{{ route('providers.show', $receipt->provider) }}">{{ $receipt->provider->name }}</a>
+                        @else
+                            N/A
+                        @endif
+                    </td>
+                    <td>{{ $receipt->products->count() }}</td>
+                    <td>{{ $receipt->products->sum('stock') }}</td>
+                    <td>{{ $receipt->products->sum('stock_defective') }}</td>
+                    <td>{!! $receipt->finalized_at ? 'Finalized' : '<span style="color:yellow; font-weight:bold;">TO FINALIZE</span>' !!}</td>
                 </tr>
                 </tbody>
             </table>
@@ -62,7 +68,7 @@
     <div class="row">
         <!-- Title Start -->
         <div class="col-12 col-md-7">
-            <h1 class="mb-0 pb-0 display-4" id="title">Products: 1</h1>
+            <h1 class="mb-0 pb-0 display-4" id="title">Products: {{ $receipt->products->count() }}</h1>
         </div>
         <!-- Title End -->
     </div>
@@ -82,13 +88,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">Phones</th>
-                    <td>Samasung A13</td>
-                    <td>200</td>
-                    <td>10</td>
-                    <td>210</td>
-                </tr>
+                @foreach ($receipt->products as $received_product)
+                    <tr>
+                        <td><a href="{{ route('category-view', $received_product->product->category) }}">{{ $received_product->product->category->name }}</a></td>
+                        <td><a href="{{ route('product-view', $received_product->product) }}">{{ $received_product->product->name }}</a></td>
+                        <td>{{ $received_product->stock }}</td>
+                        <td>{{ $received_product->stock_defective }}</td>
+                        <td>{{ $received_product->stock + $received_product->stock_defective }}</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('received_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('recept_id')->onDelete('cascade');
+            $table->foreignId('receipt_id')->onDelete('cascade');
             $table->foreignId('product_id');
             $table->integer('stock');
             $table->integer('stock_defective');

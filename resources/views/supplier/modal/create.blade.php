@@ -25,7 +25,7 @@
                     <label>Phone Number</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <textarea class="form-control" placeholder="Payment Information" rows="3" spellcheck="false"></textarea>
+                    <textarea class="form-control" placeholder="Payment Information" name="paymentInfo" rows="3" spellcheck="false"></textarea>
                     <label>Payment Information</label>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Save</button>

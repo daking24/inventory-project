@@ -47,10 +47,13 @@ class ProviderController extends Controller
      * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Provider $provider)
     {
-        // Remember to add id
-        return view('supplier.view');
+        $transactions = $provider->transactions()->latest()->limit(25)->get();
+
+        $receipts = $provider->receipts()->latest()->limit(25)->get();
+
+        return view('supplier.view', compact('provider', 'transactions', 'receipts'));
     }
 
     /**

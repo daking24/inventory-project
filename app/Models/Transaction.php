@@ -5,20 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\PaymentMethod;
+use App\Models\Provider;
+use App\Models\Sale;
+use App\Models\Client;
+use App\Models\Transfer;
+
 class Transaction extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title', 
-        'reference', 
-        'amount', 
-        'payment_methods_id', 
-        'type', 
-        'client_id', 
-        'user_id', 
-        'sale_id', 
-        'provider_id', 
+        'title',
+        'reference',
+        'amount',
+        'payment_methods_id',
+        'type',
+        'client_id',
+        'user_id',
+        'sale_id',
+        'provider_id',
         'transfer_id'
     ];
 

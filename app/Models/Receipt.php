@@ -5,13 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\User;
+use App\Models\Provider;
+use App\Models\ReceivedProduct;
+
 class Receipt extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title', 
-        'provider_id', 
+        'title',
+        'provider_id',
         'user_id'
     ];
 

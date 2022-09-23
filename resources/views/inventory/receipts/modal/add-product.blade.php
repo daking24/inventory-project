@@ -9,13 +9,17 @@
             <form action="{{ route('receipts.product.store', $receipt) }}" method="post">
                 @csrf
                 <div class="form-floating mb-3">
-                    <input type="hidden" class="form-control" name="recept_id" value="{{ $receipt->id }}">
+                    <input type="hidden" class="form-control" name="receipt_id" value="{{ $receipt->id }}">
                 </div>
                 <div class="mb-3" >
                     <label class="form-label">Product</label>
                     <select class="product-select" name="product_id">
-                        @foreach ($product as $item)
-                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                        @foreach ($products as $product)
+                            @if($product['id'] == old('product_id'))
+                                <option value="{{$product['id']}}" selected>[{{ $product->category->name }}] {{ $product->name }}</option>
+                            @else
+                                <option value="{{$product['id']}}">[{{ $product->category->name }}] {{ $product->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

@@ -49,9 +49,9 @@ class PaymentMethodsController extends Controller
      * @param  \App\Models\Payment_methods  $payment_methods
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(PaymentMethods $methods)
     {
-        return view('payment-methods.view');
+        return view('payment-methods.view', compact('method'));
     }
 
     /**
