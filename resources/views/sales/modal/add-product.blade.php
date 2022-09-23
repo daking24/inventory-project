@@ -21,15 +21,15 @@
             </select>
           </div>
           <div class="form-floating mb-3">
-                    <input type="number" class="form-control form-control-alternative" placeholder="Selling Price" name="unit_price" value="0" readonly>
-                    <label>Selling Price</label>
+                    <input id="product-price" type="number" class="form-control form-control-alternative" placeholder="Selling Price" name="unit_price" value="0" readonly>
+                    <label>Selling Price(Naira)</label>
           </div>
           <div class="form-floating mb-3">
-                <input type="number" class="form-control" placeholder="Quantity" name="quantity">
+                <input id="input-qty" type="number" class="form-control" placeholder="Quantity" name="quantity">
                 <label>Quantity</label>
           </div>
           <div class="form-floating mb-3">
-                    <input type="number" class="form-control form-control-alternative" placeholder="Total Amount" name="total_amount" value="0" readonly>
+                    <input id="input-total" type="text" class="form-control form-control-alternative" placeholder="Total Amount" name="total_amount" value="0" readonly>
                     <label>Total Price</label>
           </div>
 
@@ -49,9 +49,9 @@
     });
     </script>
     <script>
-     $('#product').change(function() {
+     $('#receiver_method').change(function() {
         let id = $(this).val();
-        console.log(id);
+        // console.log(id);
         let url = '{{ route('json-product', ':id') }}';
         url = url.replace(':id', id);
 
@@ -68,4 +68,14 @@
         });
     });
   </script>
+  <script>
+        let input_qty = document.getElementById('input-qty');
+        let input_price = document.getElementById('product-price');
+        let input_total = document.getElementById('input-total');
+        input_qty.addEventListener('input', updateTotal);
+        input_price.addEventListener('input', updateTotal);
+        function updateTotal () {
+            input_total.value = "₦"+(parseInt(input_qty.value) * parseFloat(input_price.value));
+        }
+    </script>
 @endpush('js')

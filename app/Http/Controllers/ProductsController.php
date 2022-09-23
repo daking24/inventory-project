@@ -34,10 +34,10 @@ class ProductsController extends Controller
     }
 
 
-    public function fetchProduct($id)
+    public function fetchProduct(Product $id)
     {
-        $data = Product::find($id);
-        echo json_encode($data);
+
+        echo json_encode($id);
     }
 
     /**

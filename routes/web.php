@@ -56,6 +56,8 @@ Route::prefix('admin')->group(function() {
         Route::get('/sales', [SaleController::class, 'index'])->name('sales');
         Route::get('sales/{sale}', ['as' => 'sales.product.create', 'uses' => 'App\Http\Controllers\SaleController@createProductSale']);
         Route::get('/sales/{sale}/view', [SaleController::class, 'show'])->name('sales-view');
+        Route::get('/sale/product/{id}', [ProductsController::class, 'fetchProduct'])->name('json-product');
+
         Route::get('/all', [TransactionController::class, 'index'])->name('transactions');
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
 
