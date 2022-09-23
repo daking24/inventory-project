@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\receipt;
+use App\Models\Receipt;
+use App\Models\Provider;
+use App\Models\Product;
+use App\Models\ReceivedProduct;
 use App\Http\Requests\StorereceiptRequest;
 use App\Http\Requests\UpdatereceiptRequest;
+use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
 {
@@ -15,7 +19,10 @@ class ReceiptController extends Controller
      */
     public function index()
     {
-        return view('inventory.receipts.index');
+
+        return view('inventory.receipts.index',[
+            'provider' => Provider::all()
+        ]);
     }
 
     /**
@@ -23,9 +30,13 @@ class ReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Receipt $receipt)
     {
-        return view('inventory.receipts.summary');
+
+        return view('inventory.receipts.summary',[
+            'product' => Product::all(),
+            'receipt' => $receipt
+        ]);
     }
 
     /**
@@ -34,9 +45,13 @@ class ReceiptController extends Controller
      * @param  \App\Http\Requests\StorereceiptRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorereceiptRequest $request)
+    public function store(Request $request,  Receipt $receipt)
     {
-        //
+        $receipt = $receipt->create($request->all());
+
+        return redirect()
+            ->route('receipt-create', $receipt)
+            ->withStatus('Receipt registered successfully, you can start adding the products belonging to it.');
     }
 
     /**
@@ -56,7 +71,7 @@ class ReceiptController extends Controller
      * @param  \App\Models\receipt  $receipt
      * @return \Illuminate\Http\Response
      */
-    public function edit(receipt $receipt)
+    public function edit(Receipt $receipt)
     {
         //
     }
@@ -83,4 +98,15 @@ class ReceiptController extends Controller
     {
         //
     }
+
+
+    public function storeproduct(Request $request, Receipt $receipt, ReceivedProduct $receivedproduct)
+    {
+        $receivedproduct->create($request->all());
+
+        return redirect()
+            ->route('receipt-create', $receipt)
+            ->withStatus('Product added successfully.');
+    }
+
 }

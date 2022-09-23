@@ -6,28 +6,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="" method="post">
+            <form action="{{ route('receipt.store') }}" method="post">
                 @csrf
+                <div class="form-floating mb-3">
+                    <input type="hidden" class="form-control" name="user_id" value="{{ Auth::id() }}">
+                </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="title" placeholder="Title">
                     <label>Title</label>
                 </div>
                 <div class="mb-3" >
                     <label class="form-label">Supplier (Optional)</label>
-                    <select class="supplier-select">
-                        {{-- <option label="&nbsp;"></option> --}}
-                        <option value="Breadstick">Breadstick</option>
-                        <option value="Biscotti">Biscotti</option>
-                        <option value="Fougasse">Fougasse</option>
-                        <option value="Lefse">Lefse</option>
-                        <option value="Melonpan">Melonpan</option>
-                        <option value="Naan">Naan</option>
-                        <option value="Panbrioche">Panbrioche</option>
-                        <option value="Rewena">Rewena</option>
-                        <option value="Shirmal">Shirmal</option>
-                        <option value="Tunnbröd">Tunnbröd</option>
-                        <option value="Vánočka">Vánočka</option>
-                        <option value="Zopf">Zopf</option>
+                    <select class="supplier-select" name="provider_id">
+                        @foreach ($provider as $item)
+                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Continue</button>

@@ -69,7 +69,7 @@ Route::prefix('admin')->group(function() {
     Route::prefix('/inventory')->group(function()
     {
         Route::get('/receipts', [ReceiptController::class, 'index'])->name('inventory-receipt');
-        Route::get('/receipts/create', [ReceiptController::class, 'create'])->name('receipt-create');
+        Route::get('/receipts/{receipt}/create', [ReceiptController::class, 'create'])->name('receipt-create');
         Route::get('/receipts/view/1', [ReceiptController::class, 'show'])->name('receipt-view');
         Route::get('/categories', [ProductCategoriesController::class, 'index'])->name('inventory-category');
         Route::get('/categories/{product_categories}/view', [ProductCategoriesController::class, 'show'])->name('category-view');
@@ -104,4 +104,5 @@ Route::get('transactions/{type}', ['as' => 'transactions.type', 'uses' => 'App\H
 Route::get('transactions/{type}/create', ['as' => 'transactions.create', 'uses' => 'App\Http\Controllers\TransactionController@create']);
 Route::post('transactions/store', ['as' => 'transactions.store', 'uses' => 'App\Http\Controllers\TransactionController@store']);
 Route::post('transfer/store', ['as' => 'transfer.store', 'uses' => 'App\Http\Controllers\TransferController@store']);
-
+Route::post('receipt/store', ['as' => 'receipt.store', 'uses' => 'App\Http\Controllers\ReceiptController@store']);
+Route::post('receipts/{receipt}/product', ['as' => 'receipts.product.store', 'uses' => 'App\Http\Controllers\ReceiptController@storeproduct']);

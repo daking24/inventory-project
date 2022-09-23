@@ -6,24 +6,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="{{ route('client') }}" method="post">
+            <form action="{{ route('receipts.product.store', $receipt) }}" method="post">
                 @csrf
+                <div class="form-floating mb-3">
+                    <input type="hidden" class="form-control" name="recept_id" value="{{ $receipt->id }}">
+                </div>
                 <div class="mb-3" >
                     <label class="form-label">Product</label>
-                    <select class="product-select">
-                        {{-- <option label="&nbsp;"></option> --}}
-                        <option value="Breadstick">Breadstick</option>
-                        <option value="Biscotti">Biscotti</option>
-                        <option value="Fougasse">Fougasse</option>
-                        <option value="Lefse">Lefse</option>
-                        <option value="Melonpan">Melonpan</option>
-                        <option value="Naan">Naan</option>
-                        <option value="Panbrioche">Panbrioche</option>
-                        <option value="Rewena">Rewena</option>
-                        <option value="Shirmal">Shirmal</option>
-                        <option value="Tunnbröd">Tunnbröd</option>
-                        <option value="Vánočka">Vánočka</option>
-                        <option value="Zopf">Zopf</option>
+                    <select class="product-select" name="product_id">
+                        @foreach ($product as $item)
+                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -33,7 +26,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="defects" placeholder="Defective Stock">
+                    <input type="number" class="form-control" name="stock_defective" placeholder="Defective Stock">
                     <label>Defective Stock</label>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Continue</button>
