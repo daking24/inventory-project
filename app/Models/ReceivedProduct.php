@@ -14,7 +14,7 @@ class ReceivedProduct extends Model
     use HasFactory;
 
     protected $fillable = [
-        'receipt_id',
+        'recept_id',
         'product_id',
         'stock',
         'stock_defective'
