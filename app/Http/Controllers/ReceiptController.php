@@ -21,7 +21,8 @@ class ReceiptController extends Controller
     {
 
         return view('inventory.receipts.index',[
-            'provider' => Provider::all()
+            'provider' => Provider::all(),
+            'receipts' => Receipt::all()
         ]);
     }
 
@@ -33,10 +34,8 @@ class ReceiptController extends Controller
     public function create(Receipt $receipt)
     {
 
-        return view('inventory.receipts.summary',[
-            'product' => Product::all(),
-            'receipt' => $receipt
-        ]);
+        $products = Product::all();
+        return view('inventory.receipts.summary', compact('receipt', 'products'));
     }
 
     /**
@@ -60,9 +59,9 @@ class ReceiptController extends Controller
      * @param  \App\Models\receipt  $receipt
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Receipt $receipt)
     {
-        return view('inventory.receipts.finalized-summary');
+        return view('inventory.receipts.finalized-summary', compact('receipt'));
     }
 
     /**

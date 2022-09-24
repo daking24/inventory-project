@@ -42,14 +42,14 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>22 Sept 2022</td>
-                    <td>Phone Supply</td>
-                    <td>Sales Manager</td>
-                    <td>Samsung</td>
-                    <td>50</td>
-                    <td>2000</td>
-                    <td>20</td>
+                    <th scope="row">{{ $provider->id }}</th>
+                    <td>{{ $provider->name }}</td>
+                    <td>{{ $provider->description }}</td>
+                    <td>{{ $provider->email }}</td>
+                    <td>{{ $provider->phone }}</td>
+                    <td style="max-width: 175px">{{ $provider->paymentInfo }}</td>
+                    <td>{{ $provider->transactions->count() }}</td>
+                    <td>{{ __(abs($provider->transactions->sum('amount'))) }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -81,14 +81,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">Phones</th>
-                    <td>Samasung A13</td>
-                    <td>200</td>
-                    <td>10</td>
-                    <td>210</td>
-                    <td>dasdda</td>
-                </tr>
+                    @forelse ($transactions as $transaction)
+                    <tr>
+                        <th scope="row">{{ date('d-m-y', strtotime($transaction->created_at)) }}</th>
+                        <td>{{ $transaction->id }}</td>
+                        <td>{{ $transaction->title }}</td>
+                        <td><a href="{{ route('method-view', $transaction->method) }}">{{ $transaction->method->name }}</a></td>
+                        <td>{{ __($transaction->amount) }}</td>
+                        <td>{{ $transaction->reference }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                    <td class="text-center" colspan="6">
+                        No Transactions Available
+                    </td>
+                    </tr>
+                    @endforelse
+
                 </tbody>
             </table>
         </div>
@@ -117,18 +126,40 @@
                     <th scope="col">Stock</th>
                     <th scope="col">Defective Stock</th>
                     <th scope="col">Total Stock</th>
+                    <th></th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">Phones</th>
-                    <td>Samasung A13</td>
-                    <td>200</td>
-                    <td>10</td>
-                    <td>210</td>
-                    <td>dasdda</td>
-                    <td>dasdda</td>
-                </tr>
+
+                    @forelse ($receipts as $receipt)
+                    <tr>
+                        <th scope="row">{{ date('d-m-y', strtotime($receipt->created_at)) }}</th>
+                        <td><a href="{{ route('receipt-view', $receipt) }}">{{ $receipt->id }}</a></td>
+                        <td>{{ $receipt->title }}</td>
+                        <td>{{ $receipt->products->count() }}</td>
+                        <td>{{ $receipt->products->sum('stock') }}</td>
+                        <td>{{ $receipt->products->sum('stock_defective') }}</td>
+                        <td>{{ $receipt->products->sum('stock') + $receipt->products->sum('stock_defective') }}</td>
+                        <td>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <a href="{{ route('receipt-view', $receipt) }}" type="button" class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-glasses undefined"><circle cx="5.5" cy="6.5" r="3.5"></circle><circle cx="14.5" cy="6.5" r="3.5"></circle><path d="M11 6 9 6M2 6 2.89031 14.9031C2.95859 15.586 3.37218 16.1861 3.98596 16.493L5 17M18 6 17.1097 14.9031C17.0414 15.586 16.6278 16.1861 16.014 16.493L15 17"></path></svg>
+                        <span class="d-none d-xxl-inline-block">View</span>
+                    </a>
+                </div>
+
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                    <td class="text-center" colspan="8">
+                        No Receipts Available
+                    </td>
+                    </tr>
+                    @endforelse
+
                 </tbody>
             </table>
         </div>

@@ -14,7 +14,7 @@ class ReceivedProduct extends Model
     use HasFactory;
 
     protected $fillable = [
-        'recept_id',
+        'receipt_id',
         'product_id',
         'stock',
         'stock_defective'
@@ -22,7 +22,7 @@ class ReceivedProduct extends Model
 
     public function receipt()
     {
-        return $this->belongsTo(Receipt::class);
+        return $this->belongsTo(Receipt::class, 'receipt_id');
     }
 
     public function product()
