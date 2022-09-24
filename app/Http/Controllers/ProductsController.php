@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductsRequest;
-use App\Http\Requests\UpdateProductsRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ReceivedProduct;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -17,9 +17,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $categories = ProductCategory::all();
-        $product = Product::paginate(25);
-        // dd($product->product_category_id);
+        $categories = ProductCategory::where('is_active', true)->get();
+        $product = Product::paginate(25)->where('is_active', true);
         return view('inventory.products.index', compact('categories','product'));
     }
 
@@ -73,9 +72,10 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Products $products)
+    public function edit(Product $products)
     {
-        //
+        $categories = ProductCategory::where('is_active', false)->get();
+        return view('inventory.products.index', compact('categories'));
     }
 
     /**
@@ -85,9 +85,13 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductsRequest $request, Products $products)
+    public function update(StoreProductsRequest $request, Product $product)
     {
-        //
+        $product->update($request->all());
+
+        return redirect()
+            ->route('inventory-product')
+            ->withStatus('Product updated successfully.');
     }
 
     /**
@@ -96,8 +100,13 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $products)
+    public function destroy(Product $product)
     {
-        //
+        dd($product);
+        $product->delete();
+
+        return redirect()
+            ->route('inventory-product')
+            ->withStatus('Product removed successfully.');
     }
 }

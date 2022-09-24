@@ -73,7 +73,7 @@ class ReceiptController extends Controller
      */
     public function edit(Receipt $receipt)
     {
-        //
+
     }
 
     /**
