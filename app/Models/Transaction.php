@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\PaymentMethod;
+use App\Models\PaymentMethods;
 use App\Models\Provider;
 use App\Models\Sale;
 use App\Models\Client;
@@ -30,7 +30,7 @@ class Transaction extends Model
 
     public function method()
     {
-        return $this->belongsTo(PaymentMethod::class, 'payment_method_id');
+        return $this->belongsTo(PaymentMethods::class, 'payment_methods_id');
     }
 
     public function provider()
@@ -55,7 +55,7 @@ class Transaction extends Model
 
     public function scopeFindByPaymentMethodId($query, $id)
     {
-        return $query->where('payment_method_id', $id);
+        return $query->where('payment_methods_id', $id);
     }
 
     public function scopeThisMonth($query)

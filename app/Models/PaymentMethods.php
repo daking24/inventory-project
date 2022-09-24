@@ -17,6 +17,6 @@ class PaymentMethods extends Model
     ];
 
     public function transactions() {
-        return $this->hasMany(Transaction::class, 'payment_method_id', 'id');
+        return $this->hasMany(Transaction::class, 'payment_methods_id', 'id');
     }
 }
