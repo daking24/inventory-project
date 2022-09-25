@@ -95,21 +95,22 @@
               <div class="mb-5">
                 <p class="h6">Please use your credentials to login.</p>
                 <p class="h6">
-                  If you are not a member, please
-                  <a href="Register.html">register</a>
-                  .
+                  If you are not a member, please contact the administrator.
                 </p>
               </div>
               <div>
                 <form action="{{ route('loginPost') }}" method="POST">
                   @csrf
-                  <div class="mb-3 filled form-group tooltip-end-top">
+                  <div class="mb-3 filled form-group tooltip-end-top{{ $errors->has('email') ? ' has-danger' : '' }}">
                     <i data-acorn-icon="email"></i>
-                    <input class="form-control" placeholder="Email" name="email" />
-                  </div>
-                  <div class="mb-3 filled form-group tooltip-end-top">
+                    <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}  " placeholder="Email" name="email" />
+@include('alerts.feedback', ['field' => 'email'])
+                </div>
+                  <div class="mb-3 filled form-group tooltip-end-top{{ $errors->has('password') ? ' has-danger' : '' }} ">
                     <i data-acorn-icon="lock-off"></i>
-                    <input class="form-control pe-7" name="password" type="password" placeholder="Password" />
+                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} pe-7" name="password" type="password" placeholder="Password" />
+                        @include('alerts.feedback', ['field' => 'password'])
+                    
                     <a class="text-small position-absolute t-3 e-3" href="ForgotPassword.html">Forgot?</a>
                   </div>
                   <button type="submit" class="btn btn-lg btn-primary">Login</button>
