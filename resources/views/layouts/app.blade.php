@@ -56,7 +56,7 @@
 <div id="root">
     {{-- Navbar -> Start --}}
     {{-- Admin Sidebar --}}
-    @role('admin')
+    @role('Admin Manager')
     @include('layouts.navbar.admin.sidebar')
     @else
     {{-- Sales Manager Sidebar --}}

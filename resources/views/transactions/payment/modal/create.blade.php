@@ -23,15 +23,23 @@
                     <label for="provider" class="form-label">Provider</label>
                     <select id="provider" name="provider_id" class="provider-select">
                         @foreach ($provider as $item)
-                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                            @if($item['id'] == old('provider_id'))
+                                <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                            @else
+                                <option value="{{$item['id']}}">{{$item['name']}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="method" class="form-label">Payment Method</label>
                     <select id="method" name="payment_methods_id" class="method-select">
-                        @foreach ($payment as $item)
-                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                        @foreach ($payment as $items)
+                            @if($items['id'] == old('payment_methods_id'))
+                                <option value="{{$items['id']}}" selected>{{$items['name']}}</option>
+                            @else
+                                <option value="{{$items['id']}}">{{$items['name']}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

@@ -213,17 +213,17 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('payment')}}">
+                        <a href="{{route('transactions.type', 'payment')}}">
                             <span class="label">Payments</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('income')}}">
+                        <a href="{{route('transactions.type', 'income')}}">
                             <span class="label">Income</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('expense')}}">
+                        <a href="{{route('transactions.type', 'expense')}}">
                             <span class="label">Expense</span>
                         </a>
                     </li>

@@ -21,9 +21,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="method" class="form-label">Method Of Payment</label>
-                    <select id="method" name="payment_methods_id" class="form-control form-select">
+                    <select id="method" name="payment_methods_id" class="">
                         @foreach ($payment as $item)
-                            <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                            @if($item['id'] == old('payment_methods_id'))
+                                <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                            @else
+                                <option value="{{$item['id']}}">{{$item['name']}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

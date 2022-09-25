@@ -49,10 +49,8 @@ Route::prefix('admin')->group(function() {
 
     Route::prefix('/transactions')->group(function()
     {
-        Route::get('/expenses', [ExpenseController::class, 'index'])->name('expense');
         Route::get('/income', [IncomeController::class, 'index'])->name('income');
         Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
-        Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
         Route::get('/sales', [SaleController::class, 'index'])->name('sales');
         Route::get('sales/{sale}', ['as' => 'sales.product.create', 'uses' => 'App\Http\Controllers\SaleController@createProductSale']);
         Route::get('/sales/{sale}/view', [SaleController::class, 'show'])->name('sales-view');

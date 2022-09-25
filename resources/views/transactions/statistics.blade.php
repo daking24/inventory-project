@@ -191,7 +191,7 @@
                     <td>{{ $period }}</td>
                     <td>{{ $data->count() }}</td>
                     <td>{{ $data->groupBy('client_id')->count() }}</td>
-                    <td>{{ $data->where('finalized_at', '!=', null)->map(function ($sale) {return $sale->products->sum('qty');})->sum() }}</td>
+                    <td>{{ $data->where('finalized_at', '!=', null)->map(function ($sale) {return $sale->products->sum('quantity');})->sum() }}</td>
                     <td>{{ __($data->avg('total_amount')) }}</td>
                     <td>{{ __($data->where('finalized_at', '!=', null)->map(function ($sale) {return $sale->products->sum('total_amount');})->sum()) }}</td>
                     <td>{{ $data->where('finalized_at', null)->count() }}</td>
