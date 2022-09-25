@@ -29,7 +29,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            {{-- <tr>
                 <th scope="row">22-12-2022</th>
                 <td>Income</td>
                 <td>Cash Deposit</td>
@@ -51,7 +51,62 @@
                     </button>
                 </div>
                 </td>
-            </tr>
+            </tr> --}}
+            @foreach ($transactions as $transaction)
+                                    <tr>
+                                        <td>{{ date('d-m-y', strtotime($transaction->created_at)) }}</td>
+                                        <td>
+                                            <a href="{{ route('transactions.type', ['type' => $transaction->type]) }}">{{ $transactionname[$transaction->type] }}</a>
+                                        </td>
+                                        <td style="max-width:150px">{{ $transaction->title }}</td>
+                                        <td><a href="{{ route('methods.show', $transaction->method) }}">{{ $transaction->method->name }}</a></td>
+                                        <td>{{ __($transaction->amount) }}</td>
+                                        <td>{{ $transaction->reference }}</td>
+                                        <td>
+                                            @if ($transaction->client)
+                                                <a href="{{ route('clientShow', $transaction->client) }}">{{ $transaction->client->name }}<br>{{ $transaction->client->document_type }}-{{ $transaction->client->document_id }}</a>
+                                            @else
+                                                Does not apply
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($transaction->provider)
+                                                <a href="{{ route('supplier-view', $transaction->provider) }}">{{ $transaction->provider->name }}</a>
+                                            @else
+                                                Does not apply
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($transaction->transfer)
+                                                <a href="{{ route('transfer', $transaction->transfer) }}">ID {{ $transaction->transfer->id }}</a>
+                                            @else
+                                                Does not apply
+                                            @endif
+                                        </td>
+                                        <td class="td-actions text-right">
+                                            @if ($transaction->sale_id)
+                                                <a href="{{ route('sales-view', $transaction->sale) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="More details">
+                                                    <i class="tim-icons icon-zoom-split"></i>
+                                                </a>
+                                            @elseif ($transaction->transfer_id)
+                                                <a href="{{ route('transfer', $transaction->transfer) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="More details">
+                                                    <i class="tim-icons icon-zoom-split"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('transactions.edit', $transaction) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Edit Transaction">
+                                                    <i class="tim-icons icon-pencil"></i>
+                                                </a>
+                                                <form action="{{ route('transactions.destroy', $transaction) }}" method="post" class="d-inline">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Delete Transaction" onclick="confirm('Are you sure you want to delete this transaction?') ? this.parentElement.submit() : ''">
+                                                        <i class="tim-icons icon-simple-remove"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
             </tbody>
         </table>
     </div>

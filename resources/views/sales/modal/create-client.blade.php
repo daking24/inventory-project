@@ -12,6 +12,7 @@
             <div class="mb-3">
                 <label for="method" class="form-label">Select Customer</label>
                 <select id="method" name="client_id" class="customer-select">
+
                     @foreach ($client as $item)
                             <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
                     @endforeach
@@ -19,7 +20,7 @@
                 <div class="form-floating mb-3">
                     <input type="hidden" class="form-control" name="user_id" value="{{ Auth::id() }}">
                 </div>
-                
+
             </div>
             <button type="submit" class="btn btn-lg btn-primary">Continue</button>
             </form>
@@ -27,16 +28,16 @@
             <form action="{{ route('createClient') }}" method="post">
                 @csrf
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="name" placeholder="Customer's Name" value="Customer-N">
+                    <input type="text" class="form-control" name="name" placeholder="Customer's Name" >
                     <label>Customer's Name</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="phone" placeholder="Phone Number">
-                    <label>Phone Number(Optional)</label>
+                    <label>Phone Number</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="email" placeholder="Email">
-                    <label>Email(Optional)</label>
+                    <label>Email</label>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Save</button>
 

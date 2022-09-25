@@ -176,50 +176,27 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Period</th>
-                <th scope="col">Sales</th>
-                <th scope="col">Clients</th>
-                <th scope="col">Billed Amount</th>
-                <th scope="col">To Finalize</th>
-
+                <th scope="row">Period</th>
+                <th scope="row">Sales</th>
+                <th scope="row">Clients</th>
+                <th scope="row">Total Stock</th>
+                <th scope="row" data-toggle="tooltip" data-placement="bottom" title="Promedio de ingresos por cada venta">Average C / V</th>
+                <th scope="row">Billed Amount</th>
+                <th scope="row">To Finalize</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">Day</th>
-                <td>1</td>
-                <td>2</td>
-                <td>1</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <th scope="row">Yesterday</th>
-                <td>1</td>
-                <td>2</td>
-                <td>1</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <th scope="row">Week</th>
-                <td>1</td>
-                <td>2</td>
-                <td>1</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <th scope="row">Month</th>
-                <td>1</td>
-                <td>2</td>
-                <td>1</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <th scope="row">Year</th>
-                <td>1</td>
-                <td>2</td>
-                <td>1</td>
-                <td>1</td>
-            </tr>
+            @foreach ($salesperiods as $period => $data)
+                <tr>
+                    <td>{{ $period }}</td>
+                    <td>{{ $data->count() }}</td>
+                    <td>{{ $data->groupBy('client_id')->count() }}</td>
+                    <td>{{ $data->where('finalized_at', '!=', null)->map(function ($sale) {return $sale->products->sum('qty');})->sum() }}</td>
+                    <td>{{ __($data->avg('total_amount')) }}</td>
+                    <td>{{ __($data->where('finalized_at', '!=', null)->map(function ($sale) {return $sale->products->sum('total_amount');})->sum()) }}</td>
+                    <td>{{ $data->where('finalized_at', null)->count() }}</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

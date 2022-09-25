@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('client_id');
             $table->decimal('total_amount',30,2)->nullable();
-            $table->timestamp('finalized_at');
+            $table->timestamp('finalized_at')->nullable();
             $table->timestamps();
         });
     }

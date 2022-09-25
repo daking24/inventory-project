@@ -1,6 +1,8 @@
 @extends('layouts.app', ['pageSlug' => 'transactions_sales', 'page' => 'Transactions | Sales', 'section' => ''])
 
 @section('content')
+  @include('alerts.success')
+  @include('alerts.error')
   <div class="page-title-container">
     <div class="row">
       <!-- Title Start -->
@@ -8,29 +10,37 @@
         <h1 class="mb-0 pb-0 display-4" id="title">Sale Summary</h1>
       </div>
       <!-- Title End -->
+      @if (!$sale->finalized_at)
+        <!-- Top Buttons Start -->
+        <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
+          <!-- Add New Button Start -->
+          @if ($sale->products->count() == 0)
+            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto " data-bs-toggle="modal" data-bs-target="#deleteSale">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                class="acorn-icons acorn-icons-bin undefined">
+                <path
+                  d="M4 5V14.5C4 15.9045 4 16.6067 4.33706 17.1111C4.48298 17.3295 4.67048 17.517 4.88886 17.6629C5.39331 18 6.09554 18 7.5 18H12.5C13.9045 18 14.6067 18 15.1111 17.6629C15.3295 17.517 15.517 17.3295 15.6629 17.1111C16 16.6067 16 15.9045 16 14.5V5">
+                </path>
+                <path
+                  d="M14 5L13.9424 4.74074C13.6934 3.62043 13.569 3.06028 13.225 2.67266C13.0751 2.50368 12.8977 2.36133 12.7002 2.25164C12.2472 2 11.6734 2 10.5257 2L9.47427 2C8.32663 2 7.75281 2 7.29981 2.25164C7.10234 2.36133 6.92488 2.50368 6.77496 2.67266C6.43105 3.06028 6.30657 3.62044 6.05761 4.74074L6 5">
+                </path>
+                <path d="M2 5H18M12 9V13M8 9V13"></path>
+              </svg>
+              <span>Delete Sale</span>
+            </button>
+            <!-- Add New Button End -->
+          @else
+            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto " data-bs-toggle="modal" data-bs-target="#deleteSale">
+                    <i data-acorn-icon="arrow-end-right" class="icon" data-acorn-size="18"></i>
 
-      <!-- Top Buttons Start -->
-      <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
-        <!-- Add New Button Start -->
-        <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto ">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none"
-            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-            class="acorn-icons acorn-icons-bin undefined">
-            <path
-              d="M4 5V14.5C4 15.9045 4 16.6067 4.33706 17.1111C4.48298 17.3295 4.67048 17.517 4.88886 17.6629C5.39331 18 6.09554 18 7.5 18H12.5C13.9045 18 14.6067 18 15.1111 17.6629C15.3295 17.517 15.517 17.3295 15.6629 17.1111C16 16.6067 16 15.9045 16 14.5V5">
-            </path>
-            <path
-              d="M14 5L13.9424 4.74074C13.6934 3.62043 13.569 3.06028 13.225 2.67266C13.0751 2.50368 12.8977 2.36133 12.7002 2.25164C12.2472 2 11.6734 2 10.5257 2L9.47427 2C8.32663 2 7.75281 2 7.29981 2.25164C7.10234 2.36133 6.92488 2.50368 6.77496 2.67266C6.43105 3.06028 6.30657 3.62044 6.05761 4.74074L6 5">
-            </path>
-            <path d="M2 5H18M12 9V13M8 9V13"></path>
-          </svg>
-          <span>Delete Sale</span>
-        </button>
-        <!-- Add New Button End -->
-
-      </div>
-      <!-- Top Buttons End -->
-    </div>
+              <span>Finalize Sale</span>
+            </button>
+          @endif
+        </div>
+    <!-- Top Buttons End -->
+    @endif
+  </div>
   </div>
   <div class="col-12 mb-5">
     <div class="card mb-5">
@@ -52,14 +62,14 @@
           </thead>
           <tbody>
             <tr>
-              <th scope="row">1</th>
-              <td>22 Sept 2022</td>
-              <td>Sales Manager</td>
-              <td>John Doe</td>
-              <td>50</td>
-              <td>200</td>
-              <td>200000</td>
-              <td>ON HOLD</td>
+                <th scope="row">{{ $sale->id }}</th>
+                <td>{{ date('d-m-y', strtotime($sale->created_at)) }}</td>
+                <td>{{ $sale->user->name }}</td>
+                <td><a href="{{ route('clientShow', $sale->client) }}">{{ $sale->client->name }} | {{ $sale->client->document_type }}-{{ $sale->client->document_id }}</a></td>
+                <td>{{ $sale->products->count() }}</td>
+                <td>{{ $sale->products->sum('quantity') }}</td>
+                <td>{{ __($sale->products->sum('total_amount')) }}</td>
+                <td class="text-warning">{!! $sale->finalized_at ? 'Completed at<br>'.date('d-m-y', strtotime($sale->finalized_at)) : (($sale->products->count() > 0) ? 'TO FINALIZE' : 'ON HOLD') !!}</td>
             </tr>
           </tbody>
         </table>
@@ -70,7 +80,7 @@
     <div class="row">
       <!-- Title Start -->
       <div class="col-12 col-md-7">
-        <h1 class="mb-0 pb-0 display-4" id="title">Cart</h1>
+        <h1 class="mb-0 pb-0 display-4" id="title">Cart:  {{ $sale->products->sum('quantity') }}</h1>
       </div>
       <!-- Title End -->
 
@@ -131,27 +141,29 @@
         <div class="os-viewport os-viewport-native-scrollbars-invisible os-viewport-native-scrollbars-overlaid"
           style="overflow-y: scroll;">
           <div class="os-content" style="padding: 0px 15px; height: 100%; width: 100%;">
+            @forelse ($sale->products as $sold_product)
+
             <div class="card mb-2 sh-19 sh-md-8">
               <div class="card-body pt-0 pb-0 h-100">
                 <div class="row g-0 h-100 align-content-center">
                   <div class="col-11 col-md-1 d-flex flex-column justify-content-center mb-1 mb-md-0 order-1 order-md-1">
                     <div class="text-muted text-small d-md-none">ID</div>
-                    <a href="#" class="text-truncate">1</a>
+                    <div class="text-truncate">{{ $sold_product->product->id }}</div>
                   </div>
                   <div
                     class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-2 order-md-2">
                     <div class="text-muted text-small d-md-none">Category</div>
-                    <div class="text-alternate">Phones</div>
+                    <div class="text-alternate"><a href="{{ route('category-view', $sold_product->product->category) }}">{{ $sold_product->product->category->name }}</a></div>
                   </div>
                   <div
                     class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-3 order-md-3">
                     <div class="text-muted text-small d-md-none">Product</div>
-                    <div class="text-alternate">Samsung A12</div>
+                    <div class="text-alternate"><a href="{{ route('product-view', $sold_product->product) }}">{{ $sold_product->product->name }}</a></div>
                   </div>
                   <div
                     class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-4 order-md-4">
                     <div class="text-muted text-small d-md-none">Quantity</div>
-                    <div class="text-alternate">1</div>
+                    <div class="text-alternate">{{ $sold_product->quantity }}</div>
                   </div>
                   <div
                     class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-5 order-md-5">
@@ -159,7 +171,7 @@
                     <div class="text-alternate">
                       <span>
                         <span class="text-small">₦</span>
-                        3.25
+                        {{ __($sold_product->unit_price) }}
                       </span>
                     </div>
                   </div>
@@ -169,14 +181,14 @@
                     <div class="text-alternate">
                       <span>
                         <span class="text-small">₦</span>
-                        30.25
+                        {{ __($sold_product->total_amount) }}
                       </span>
                     </div>
                   </div>
                   <div
                     class="col-1 col-md-1 d-flex flex-column justify-content-center align-items-md-end mb-1 mb-md-0 order-2 text-end order-md-last">
                     <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-end">
-                      <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" type="button">
+                      <a href="#" class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                           fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                           stroke-linejoin="round" class="acorn-icons acorn-icons-edit-square undefined">
@@ -188,8 +200,8 @@
                           </path>
                         </svg>
                         <span class="d-none d-xxl-inline-block">Edit</span>
-                      </button>
-                      <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" type="button">
+                      </a>
+                      <a href="#"  data-bs-toggle="modal" data-bs-target="#deleteProduct" class="btn btn-sm btn-icon btn-icon-start btn-outline-danger ms-1" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                           fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                           stroke-linejoin="round" class="acorn-icons acorn-icons-bin undefined">
@@ -202,12 +214,22 @@
                           <path d="M2 5H18M12 9V13M8 9V13"></path>
                         </svg>
                         <span class="d-none d-xxl-inline-block">Delete</span>
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            @empty
+            <div class="card mb-2 sh-19 sh-md-8">
+                <div class="text-center">
+                  <p class="mt-3 mb-0">
+                    {{ __('There is no data.') }}
+                  </p>
+                </div>
+              </div>
+            @endforelse
+
           </div>
           <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
             <div class="os-scrollbar-track os-scrollbar-track-off">
@@ -227,6 +249,8 @@
 
   {{-- Add Products Modal Start --}}
   @include('sales.modal.add-product')
+  @include('sales.modal.delete-sale')
+  @include('sales.modal.delete-product')
   {{-- Add Products Modal End --}}
 @endsection
 
@@ -240,7 +264,7 @@
   <script src="{{ asset('temp/js') }}/scripts.js"></script>
   <!-- Page Specific Scripts End -->
   <script>
-    let productId =  document.getElementById("product")  
+    let productId = document.getElementById("product")
     let opt = productId.options[productId.selectedIndex].value()
     console.log(opt);
   </script>

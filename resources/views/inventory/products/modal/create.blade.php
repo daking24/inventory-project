@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="defective" placeholder="Defectives">
+                    <input type="number" class="form-control" name="stock_defective" placeholder="Defectives">
                     <label>Defectives</label>
                 </div>
 

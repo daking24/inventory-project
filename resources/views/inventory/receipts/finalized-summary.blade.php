@@ -49,7 +49,7 @@
                     <td>{{ $receipt->user->name }}</td>
                     <td>
                         @if($receipt->provider_id)
-                            <a href="{{ route('providers.show', $receipt->provider) }}">{{ $receipt->provider->name }}</a>
+                            <a href="{{ route('supplier-view', $receipt->provider) }}">{{ $receipt->provider->name }}</a>
                         @else
                             N/A
                         @endif

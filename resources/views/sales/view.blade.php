@@ -1,7 +1,7 @@
 @extends('layouts.app', ['pageSlug' => 'transactions_sales', 'page' => 'Transactions | Sales', 'section' => ''])
 
 @section('content')
-<div class="page-title-container">
+  <div class="page-title-container">
     <div class="row">
       <!-- Title Start -->
       <div class="col-12 col-md-7">
@@ -52,14 +52,20 @@
           </thead>
           <tbody>
             <tr>
-              <th scope="row">1</th>
-              <td>22 Sept 2022</td>
-              <td>Sales Manager</td>
-              <td>John Doe</td>
-              <td>50</td>
-              <td>200</td>
-              <td>200000</td>
-              <td>Finalized</td>
+              <th scope="row">{{ $sale->id }}</th>
+              <td>{{ date('d-m-y', strtotime($sale->created_at)) }}</td>
+              <td>{{ $sale->user->name }}</td>
+              <td><a
+                  href="{{ route('clientShow', $sale->client) }}">{{ $sale->client->name }}<br>{{ $sale->client->document_type }}-{{ $sale->client->document_id }}</a>
+              </td>
+              <td>{{ $sale->products->count() }}</td>
+              <td>{{ $sale->products->sum('quantity') }}</td>
+              <th scope="row" class="text-success">₦{{ __($sale->products->sum('total_amount')) }}</th>
+              <td>{!! $sale->finalized_at
+                  ? 'Completed at<br>' . date('d-m-y', strtotime($sale->finalized_at))
+                  : ($sale->products->count() > 0
+                      ? 'TO FINALIZE'
+                      : 'ON HOLD') !!}</td>
             </tr>
           </tbody>
         </table>
@@ -70,7 +76,7 @@
     <div class="row">
       <!-- Title Start -->
       <div class="col-12 col-md-7">
-        <h1 class="mb-0 pb-0 display-4" id="title">Products: 1</h1>
+        <h1 class="mb-0 pb-0 display-4" id="title">Products: {{ $sale->products->sum('quantity') }} </h1>
       </div>
       <!-- Title End -->
 
@@ -94,18 +100,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Phones</td>
-              <td>iPhone 14 Pro Max</td>
-              <td>1</td>
-              <td>800000</td>
-              <td>800000</td>
-            </tr>
+            @foreach ($sale->products as $sold_product)
+              <tr>
+                <td>{{ $sold_product->product->id }}</td>
+                <td><a
+                    href="{{ route('category-view', $sold_product->product->category) }}">{{ $sold_product->product->category->name }}</a>
+                </td>
+                <td><a
+                    href="{{ route('product-view', $sold_product->product) }}">{{ $sold_product->product->name }}</a>
+                </td>
+                <td>{{ $sold_product->quantity }}</td>
+                <td>₦{{ __($sold_product->unit_price) }}</td>
+                <td>₦{{ __($sold_product->total_amount) }}</td>
+                <td>
+                </td>
+              </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
     </div>
   </div>
 @endsection
-

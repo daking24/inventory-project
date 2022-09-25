@@ -16,7 +16,11 @@
             <label for="receiver_method" class="form-label">Select Product</label>
             <select id="receiver_method" name="product_id" class="select-product">
               @foreach ($products as $item)
-              <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
+                @if($item['id'] == old('product_id'))
+                    <option value="{{$item['id']}}" selected>[{{ $item->category->name }}] {{ $item->name }} - Base price: {{ $item->base_price }} - Selling Price: {{ $item->selling_price }}</option>
+                @else
+                    <option value="{{$item['id']}}">[{{ $item->category->name }}] {{ $item->name }} - Base price: {{ $item->base_price }} - Selling Price: {{ $item->selling_price }}</option>
+                @endif
              @endforeach
             </select>
           </div>

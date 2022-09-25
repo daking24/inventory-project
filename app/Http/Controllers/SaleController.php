@@ -21,7 +21,8 @@ class SaleController extends Controller
     public function index()
     {
         $client = Client::all();
-        return view('sales.index', compact('client'));
+        $sales = Sale::latest()->paginate(25);
+        return view('sales.index', compact('client', 'sales'));
     }
 
     /**
@@ -43,7 +44,7 @@ class SaleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Sale $model)
-    {  
+    {
         $existent = Sale::where('client_id', $request->get('client_id'))->where('finalized_at', null)->get();
 
         if($existent->count()) {
@@ -66,8 +67,9 @@ class SaleController extends Controller
      */
     public function show(Sale $sale)
     {
-        
-        return view('sales.view', ['sale'=>$sale]);
+
+         $client = Client::all();
+        return view('sales.view', compact('client', 'sale'));
     }
 
     /**
@@ -131,7 +133,7 @@ class SaleController extends Controller
 
     public function storeProduct(Request $request, SoldProduct $soldProduct, Sale $sale)
     {
-        $request->merge(['total_amount' => $request->get('selling_price') * $request->get('quantity')]);
+        $request->merge(['total_amount' => $request->get('unit_price') * $request->get('quantity')]);
 
         $soldProduct->create($request->all());
             return redirect()

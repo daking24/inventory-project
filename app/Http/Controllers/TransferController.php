@@ -19,7 +19,9 @@ class TransferController extends Controller
     public function index()
     {
         return view('transactions.transfer.index',[
-            'payment' => PaymentMethods::all()
+            'payment' => PaymentMethods::all(),
+            'transfers' => Transfer::latest()->paginate(25)
+
         ]);
     }
 

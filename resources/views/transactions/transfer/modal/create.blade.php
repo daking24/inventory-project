@@ -15,7 +15,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="sender_method" class="form-label">Sender Payment Method</label>
-                    <select id="sender_method" name="sender_method_id" class="form-control sender-method">
+                    <select id="sender_method" name="sender_method_id" class="sender-method">
                         @foreach ($payment as $item)
                             <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
                         @endforeach
@@ -23,7 +23,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="receiver_method" class="form-label">Receiver Payment Method</label>
-                    <select id="receiver_method" name="receiver_method_id" class="form-control receiver-method">
+                    <select id="receiver_method" name="receiver_method_id" class="receiver-method">
                         @foreach ($payment as $item)
                             <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
                         @endforeach

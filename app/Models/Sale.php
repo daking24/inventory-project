@@ -5,12 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Client;
+use App\Models\Transaction;
+use App\Models\SoldProduct;
+use App\Models\User;
+
+
 class Sale extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'client_id', 
+        'client_id',
         'user_id'
     ];
     public function client() {
