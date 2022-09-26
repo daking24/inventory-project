@@ -32,8 +32,9 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($product as $item)
+            @foreach ($products as $item)
             <tr>
+            
                 <td><a href="{{ route('category-view', $item->category) }}">{{ $item->category->name }}</a></td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->base_price }}</td>

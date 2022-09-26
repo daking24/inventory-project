@@ -18,8 +18,8 @@ class ProductsController extends Controller
     public function index()
     {
         $categories = ProductCategory::where('is_active', true)->get();
-        $product = Product::paginate(25)->where('is_active', true);
-        return view('inventory.products.index', compact('categories','product'));
+        $products = Product::paginate(25)->where('is_active', true);
+        return view('inventory.products.index', compact('categories','products'));
     }
 
     /**
@@ -72,9 +72,9 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $products)
+    public function edit(Product $product)
     {
-        $categories = ProductCategory::where('is_active', false)->get();
+        $categories = ProductCategory::where('is_active', true)->get();
         return view('inventory.products.index', compact('categories'));
     }
 
