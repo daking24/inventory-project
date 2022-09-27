@@ -8,15 +8,22 @@
             <div class="modal-body">
             <form action="" method="post">
                 @csrf
+                <div class="form-group">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="name" placeholder="Name">
                     <label>Name</label>
                 </div>
+                </div>
                 <div class="mb-5">
                     <label class="form-label">Category</label>
                     <select class="select2">
-                        <option value="David">David</option>
-                        <option value="Breadstick">Breadstick</option>
+                        @foreach ($categories as $category)
+                            @if($category['id'] == old('document') or $category['id'] == $product->product_category_id)
+                                <option value="{{$category['id']}}" selected>{{$category['name']}}</option>
+                            @else
+                                <option value="{{$category['id']}}">{{$category['name']}}</option>
+                            @endif
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-floating mb-3">

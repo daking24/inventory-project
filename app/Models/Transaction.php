@@ -10,6 +10,7 @@ use App\Models\Provider;
 use App\Models\Sale;
 use App\Models\Client;
 use App\Models\Transfer;
+use Carbon\Carbon;
 
 class Transaction extends Model
 {

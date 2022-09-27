@@ -444,12 +444,12 @@
 </div>
 <!-- Search Modal End -->
 <!-- Vendor Scripts Start -->
-<script src="{{asset('temp')}}/js/vendor/jquery-3.5.1.min.js"></script>
-<script src="{{asset('temp')}}/js/vendor/bootstrap.bundle.min.js"></script>
-<script src="{{asset('temp')}}/js/vendor/OverlayScrollbars.min.js"></script>
-<script src="{{asset('temp')}}/js/vendor/autoComplete.min.js"></script>
-<script src="{{asset('temp')}}/js/vendor/clamp.min.js"></script>
-<script src="{{asset('temp')}}/icon/acorn-icons.js"></script>
+<script src="{{asset('temp/js/vendor/jquery-3.5.1.min.js')}}"></script>
+<script src="{{asset('temp/js/vendor/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('temp/js/vendor/OverlayScrollbars.min.js')}}"></script>
+<script src="{{asset('temp/js/vendor/autoComplete.min.js')}}"></script>
+<script src="{{asset('temp/js/vendor/clamp.min.js')}}"></script>
+<script src="{{asset('temp/icon/acorn-icons.js')}}"></script>
 <script src="{{asset('temp')}}/icon/acorn-icons-interface.js"></script>
 
 <!-- Vendor Scripts End -->
