@@ -15,10 +15,13 @@
                 </div>
                     @include('alerts.feedback', ['field' => 'name'])
                 </div>
-                <div class="form-group mb-3" {{ $errors->has('product_category_id') ? ' has-danger' : '' }}>
+
+                <div class="form-group mb-3" {{ $errors->has('id') ? ' has-danger' : '' }}>
                     <label class="form-label">Category</label>
-                    <select class="form-selected{{ $errors->has('name') ? ' is-invalid' : '' }}" name="product_category_id">
+                    
+                    <select class="form-selected{{ $errors->has('id') ? ' is-invalid' : '' }}" name="product_category_id">
                         @foreach ($categories as $item)
+
                             @if($item['id'] == old('document'))
                                                 <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
                                             @else
@@ -26,7 +29,7 @@
                                             @endif
                         @endforeach
                     </select>
-                    @include('alerts.feedback', ['field' => 'product_category_id'])
+                    @include('alerts.feedback', ['field' => 'id'])
                 </div>
                 <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
                 <div class="form-floating mb-3">

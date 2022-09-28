@@ -16,9 +16,10 @@
                 </div>
                 <div class="mb-5">
                     <label class="form-label">Category</label>
+
                     <select class="select2">
                         @foreach ($categories as $category)
-                            @if($category['id'] == old('document') or $category['id'] == $product->product_category_id)
+                            @if($category['id'] == old('document') )
                                 <option value="{{$category['id']}}" selected>{{$category['name']}}</option>
                             @else
                                 <option value="{{$category['id']}}">{{$category['name']}}</option>

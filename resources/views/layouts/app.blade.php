@@ -50,7 +50,32 @@
 <link rel="stylesheet" href="{{asset('temp')}}/css/styles.css"/>
 <link rel="stylesheet" href="{{asset('temp')}}/css/main.css"/>
 <!-- Template Base Styles End -->
-<script src="{{asset('temp')}}/js/base/loader.js"></script></head>
+@stack('css')
+<script src="{{asset('temp')}}/js/base/loader.js"></script>
+<style>
+        @media print{
+            .noprint,body * {
+                visibility: hidden;
+            }
+            .print-container, .print-container * {
+                visibility: visible;
+            }
+            header, footer, aside, nav, form, iframe, .menu, .hero, .adslot, .noprint {
+            display: none;
+            }
+
+            .print-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
 
 <body>
 <div id="root">
