@@ -107,3 +107,7 @@ Route::get('transactions/{id}/print-sales', ['as' => 'sales.receipt.print', 'use
 Route::post('transfer/store', ['as' => 'transfer.store', 'uses' => 'App\Http\Controllers\TransferController@store']);
 Route::post('receipt/store', ['as' => 'receipt.store', 'uses' => 'App\Http\Controllers\ReceiptController@store']);
 Route::post('receipts/{receipt}/product', ['as' => 'receipts.product.store', 'uses' => 'App\Http\Controllers\ReceiptController@storeproduct']);
+Route::get('products/{product}/edit', ['as' => 'products.edit', 'uses' => 'App\Http\Controllers\ProductsController@edit']);
+Route::post('products/{product}/update', ['as' => 'products.update', 'uses' => 'App\Http\Controllers\ProductsController@update']);
+Route::delete('products/{product}/delete', ['as' => 'products.delete', 'uses' => 'App\Http\Controllers\ProductsController@delete']);
+Route::get('inventory/receipts/{receipt}/finalize', ['as' => 'receipts.finalize', 'uses' => 'App\Http\Controllers\ReceiptController@finalize']);

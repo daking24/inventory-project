@@ -9,6 +9,7 @@ use App\Models\ReceivedProduct;
 use App\Http\Requests\StorereceiptRequest;
 use App\Http\Requests\UpdatereceiptRequest;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ReceiptController extends Controller
 {
@@ -72,7 +73,7 @@ class ReceiptController extends Controller
      */
     public function edit(Receipt $receipt)
     {
-        //
+
     }
 
     /**
@@ -107,5 +108,21 @@ class ReceiptController extends Controller
             ->route('receipt-create', $receipt)
             ->withStatus('Product added successfully.');
     }
+
+
+    public function finalize(Receipt $receipt)
+    {
+        $receipt->finalized_at = Carbon::now()->toDateTimeString();
+        $receipt->save();
+
+        foreach($receipt->products as $receivedproduct) {
+            $receivedproduct->product->stock += $receivedproduct->stock;
+            $receivedproduct->product->stock_defective += $receivedproduct->stock_defective;
+            $receivedproduct->product->save();
+        }
+
+        return redirect()->route('receipt-view', $receipt)->withStatus('Receipt successfully completed.');
+    }
+
 
 }
