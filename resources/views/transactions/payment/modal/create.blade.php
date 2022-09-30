@@ -15,13 +15,16 @@
                 <div class="form-floating mb-3">
                     <input type="hidden" class="form-control" name="user_id" value="{{ Auth::id() }}">
                 </div>
+
+                <div class="form-group{{ $errors->has('title') ? ' has-danger' : '' }}">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="title" placeholder="Title">
+                    <input type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" placeholder="Title">
                     <label>Title</label>
+                </div>@include('alerts.feedback', ['field' => 'title'])
                 </div>
-                <div class="mb-3">
+                <div class="mb-3{{ $errors->has('provider_id') ? ' has-danger' : '' }}">
                     <label for="provider" class="form-label">Provider</label>
-                    <select id="provider" name="provider_id" class="provider-select">
+                    <select id="provider" name="provider_id" class="provider-select{{ $errors->has('provider_id') ? ' is-invalid' : '' }}">
                         @foreach ($provider as $item)
                             @if($item['id'] == old('provider_id'))
                                 <option value="{{$item['id']}}" selected>{{$item['name']}}</option>
@@ -29,11 +32,11 @@
                                 <option value="{{$item['id']}}">{{$item['name']}}</option>
                             @endif
                         @endforeach
-                    </select>
+                    </select>@include('alerts.feedback', ['field' => 'provider_id'])
                 </div>
-                <div class="mb-3">
+                <div class="mb-3{{ $errors->has('payment_methods_id') ? ' has-danger' : '' }}">
                     <label for="method" class="form-label">Payment Method</label>
-                    <select id="method" name="payment_methods_id" class="method-select">
+                    <select id="method" name="payment_methods_id" class="method-select{{ $errors->has('payment_methods_id') ? ' is-invalid' : '' }}">
                         @foreach ($payment as $items)
                             @if($items['id'] == old('payment_methods_id'))
                                 <option value="{{$items['id']}}" selected>{{$items['name']}}</option>
@@ -41,15 +44,19 @@
                                 <option value="{{$items['id']}}">{{$items['name']}}</option>
                             @endif
                         @endforeach
-                    </select>
+                    </select>@include('alerts.feedback', ['field' => 'payment_methods_id'])
                 </div>
+                <div class="{{ $errors->has('amount') ? ' has-danger' : '' }}">
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="amount" placeholder="Amount">
+                    <input type="number" class="form-control{{ $errors->has('amount') ? ' is-invalid' : '' }}" name="amount" placeholder="Amount">
                     <label>Amount</label>
+                </div>@include('alerts.feedback', ['field' => 'amount'])
                 </div>
+                <div class="form-group{{ $errors->has('reference') ? ' has-danger' : '' }}">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="reference" placeholder="Reference">
+                    <input type="text" class="form-control{{ $errors->has('reference') ? ' is-invalid' : '' }}" name="reference" placeholder="Reference">
                     <label>Reference</label>
+                </div>@include('alerts.feedback', ['field' => 'reference'])
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Save</button>
             </div>

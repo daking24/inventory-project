@@ -49,7 +49,6 @@ Route::prefix('admin')->group(function() {
 
     Route::prefix('/transactions')->group(function()
     {
-        Route::get('/income', [IncomeController::class, 'index'])->name('income');
         Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
         Route::get('/sales', [SaleController::class, 'index'])->name('sales');
         Route::get('sales/{sale}', ['as' => 'sales.product.create', 'uses' => 'App\Http\Controllers\SaleController@createProductSale']);
@@ -111,3 +110,6 @@ Route::get('products/{product}/edit', ['as' => 'products.edit', 'uses' => 'App\H
 Route::post('products/{product}/update', ['as' => 'products.update', 'uses' => 'App\Http\Controllers\ProductsController@update']);
 Route::delete('products/{product}/delete', ['as' => 'products.delete', 'uses' => 'App\Http\Controllers\ProductsController@delete']);
 Route::get('inventory/receipts/{receipt}/finalize', ['as' => 'receipts.finalize', 'uses' => 'App\Http\Controllers\ReceiptController@finalize']);
+Route::get('transactions/edit/{transaction}', ['as' => 'transaction.edit', 'uses' => 'App\Http\Controllers\TransactionController@edit']);
+Route::post('transactions/update/{transaction}', ['as' => 'transaction.update', 'uses' => 'App\Http\Controllers\TransactionController@update']);
+Route::delete('transactions/delete/{transaction}', ['as' => 'transaction.delete', 'uses' => 'App\Http\Controllers\TransactionController@destroy']);

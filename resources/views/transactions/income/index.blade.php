@@ -45,8 +45,8 @@
                   </a>
                 @else
                   <div class="d-flex align-items-center justify-content-end">
-                    <button class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
-                      data-bs-target="#incomeEdit" type="button">
+                    <a href="{{ route('transaction.edit', $transaction->id) }}" class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
+                      data-bs-target="#incomeEdit{{ $transaction->id }}" type="button">
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" class="acorn-icons acorn-icons-edit-square undefined">
@@ -58,8 +58,8 @@
                         </path>
                       </svg>
                       <span class="d-none d-xxl-inline-block">Edit</span>
-                    </button>
-                    <button data-bs-toggle="modal" data-bs-target="#incomeDelete"
+                    </a>
+                    <button data-bs-toggle="modal" data-bs-target="#incomeDelete{{ $transaction->id }}"
                       class="btn btn-sm btn-icon btn-icon-start btn-outline-danger ms-1" type="button">
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -75,6 +75,9 @@
                       <span class="d-none d-xxl-inline-block">Delete</span>
                     </button>
                   </div>
+
+  @include('transactions.income.modal.edit')
+  @include('transactions.income.modal.delete')
                 @endif
               </td>
             </tr>
@@ -92,6 +95,4 @@
 
 
   @include('transactions.income.modal.create')
-  @include('transactions.income.modal.edit')
-  @include('transactions.income.modal.delete')
 @endsection

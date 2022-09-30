@@ -40,12 +40,11 @@
               <td><a href="{{ route('method-view', $transaction->method) }}">{{ $transaction->method->name }}</a></td>
               <td>{{ __($transaction->amount) }}</td>
               <td>{{ $transaction->reference }}</td>
-              <td></td>
               <td class="td-actions text-right">
 
                 <div class="d-flex align-items-center justify-content-end">
-                  <button class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
-                    data-bs-target="#paymentEdit" type="button">
+                  <a href="{{ route('transaction.edit', $transaction->id) }}" id="editPayment{{ $transaction->id }}" class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
+                    data-bs-target="#paymentEdit{{ $transaction->id }}" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                       fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                       stroke-linejoin="round" class="acorn-icons acorn-icons-edit-square undefined">
@@ -57,9 +56,9 @@
                       </path>
                     </svg>
                     <span class="d-none d-xxl-inline-block">Edit</span>
-                  </button>
+                  </a>
                   <button class="btn btn-sm btn-icon btn-icon-start btn-outline-danger ms-1" type="button" data-bs-toggle="modal"
-                    data-bs-target="#paymentDelete">
+                    data-bs-target="#paymentDelete{{ $transaction->id }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                       fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                       stroke-linejoin="round" class="acorn-icons acorn-icons-bin undefined">
@@ -76,6 +75,9 @@
                 </div>
               </td>
             </tr>
+
+  @include('transactions.payment.modal.edit')
+  @include('transactions.payment.modal.delete')
             @empty
             <tr>
                 <th scope="row" colspan="7" class="text-center">
@@ -90,6 +92,74 @@
     </div>
   </div>
   @include('transactions.payment.modal.create')
-  @include('transactions.payment.modal.edit')
-  @include('transactions.payment.modal.delete')
 @endsection
+
+{{-- @push('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+
+$(document).ready(function () {
+
+$.ajaxSetup({
+    headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+});
+
+$('body').on('click', '#submitPayment', function (event) {
+    event.preventDefault()
+    var id = $('#trans_id').val();
+    var title = $("#title").val();
+    var type = $("#type").val();
+    var user_id = $("#user_id").val();
+    var provider_id = $("#provider").val();
+    var payment_method_id = $("#method").val();
+    var amount = $("#amount").val();
+    var reference = $("#reference").val();
+
+    $.ajax({
+      url: 'transactions/edit/' ,
+      type: "POST",
+      data: {
+        id: id,
+        type: type,
+        title: title,
+        user_id: user_id,
+        provider_id: provider_id,
+        payment_method_id: payment_method_id,
+        amount: amount,
+        reference: reference,
+      },
+      dataType: 'json',
+      success: function (data) {
+
+          $('#paymentdata').trigger("reset");
+          $('#paymentEdit').modal('hide');
+          window.location.reload(true);
+      }
+  });
+});
+
+$('body').on('click', '#editPayment', function (event) {
+
+    event.preventDefault();
+    let id = $(this).data('id');
+    console.log(id)
+    $.get('edit/' + id , function (data) {
+         $('#paymentEdit').modal('show');
+         $('#trans_id').val(data.data.id);
+         $('#type').val(data.data.type);
+         $('#title').val(data.data.title);
+         $('#user_id').val(data.data.user_id);
+         $('#provider').val(data.data.provider_id);
+         $('#method').val(data.data.payment_method_id);
+         $('#amount').val(data.data.amount);
+         $('#reference').val(data.data.reference);
+         console.log(data)
+     })
+});
+
+});
+</script>
+@endpush --}}

@@ -58,18 +58,18 @@ class TransactionController extends Controller
         switch ($type) {
             case 'expense':
                 return view('transactions.expense.create', [
-                    'payment_methods' => PaymentMethods::all(),
+                    'payment' => PaymentMethods::all(),
                 ]);
 
             case 'payment':
                 return view('transactions.payment.create', [
-                    'payment_methods' => PaymentMethods::all(),
+                    'payment' => PaymentMethods::all(),
                     'providers' => Provider::all(),
                 ]);
 
             case 'income':
                 return view('transactions.income.create', [
-                    'payment_methods' => PaymentMethods::all(),
+                    'payment' => PaymentMethods::all(),
                 ]);
         }
     }
@@ -101,7 +101,7 @@ class TransactionController extends Controller
             $client = Client::find($request->get('client_id'));
             $client->balance += $request->get('amount');
             $client->save();
-            
+
 
             return redirect()
                 ->route('clients.show', $request->get('client_id'))
@@ -164,7 +164,26 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+         switch ($transaction->type) {
+            case 'expense':
+                return view('transactions.expense.index', [
+                    'transaction' => $transaction,
+                    'payment' => PaymentMethods::all()
+                ]);
+
+            case 'payment':
+                return view('transactions.payment.index', [
+                    'transaction' => $transaction,
+                    'payment' => PaymentMethods::all(),
+                    'providers' => Provider::all()
+                ]);
+
+            case 'income':
+                return view('transactions.income.index', [
+                    'transaction' => $transaction,
+                    'payment' => PaymentMethods::all(),
+                ]);
+        }
     }
 
     /**
@@ -174,9 +193,38 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTransactionRequest $request, Transaction $transaction)
+    public function update(Request $request, Transaction $transaction)
     {
-        
+        $transaction->update($request->all());
+
+        switch ($request->get('type')) {
+            case 'expense':
+                if ($request->get('amount') > 0) {
+                    $request->merge(['amount' => ((float) $request->get('amount') * (-1))]);
+                }
+                return redirect()
+                    ->route('transactions.type', ['type' => 'expense'])
+                    ->withStatus('Expense updated sucessfully.');
+
+            case 'payment':
+                if ($request->get('amount') > 0) {
+                    $request->merge(['amount' => ((float) $request->get('amount') * (-1))]);
+                }
+
+                return redirect()
+                    ->route('transactions.type', ['type' => 'payment'])
+                    ->withStatus('Payment updated satisfactorily.');
+
+            case 'income':
+                return redirect()
+                    ->route('transactions.type', ['type' => 'income'])
+                    ->withStatus('Login successfully updated.');
+
+            default:
+                return redirect()
+                    ->route('transactions.index')
+                    ->withStatus('Transaction updated successfully.');
+        }
     }
 
     /**
@@ -187,6 +235,25 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        if ($transaction->transfer) {
+            return back()->withStatus('You cannot remove a transaction from a transfer. You must delete the transfer to delete its records.');
+        }
+
+        $type = $transaction->type;
+        $transaction->delete();
+
+        switch ($type) {
+            case 'expense':
+                return back()->withStatus('Expenditure successfully removed.');
+
+            case 'payment':
+                return back()->withStatus('Payment successfully removed.');
+
+            case 'income':
+                return back()->withStatus('Entry successfully removed.');
+
+            default:
+                return back()->withStatus('Transaction deleted successfully.');
+        }
     }
 }
