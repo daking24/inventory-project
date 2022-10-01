@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ReceivedProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
@@ -19,7 +20,9 @@ class ProductsController extends Controller
     {
         $categories = ProductCategory::where('is_active', true)->get();
         $products = Product::paginate(25)->where('is_active', true);
-        return view('inventory.products.index', compact('categories','products'));
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('inventory.products.index', compact('categories','products', 'user', 'role'));
     }
 
     /**
@@ -61,9 +64,10 @@ class ProductsController extends Controller
     public function show(Product $products)
     {
         $solds = $products->solds()->latest()->limit(25)->get();
-
+        $user = auth()->user();
+        $role = $user->getRoleNames()->first();
         $receiveds = $products->receiveds()->latest()->limit(25)->get();
-        return view('inventory.products.view', compact('products', 'solds', 'receiveds'));
+        return view('inventory.products.view', compact('products', 'solds', 'receiveds', 'user', 'role'));
     }
 
     /**
@@ -102,7 +106,7 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        dd($product);
+        // dd($product);
         $product->delete();
 
         return redirect()

@@ -38,8 +38,8 @@
                     <td>{{ $soldproduct->product->name }}</td>
                     <td>{{ $soldproduct->product->stock }}</td>
                     <td>{{ $soldproduct->total_qty }}</td>
-                    <td>{{ __(round($soldproduct->avg_price, 2)) }}</td>
-                    <td>{{ __($soldproduct->incomes) }}</td>
+                    <td>₦{{ __(round($soldproduct->avg_price, 2)) }}</td>
+                    <td>₦{{ __($soldproduct->incomes) }}</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-end">
                     <a href="{{ route('product-view', $soldproduct->product) }}" type="button" class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" >
@@ -86,7 +86,7 @@
                             <td><a href="{{ route('category-view', $soldproduct->product->category) }}">{{ $soldproduct->product->category->name }}</a></td>
                             <td><a href="{{ route('product-view', $soldproduct->product) }}">{{ $soldproduct->product->name }}</a></td>
                             <td>{{ $soldproduct->total_qty }}</td>
-                            <td>{{ __($soldproduct->incomes) }}</td>
+                            <td>₦{{ __($soldproduct->incomes) }}</td>
                         </tr>
                         @empty
                         <tr>
@@ -123,10 +123,10 @@
                     @forelse ($soldproductsbyavgprice as $soldproduct)
                         <tr>
                             <td>{{ $soldproduct->product_id }}</td>
-                            <td><a href="{{ route('categories.show', $soldproduct->product->category) }}">{{ $soldproduct->product->category->name }}</a></td>
-                            <td><a href="{{ route('products.show', $soldproduct->product) }}">{{ $soldproduct->product->name }}</a></td>
+                            <td><a href="{{ route('category-view', $soldproduct->product->category) }}">{{ $soldproduct->product->category->name }}</a></td>
+                            <td><a href="{{ route('product-view', $soldproduct->product) }}">{{ $soldproduct->product->name }}</a></td>
                             <td>{{ $soldproduct->total_qty }}</td>
-                            <td>{{ __(round($soldproduct->avg_price, 2)) }}</td>
+                            <td>₦{{ __(round($soldproduct->avg_price, 2)) }}</td>
                         </tr>
                         @empty
                         <tr>

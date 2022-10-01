@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ProductCategory;
 use App\Http\Requests\StoreProduct_categoriesRequest;
 use App\Http\Requests\UpdateProduct_categoriesRequest;
+use Auth;
+use Illuminate\Http\Request;
 
 class ProductCategoriesController extends Controller
 {
@@ -15,8 +17,10 @@ class ProductCategoriesController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
         $categories = ProductCategory::get();
-        return view('inventory.categories.index', compact('categories'));
+        return view('inventory.categories.index', compact('categories', 'user', 'role'));
     }
 
     /**
@@ -50,7 +54,9 @@ class ProductCategoriesController extends Controller
      */
     public function show(ProductCategory $product_categories)
     {
-        return view('inventory.categories.view', compact('product_categories'));
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('inventory.categories.view', compact('product_categories', 'user', 'role'));
     }
 
     /**
@@ -71,9 +77,11 @@ class ProductCategoriesController extends Controller
      * @param  \App\Models\Product_categories  $product_categories
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProduct_categoriesRequest $request, Product_categories $product_categories)
+    public function update(Request $request, ProductCategory $category)
     {
-        //
+        // Update the product category
+        $category->update($request->all());
+        return redirect()->route('inventory-category')->withStatus('Category Updated Succesfully');
     }
 
     /**
@@ -82,8 +90,10 @@ class ProductCategoriesController extends Controller
      * @param  \App\Models\Product_categories  $product_categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product_categories $product_categories)
+    public function destroy(ProductCategory $category)
     {
-        //
+        //delete category
+        $category->delete();
+        return redirect()->route('inventory-category')->withStatus('Category Deleted Succesfully');
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Transaction;
 // use App\Http\Requests\StorePayment_methodsRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdatePayment_methodsRequest;
+use Illuminate\Support\Facades\Auth;
 
 
 class PaymentMethodsController extends Controller
@@ -19,9 +20,13 @@ class PaymentMethodsController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
         return view('payment-methods.index',[
             'methods' => PaymentMethods::paginate(15),
-            'month' => Carbon::now()->month
+            'month' => Carbon::now()->month,
+            'user' => $user,
+            'role' => $role
         ]);
     }
 
@@ -73,11 +78,16 @@ class PaymentMethodsController extends Controller
             'monthly' => Transaction::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->sum('amount'),
             'annual' => Transaction::whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()])->sum('amount'),
         ];
+
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
         return view('payment-methods.view', [
             'methods' => $method,
             'transactions' => Transaction::where('payment_methods_id', $method->id)->latest()->paginate(25),
             'balances' => $balances,
-            'transactionname' => $transactionname
+            'transactionname' => $transactionname,
+            'user' => $user,
+            'role' => $role
         ]);
     }
 
@@ -99,9 +109,11 @@ class PaymentMethodsController extends Controller
      * @param  \App\Models\Payment_methods  $payment_methods
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePayment_methodsRequest $request, Payment_methods $payment_methods)
+    public function update(Request $request, PaymentMethods $method)
     {
-        //
+        // update payment method
+        $method->update($request->all());
+        return redirect()->route('payment-methods')->withStatus('Payment Method is updated successfully');
     }
 
     /**
@@ -110,8 +122,10 @@ class PaymentMethodsController extends Controller
      * @param  \App\Models\Payment_methods  $payment_methods
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment_methods $payment_methods)
+    public function destroy(PaymentMethods $method)
     {
-        //
+        // delete payment method
+        $method->delete();
+        return redirect()->route('payment-methods')->withStatus('Payment Method is deleted successfully');
     }
 }

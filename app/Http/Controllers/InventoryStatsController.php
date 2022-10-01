@@ -17,13 +17,16 @@ class InventoryStatsController extends Controller
      */
     public function index()
     {
-
+        $user = auth()->user();
+        $role = $user->getRoleNames()->first();
         return view('inventory.stats', [
             'categories' => ProductCategory::all(),
             'products' => Product::all(),
             'soldproductsbystock' => SoldProduct::selectRaw('product_id, max(created_at), sum(quantity) as total_qty, sum(total_amount) as incomes, avg(unit_price) as avg_price')->whereYear('created_at', Carbon::now()->year)->groupBy('product_id')->orderBy('total_qty', 'desc')->limit(15)->get(),
             'soldproductsbyincomes' => SoldProduct::selectRaw('product_id, max(created_at), sum(quantity) as total_qty, sum(total_amount) as incomes, avg(unit_price) as avg_price')->whereYear('created_at', Carbon::now()->year)->groupBy('product_id')->orderBy('incomes', 'desc')->limit(15)->get(),
-            'soldproductsbyavgprice' => SoldProduct::selectRaw('product_id, max(created_at), sum(quantity) as total_qty, sum(total_amount) as incomes, avg(unit_price) as avg_price')->whereYear('created_at', Carbon::now()->year)->groupBy('product_id')->orderBy('avg_price', 'desc')->limit(15)->get()
+            'soldproductsbyavgprice' => SoldProduct::selectRaw('product_id, max(created_at), sum(quantity) as total_qty, sum(total_amount) as incomes, avg(unit_price) as avg_price')->whereYear('created_at', Carbon::now()->year)->groupBy('product_id')->orderBy('avg_price', 'desc')->limit(15)->get(),
+            'user' => $user,
+            'role' => $role,
         ]);
     }
 

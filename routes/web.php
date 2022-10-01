@@ -75,6 +75,8 @@ Route::prefix('admin')->group(function() {
         Route::get('/receipts/{receipt}/create', [ReceiptController::class, 'create'])->name('receipt-create');
         Route::get('/receipts/{receipt}/view', [ReceiptController::class, 'show'])->name('receipt-view');
         Route::get('/categories', [ProductCategoriesController::class, 'index'])->name('inventory-category');
+        Route::post('/categories/{category}/update', [ProductCategoriesController::class, 'update'])->name('inventory-category.update');
+        Route::delete('/categories/{category}/delete', [ProductCategoriesController::class, 'destroy'])->name('inventory-category.delete');
         Route::get('/categories/{product_categories}/view', [ProductCategoriesController::class, 'show'])->name('category-view');
         Route::get('/products', [ProductsController::class, 'index'])->name('inventory-product');
         Route::get('/products/view/{products}', [ProductsController::class, 'show'])->name('product-view');
@@ -83,8 +85,12 @@ Route::prefix('admin')->group(function() {
 
     });
     Route::get('/suppliers', [ProviderController::class, 'index'])->name('supplier');
+    Route::post('/suppliers/{provider}/update', [ProviderController::class, 'update'])->name('supplier.update');
+    Route::delete('/suppliers/{provider}/delete', [ProviderController::class, 'destroy'])->name('supplier.delete');
     Route::get('/suppliers/{provider}/view', [ProviderController::class, 'show'])->name('supplier-view');
     Route::get('/methods', [PaymentMethodsController::class, 'index'])->name('payment-methods');
+    Route::post('/methods/{method}/update', [PaymentMethodsController::class, 'update'])->name('payment-methods.update');
+    Route::delete('/methods/{method}/delete', [PaymentMethodsController::class, 'destroy'])->name('payment-methods.delete');
     Route::get('/methods/{method}/view', [PaymentMethodsController::class, 'show'])->name('method-view');
 
     //post endpoint
@@ -114,7 +120,7 @@ Route::post('receipt/store', ['as' => 'receipt.store', 'uses' => 'App\Http\Contr
 Route::post('receipts/{receipt}/product', ['as' => 'receipts.product.store', 'uses' => 'App\Http\Controllers\ReceiptController@storeproduct']);
 Route::get('products/{product}/edit', ['as' => 'products.edit', 'uses' => 'App\Http\Controllers\ProductsController@edit']);
 Route::post('products/{product}/update', ['as' => 'products.update', 'uses' => 'App\Http\Controllers\ProductsController@update']);
-Route::delete('products/{product}/delete', ['as' => 'products.delete', 'uses' => 'App\Http\Controllers\ProductsController@delete']);
+Route::delete('products/{product}/delete', ['as' => 'products.delete', 'uses' => 'App\Http\Controllers\ProductsController@destroy']);
 Route::get('inventory/receipts/{receipt}/finalize', ['as' => 'receipts.finalize', 'uses' => 'App\Http\Controllers\ReceiptController@finalize']);
 Route::get('transactions/edit/{transaction}', ['as' => 'transaction.edit', 'uses' => 'App\Http\Controllers\TransactionController@edit']);
 Route::post('transactions/update/{transaction}', ['as' => 'transaction.update', 'uses' => 'App\Http\Controllers\TransactionController@update']);

@@ -1,22 +1,22 @@
-<div class="modal modal-right large fade" id="editProduct" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal modal-right large fade" id="editProduct{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit {{ __('This') }} Product</h5>
+                <h5 class="modal-title">Edit {{ $item->name }} Product</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
             <form action="{{ route('products.update', $item) }}" method="post">
                 @csrf
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $item->name }}">
+                    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="Name" value="{{ $item->name }}">
                     <label>Name</label>
+                </div>@include('alerts.feedback', ['field' => 'name'])
                 </div>
-                </div>
-                <div class="mb-5">
+                <div class="mb-5{{ $errors->has('product_category_id') ? ' has-danger' : '' }}">
                     <label class="form-label">Category</label>
-                    <select class="select2" name="product_category_id">
+                    <select class="select2{{ $item->id }}{{ $errors->has('product_category_id') ? ' is-invalid' : '' }}" name="product_category_id">
                         <option >Choose ...</option>
                         @foreach ($categories as $category)
                             @if($category['id'] == old('product_category_id') or $category['id'] == $item->product_category_id)
@@ -25,29 +25,29 @@
                                 <option value="{{$category['id']}}">{{$category['name']}}</option>
                             @endif
                             @endforeach
-                    </select>
+                    </select>@include('alerts.feedback', ['field' => 'product_category_id'])
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="description" placeholder="Description" value="{{ $item->description }}">
-                    <label>Description</label>
+                <div class="form-floating mb-3{{ $errors->has('description') ? ' has-danger' : '' }}">
+                    <input type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" placeholder="Description" value="{{ $item->description }}">
+                    <label>Description</label>@include('alerts.feedback', ['field' => 'description'])
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="stock" placeholder="Stock" value="{{ $item->stock }}">
-                    <label>Stock</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="stock_defective" placeholder="Defectives" value="{{ $item->stock_defective}}">
-                    <label>Defectives</label>
+                <div class="form-floating mb-3{{ $errors->has('stock') ? ' has-danger' : '' }}">
+                    <input type="number" class="form-control{{ $errors->has('stock') ? ' is-invalid' : '' }}" name="stock" placeholder="Stock" value="{{ $item->stock }}">
+                    <label>Stock</label>@include('alerts.feedback', ['field' => 'stock'])
                 </div>
 
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="base_price" placeholder="Cost Price" value="{{ old('base_price', $item->base_price) }}">
-                    <label>Cost Price</label>
+                <div class="form-floating mb-3{{ $errors->has('stock_defective') ? ' has-danger' : '' }}">
+                    <input type="number" class="form-control{{ $errors->has('stock_defective') ? ' is-invalid' : '' }}" name="stock_defective" placeholder="Defectives" value="{{ $item->stock_defective}}">
+                    <label>Defectives</label>@include('alerts.feedback', ['field' => 'stock_defective'])
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="selling_price" placeholder="Selling Price" value="{{ $item->selling_price }}">
-                    <label>Selling Price</label>
+
+                <div class="form-floating mb-3{{ $errors->has('base_price') ? ' has-danger' : '' }}">
+                    <input type="number" class="form-control{{ $errors->has('base_price') ? ' is-invalid' : '' }}" name="base_price" placeholder="Cost Price" value="{{ old('base_price', $item->base_price) }}">
+                    <label>Cost Price</label>@include('alerts.feedback', ['field' => 'base_price'])
+                </div>
+                <div class="form-floating mb-3{{ $errors->has('selling_price') ? ' has-danger' : '' }}">
+                    <input type="number" class="form-control{{ $errors->has('selling_price') ? ' is-invalid' : '' }}" name="selling_price" placeholder="Selling Price" value="{{ $item->selling_price }}">
+                    <label>Selling Price</label>@include('alerts.feedback', ['field' => 'selling_price'])
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Update</button>
 
@@ -59,7 +59,7 @@
 @push('js')
 <script>
     new SlimSelect({
-        select: '.select2'
+        select: '.select2{{ $item->id }}'
     })
 </script>
 @endpush
