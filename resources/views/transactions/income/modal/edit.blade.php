@@ -30,15 +30,17 @@
                         @endforeach
                     </select>@include('alerts.feedback', ['field' => 'payment_methods_id'])
                 </div>
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('amount') ? ' has-danger' : '' }}">
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="amount" placeholder="Amount">
+                    <input type="number" class="form-control{{ $errors->has('amount') ? ' is-invalid' : '' }}" name="amount" placeholder="Amount">
                     <label>Amount</label>
+                </div>@include('alerts.feedback', ['field' => 'amount'])
                 </div>
-                </div>
+                <div class="form-group{{ $errors->has('reference') ? ' has-danger' : '' }}">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="reference" placeholder="Reference">
+                    <input type="text" class="form-control{{ $errors->has('reference') ? ' is-invalid' : '' }}" name="reference" placeholder="Reference">
                     <label>Reference</label>
+                </div>@include('alerts.feedback', ['field' => 'reference'])
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Update</button>
             </div>

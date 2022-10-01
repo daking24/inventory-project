@@ -35,4 +35,9 @@ class LoginController extends Controller
     
     
     }
+
+    public function profile()
+    {
+        return view('profile.profile');
+    }
 }

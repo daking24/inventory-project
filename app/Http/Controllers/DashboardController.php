@@ -22,7 +22,8 @@ class DashboardController extends Controller
         $anualsales = $this->getAnnualSales();
         $anualclients = $this->getAnnualClients();
         $anualproducts = $this->getAnnualProducts();
-
+        $user = User::find(auth()->user()->id);
+        $role = $user->getRoleNames()->first();
         return view('admin.dashboard', [
             'monthlybalance'            => $monthlyBalance,
             'monthlybalancebymethod'    => $monthlyBalanceByMethod,
@@ -35,7 +36,9 @@ class DashboardController extends Controller
             'lastincomes'               => $this->getMonthlyTransactions()->get('lastincomes'),
             'lastexpenses'              => $this->getMonthlyTransactions()->get('lastexpenses'),
             'semesterexpenses'          => $this->getMonthlyTransactions()->get('semesterexpenses'),
-            'semesterincomes'           => $this->getMonthlyTransactions()->get('semesterincomes')
+            'semesterincomes'           => $this->getMonthlyTransactions()->get('semesterincomes'),
+            'role'                      => $role,
+            'user'                      => $user,
         ]);
     }
 

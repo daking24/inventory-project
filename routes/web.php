@@ -19,7 +19,8 @@ use App\Http\Controllers\{
     ReceiptController,
     ProviderController,
     PaymentMethodsController,
-
+    ProfileController,
+    UserController,
 };
 
 
@@ -42,7 +43,7 @@ use App\Http\Controllers\{
 Route::get('/admin-dashboard', [DashboardController::class, 'adminIndex'])->name('admin-dashboard');
 Route::get('/sales-dashboard', [DashboardController::class, 'saleIndex'])->name('sale-dashboard');
 Route::post('sale/store', ['as' => 'sales.store', 'uses' => 'App\Http\Controllers\SaleController@store']);
-Route::get('/', [LoginController::class, 'Index']);
+Route::get('/', [LoginController::class, 'Index'])->name('login');
 Route::prefix('admin')->group(function() {
     Route::post('/login-post', [LoginController::class, 'Login'])->name('loginPost');
 
@@ -113,3 +114,9 @@ Route::get('inventory/receipts/{receipt}/finalize', ['as' => 'receipts.finalize'
 Route::get('transactions/edit/{transaction}', ['as' => 'transaction.edit', 'uses' => 'App\Http\Controllers\TransactionController@edit']);
 Route::post('transactions/update/{transaction}', ['as' => 'transaction.update', 'uses' => 'App\Http\Controllers\TransactionController@update']);
 Route::delete('transactions/delete/{transaction}', ['as' => 'transaction.delete', 'uses' => 'App\Http\Controllers\TransactionController@destroy']);
+
+
+Route::get('profile', ['as' => 'profile', 'uses' => 'App\Http\Controllers\ProfileController@index']);   
+Route::get('staff/view', ['as' => 'staffs', 'uses' => 'App\Http\Controllers\UserController@index']);   
+Route::post('staff/{id}/view', ['as' => 'staffs.update', 'uses' => 'App\Http\Controllers\UserController@update']);
+

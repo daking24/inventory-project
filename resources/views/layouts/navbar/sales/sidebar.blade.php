@@ -6,27 +6,17 @@
             <!-- Logo can be added directly -->
             <!-- <img src="/img/logo/logo-white.svg" alt="logo" /> -->
             <!-- Or added via css to provide different ones for different color themes -->
-            <div class="img"></div>
+            {{-- <div class="img"></div> --}}
+            <img src="{{ asset('white1-0.svg') }}" alt="logo" />
         </a>
     </div>
     <!-- Logo End -->
 
-    <!-- Language Switch Start -->
-    <div class="language-switch-container">
-        <button class="btn btn-empty language-button dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">EN</button>
-        <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">DE</a>
-            <a href="#" class="dropdown-item active">EN</a>
-            <a href="#" class="dropdown-item">ES</a>
-        </div>
-    </div>
-    <!-- Language Switch End -->
-
     <!-- User Menu Start -->
     <div class="user-container d-flex">
         <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class="profile" alt="profile" src="{{asset('temp')}}/img/profile/profile-9.webp" />
-            <div class="name">Lisa Jackson -Sales</div>
+            <img class="profile" alt="profile" src="{{asset('temp')}}/img/profile/profile.jpg" />
+            <div class="name">-Sales</div>
         </a>
         <div class="dropdown-menu dropdown-menu-end user-menu wide">
             <div class="row mb-3 ms-0 me-0">

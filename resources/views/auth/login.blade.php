@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Acorn Admin Template | Login Page</title>
+  <title>AKC Inventory | Login Page</title>
   <meta name="description" content="Login Page" />
   <!-- Favicon Tags Start -->
   <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{asset('temp/img')}}/favicon/apple-touch-icon-57x57.png" />
@@ -70,9 +70,6 @@
                   Dynamically target high-payoff intellectual capital for customized technologies. Objectively integrate emerging core competencies before
                   process-centric communities...
                 </p>
-                <div class="mb-5">
-                  <a class="btn btn-lg btn-outline-white" href="../../index.html">Learn More</a>
-                </div>
               </div>
             </div>
           </div>
@@ -83,9 +80,9 @@
         <div class="col-12 col-lg-auto h-100 pb-4 px-4 pt-0 p-lg-0">
           <div class="sw-lg-70 min-h-100 bg-foreground d-flex justify-content-center align-items-center shadow-deep py-5 full-page-content-right-border">
             <div class="sw-lg-50 px-5">
-              <div class="sh-11">
-                <a href="../../index.html">
-                  <div class="logo-default"></div>
+              <div class="sh-11 mb-7">
+                <a href="{{ route('login') }}">
+                  <img src="{{ asset('akc-logo2.png') }}" height="190" alt="">
                 </a>
               </div>
               <div class="mb-5">
@@ -110,7 +107,7 @@
                     <i data-acorn-icon="lock-off"></i>
                     <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} pe-7" name="password" type="password" placeholder="Password" />
                         @include('alerts.feedback', ['field' => 'password'])
-                    
+
                     <a class="text-small position-absolute t-3 e-3" href="ForgotPassword.html">Forgot?</a>
                   </div>
                   <button type="submit" class="btn btn-lg btn-primary">Login</button>
