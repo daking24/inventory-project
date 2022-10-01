@@ -105,9 +105,9 @@ class TransactionStatsController extends Controller
         $transactionsperiods['Year'] = Transaction::whereYear('created_at', Carbon::now()->year)->get();
 
         $passedSales= $salesperiods[$id];
-        
+        $time= $id;
 
-        return view('transactions.modal.print-receipt', compact('passedSales'));
+        return view('transactions.modal.print-receipt', compact('passedSales', 'time'));
     }
 
     /**

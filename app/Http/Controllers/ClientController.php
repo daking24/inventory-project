@@ -103,9 +103,7 @@ class ClientController extends Controller
     {
         $client->delete();
 
-        return redirect()
-            ->route('clients')
-            ->withStatus('Customer successfully removed.');
+        return back()->withStatus('Customer successfully removed.');
 
     }
 

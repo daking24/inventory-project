@@ -9,12 +9,12 @@
     </head>
     <body>
         <div class="container ticket">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo">
-            <p class="centered">RECEIPT FROM TELABIB STORES
+            <img src="{{ asset('akc-logo2-1.png') }}" alt="Logo">
+            <p class="centered">RECEIPT FROM AUSTIN KC Ent.
                 <br>No. 39 Rwangpam Street, 
                 <br>Ahmadu Bello Way, Jos, 
                 <br>Plateaau State
-                <br><b>Tel: 08184400093 Mail: telabibstores@gmail.com</b></p>
+                <br><b>Tel: 08037019120, 08045125920<br> Mail: Austinkc@gmail.com</b></p>
             <table>
                 <thead>
                     <tr>
@@ -26,8 +26,8 @@
                 <tbody>
                     @foreach ($sale->products as $sold_product)
                         <tr>
-                            <td class="quantity"><center>{{ $sold_product->qty }}</center></td>
-                            <td class="description"><a style="text-decoration: none; color: black;" href="{{ route('products.show', $sold_product->product) }}">{{ $sold_product->product->name }}</a></td>
+                            <td class="quantity"><center>{{ $sold_product->quantity }}</center></td>
+                            <td class="description"><a style="text-decoration: none; color: black;" href="{{ route('product-view', $sold_product->product) }}">{{ $sold_product->product->name }}</a></td>
                             <td class="price">₦{{ $sold_product->total_amount }}</td>
                         </tr>
                     @endforeach
@@ -37,16 +37,16 @@
             <table class="total">
                 <tbody>
                     <tr>
-                        <td class="quantity">Total</td>
-                        <td class="description"> :</td>
-                        <td class="price">₦{{ __($sale->products->sum('total_amount')) }}</td>
+                        <th scope="row" colspan="2" class="description" style="font-size: 1.5rem">Total:</th>
+                        <td class="quantity"></td>
+                        <th scope="row" colspan="1"  class="price">₦{{ __($sale->products->sum('total_amount')) }}.00</th>
                     </tr>
                 </tbody>
             </table>
             <hr>
 
             <p class="centered">Thanks for your purchase!
-                <br>Tel-Abib Stores</p>
+                <br>Austin KC Enterprise</p>
         </div>
         <button id="btnPrint" class="hidden-print">Print</button>
         <script>

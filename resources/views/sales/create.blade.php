@@ -31,11 +31,11 @@
             </button>
             <!-- Add New Button End -->
           @else
-            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto " data-bs-toggle="modal" data-bs-target="#deleteSale">
+            <a href="{{ route('sales.finalize', $sale->id) }}"  type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto ">
                     <i data-acorn-icon="arrow-end-right" class="icon" data-acorn-size="18"></i>
 
               <span>Finalize Sale</span>
-            </button>
+            </a>
           @endif
         </div>
     <!-- Top Buttons End -->

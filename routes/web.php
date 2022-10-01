@@ -103,6 +103,8 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::post('sales/{sale}/product', ['as' => 'sales.product.store', 'uses' => 'App\Http\Controllers\SaleController@storeProduct']);
+Route::get('sales/{sale}/receipt', ['as' => 'sales.receipt', 'uses' => 'App\Http\Controllers\SaleController@saleReceipt']);
+Route::get('sales/{sale}/finalize', ['as' => 'sales.finalize', 'uses' => 'App\Http\Controllers\SaleController@finalizeSale']);
 Route::get('transactions/{type}', ['as' => 'transactions.type', 'uses' => 'App\Http\Controllers\TransactionController@type']);
 Route::get('transactions/{type}/create', ['as' => 'transactions.create', 'uses' => 'App\Http\Controllers\TransactionController@create']);
 Route::post('transactions/store', ['as' => 'transactions.store', 'uses' => 'App\Http\Controllers\TransactionController@store']);

@@ -14,6 +14,7 @@
       </div>
     </div>
   </div>
+    @include('alerts.success')
   <div class="card mb-5">
     <div class="card-body">
 
@@ -35,7 +36,7 @@
               <td> {{ date('d-m-y', strtotime($transaction->created_at)) }}</td>
               <td> {{ $transaction->title }}</td>
               <td><a href="{{ route('method-view', $transaction->method) }}">{{ $transaction->method->name }}</a></td>
-              <td>{{ __($transaction->amount) }}</td>
+              <td>₦{{ __($transaction->amount) }}</td>
               <td>{{ $transaction->reference }}</td>
               <td>
                 @if ($transaction->sale_id)
@@ -45,7 +46,7 @@
                   </a>
                 @else
                   <div class="d-flex align-items-center justify-content-end">
-                    <a href="{{ route('transaction.edit', $transaction->id) }}" class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
+                    <button class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
                       data-bs-target="#incomeEdit{{ $transaction->id }}" type="button">
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -58,7 +59,7 @@
                         </path>
                       </svg>
                       <span class="d-none d-xxl-inline-block">Edit</span>
-                    </a>
+                    </button>
                     <button data-bs-toggle="modal" data-bs-target="#incomeDelete{{ $transaction->id }}"
                       class="btn btn-sm btn-icon btn-icon-start btn-outline-danger ms-1" type="button">
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"

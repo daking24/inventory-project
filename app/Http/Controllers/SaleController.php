@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
 use Auth;
+use Carbon\Carbon;
 
 class SaleController extends Controller
 {
@@ -79,6 +80,13 @@ class SaleController extends Controller
         return view('sales.view', compact('client', 'sale', 'user', 'role'));
     }
 
+    public function saleReceipt(Sale $sale)
+    {
+        $client = Client::all();
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('sales.receipt', compact('client', 'sale', 'user', 'role'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -134,7 +142,7 @@ class SaleController extends Controller
         $sale->save();
         $sale->client->save();
 
-        return back()->withStatus('The sale has been successfully completed.');
+        return redirect()->route('sales.receipt', $sale)->withStatus('The sale has been successfully completed.');
 
     }
 

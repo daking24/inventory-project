@@ -14,6 +14,7 @@
       </div>
     </div>
   </div>
+  @include('alerts.success')
   <div class="card mb-5">
     <div class="card-body">
 
@@ -37,7 +38,7 @@
               <td><a href="{{ route('method-view', $transaction->method) }}">{{ $transaction->method->name }}</a></td>
               <td>{{ __($transaction->amount) }}</td>
               <td>{{ $transaction->reference }}</td>
-              <td class="td-actions text-right">
+              <td>
                 @if ($transaction->sale_id)
                   <a href="{{ route('sales-view', $transaction->sale_id) }}" class="btn btn-link" data-toggle="tooltip"
                     data-placement="bottom" title="More Details">
@@ -46,7 +47,7 @@
                 @else
                   <div class="d-flex align-items-center justify-content-end">
                     <button class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
-                      data-bs-target="#expensesEdit" type="button">
+                      data-bs-target="#expensesEdit{{ $transaction->id }}" type="button">
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" class="acorn-icons acorn-icons-edit-square undefined">
@@ -59,8 +60,8 @@
                       </svg>
                       <span class="d-none d-xxl-inline-block">Edit</span>
                     </button>
-                    <button class="btn btn-sm btn-icon btn-icon-start btn-outline-danger ms-1" type="button"
-                      data-bs-toggle="modal" data-bs-target="#expenseDelete">
+                    <button data-bs-toggle="modal" data-bs-target="#expenseDelete{{ $transaction->id }}"
+                      class="btn btn-sm btn-icon btn-icon-start btn-outline-danger ms-1" type="button">
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" class="acorn-icons acorn-icons-bin undefined">
@@ -75,14 +76,17 @@
                       <span class="d-none d-xxl-inline-block">Delete</span>
                     </button>
                   </div>
+
+                  @include('transactions.expense.modal.edit')
+                  @include('transactions.expense.modal.delete')
                 @endif
               </td>
             </tr>
-            @empty
+          @empty
             <tr>
-                <th scope="row" colspan="6" class="text-center">
-                    <span class="text-warning">No Data Available</span>
-                </th>
+              <th scope="row" colspan="6" class="text-center">
+                <span class="text-warning">No Data Available</span>
+              </th>
             </tr>
           @endforelse
         </tbody>
@@ -92,6 +96,4 @@
 
 
   @include('transactions.expense.modal.create')
-  @include('transactions.expense.modal.edit')
-  @include('transactions.expense.modal.delete')
 @endsection

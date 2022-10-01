@@ -10,6 +10,7 @@ use App\Http\Requests\StorereceiptRequest;
 use App\Http\Requests\UpdatereceiptRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Auth;
 
 class ReceiptController extends Controller
 {
@@ -20,10 +21,13 @@ class ReceiptController extends Controller
      */
     public function index()
     {
-
+        $user = auth()->user();
+        $role = $user->getRoleNames()->first();
         return view('inventory.receipts.index',[
             'provider' => Provider::all(),
-            'receipts' => Receipt::all()
+            'receipts' => Receipt::all(),
+            'user' => $user,
+            'role' => $role,
         ]);
     }
 
@@ -34,9 +38,10 @@ class ReceiptController extends Controller
      */
     public function create(Receipt $receipt)
     {
-
+        $user = auth()->user();
+        $role = $user->getRoleNames()->first();
         $products = Product::all();
-        return view('inventory.receipts.summary', compact('receipt', 'products'));
+        return view('inventory.receipts.summary', compact('receipt', 'products', 'user', 'role'));
     }
 
     /**
@@ -62,7 +67,9 @@ class ReceiptController extends Controller
      */
     public function show(Receipt $receipt)
     {
-        return view('inventory.receipts.finalized-summary', compact('receipt'));
+        $user = auth()->user();
+        $role = $user->getRoleNames()->first();
+        return view('inventory.receipts.finalized-summary', compact('receipt', 'user', 'role'));
     }
 
     /**

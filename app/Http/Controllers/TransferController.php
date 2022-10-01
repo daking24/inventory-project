@@ -18,9 +18,13 @@ class TransferController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
         return view('transactions.transfer.index',[
             'payment' => PaymentMethods::all(),
-            'transfers' => Transfer::latest()->paginate(25)
+            'transfers' => Transfer::latest()->paginate(25),
+            'user' => $user,
+            'role' => $role
 
         ]);
     }
@@ -101,7 +105,11 @@ class TransferController extends Controller
      */
     public function update(UpdateTransferRequest $request, Transfer $transfer)
     {
-        //
+        // update transfer
+        $transfer->update($request->all());
+        return redirect()
+            ->route('transfer')
+            ->withStatus('Transaction updated successfully.');
     }
 
     /**
@@ -112,6 +120,11 @@ class TransferController extends Controller
      */
     public function destroy(Transfer $transfer)
     {
-        //
+        // delete transfer
+        $transfer->delete();
+        return redirect()
+            ->route('transfer')
+            ->withStatus('Transaction deleted successfully.');
+
     }
 }

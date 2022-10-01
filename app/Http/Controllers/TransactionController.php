@@ -40,16 +40,17 @@ class TransactionController extends Controller
     {
         $payment = PaymentMethods::all();
         $provider = Provider::all();
-
+        $user = User::find(Auth::user()->id);
+        $role = $user->getRoleNames()->first();
         switch ($type) {
             case 'expense':
-                return view('transactions.expense.index', ['payment' => $payment,'transactions' => Transaction::where('type', 'expense')->latest()->paginate(25)]);
+                return view('transactions.expense.index', ['payment' => $payment,'transactions' => Transaction::where('type', 'expense')->latest()->paginate(25), 'user' => $user, 'role' => $role]);
 
             case 'payment':
-                return view('transactions.payment.index', ['payment' => $payment,'provider' => $provider, 'transactions' => Transaction::where('type', 'payment')->latest()->paginate(25)]);
+                return view('transactions.payment.index', ['payment' => $payment,'provider' => $provider, 'transactions' => Transaction::where('type', 'payment')->latest()->paginate(25), 'user' => $user, 'role' => $role]);
 
             case 'income':
-                return view('transactions.income.index', ['payment'=> $payment,'transactions' => Transaction::where('type', 'income')->latest()->paginate(25)]);
+                return view('transactions.income.index', ['payment'=> $payment,'transactions' => Transaction::where('type', 'income')->latest()->paginate(25), 'user' => $user, 'role' => $role]);
         }
 
     }
