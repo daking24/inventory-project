@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-use App\Models\PaymentMethods;
-use App\Models\Provider;
+use App\Models\{
+    Transaction,
+    PaymentMethods,
+    Provider,
+    User,
+};
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateTransactionRequest;
+use Auth;
+
 
 class TransactionController extends Controller
 {
@@ -25,8 +30,9 @@ class TransactionController extends Controller
         ];
 
         $transactions = Transaction::latest()->paginate(25);
-
-        return view('transactions.all', compact('transactions', 'transactionname'));
+        $user = User::find(Auth::user()->id);
+        $role = $user->getRoleNames()->first();
+        return view('transactions.all', compact('transactions', 'transactionname', 'user', 'role'));
     }
 
 

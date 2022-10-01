@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\{
+    Client,
+    User,
+};
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use Illuminate\Http\Request;
+use Auth;
 
 class ClientController extends Controller
 {
@@ -16,8 +21,9 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::paginate(25);
-
-        return view('clients.index', compact('clients'));
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('clients.index', compact('clients', 'user', 'role'));
     }
 
     /**
@@ -52,8 +58,9 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-
-        return view('clients.view', compact('client'));
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('clients.view', compact('client', 'user', 'role'));
     }
 
     /**
@@ -64,7 +71,9 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.edit', compact('client'));
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('clients.edit', compact('client', 'user', 'role'));
     }
 
     /**
@@ -74,12 +83,12 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClientRequest $request, Client $client)
+    public function update(Request $request, Client $client)
     {
         $client->update($request->all());
 
         return redirect()
-            ->route('clients.index')
+            ->route('clients')
             ->withStatus('Successfully modified customer.');
 
     }
@@ -95,7 +104,7 @@ class ClientController extends Controller
         $client->delete();
 
         return redirect()
-            ->route('clients.index')
+            ->route('clients')
             ->withStatus('Customer successfully removed.');
 
     }

@@ -22,7 +22,9 @@ class SaleController extends Controller
     {
         $client = Client::all();
         $sales = Sale::latest()->paginate(25);
-        return view('sales.index', compact('client', 'sales'));
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('sales.index', compact('client', 'sales', 'user', 'role'));
     }
 
     /**
@@ -34,7 +36,10 @@ class SaleController extends Controller
     {
         $products = Product::all();
 
-        return view('sales.create', ['sale' => $sale, 'products' => $products]);
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('sales.create', ['sale' => $sale, 'products' => $products,
+            'user' => $user, 'role' => $role]);
     }
 
     /**
@@ -69,7 +74,9 @@ class SaleController extends Controller
     {
 
          $client = Client::all();
-        return view('sales.view', compact('client', 'sale'));
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('sales.view', compact('client', 'sale', 'user', 'role'));
     }
 
     /**

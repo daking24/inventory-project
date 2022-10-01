@@ -41,12 +41,17 @@ class TransactionStatsController extends Controller
         $salesperiods['Year'] = Sale::whereYear('created_at', Carbon::now()->year)->get();
         $transactionsperiods['Year'] = Transaction::whereYear('created_at', Carbon::now()->year)->get();
 
+        $user = auth()->user();
+        $role = $user->getRoleNames()->first();
+        // dd($role);
         return view('transactions.statistics', [
             'clients'               => Client::where('balance', '!=', '0.00')->get(),
             'salesperiods'          => $salesperiods,
             'transactionsperiods'   => $transactionsperiods,
             'date'                  => Carbon::now(),
-            'methods'               => PaymentMethods::all()
+            'methods'               => PaymentMethods::all(),
+            'user'                  => $user,
+            'role'                  => $role,
         ]);
     }
 
