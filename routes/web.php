@@ -60,7 +60,7 @@ Route::prefix('admin')->group(function() {
         Route::get('/stats', [TransactionStatsController::class, 'index'])->name('transaction-stats');
 
     });
-    
+
 
         Route::get('/clients/{client}/show', [ClientController::class, 'show'])->name('clientShow');
         Route::get('/clients', [ClientController::class, 'index'])->name('clients');
@@ -109,8 +109,11 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::post('sales/{sale}/product', ['as' => 'sales.product.store', 'uses' => 'App\Http\Controllers\SaleController@storeProduct']);
-Route::get('sales/{sale}/receipt', ['as' => 'sales.receipt', 'uses' => 'App\Http\Controllers\SaleController@saleReceipt']);
+Route::get('sales/{sale}/receipt', ['as' => 'sales.receipt', 'uses' => 'App\Http\Controllers\SaleController@show']);
+Route::get('sales/{sale}/receipt/print', ['as' => 'sales.receipts.printFormat', 'uses' => 'App\Http\Controllers\SaleController@saleReceipt']);
 Route::get('sales/{sale}/finalize', ['as' => 'sales.finalize', 'uses' => 'App\Http\Controllers\SaleController@finalizeSale']);
+Route::post('sales/{sale}/product/{soldproduct}/update', ['as' => 'sales.product.update', 'uses' => 'App\Http\Controllers\SaleController@updateproduct']);
+Route::delete('sales/{sale}/product/{soldproduct}/delete', ['as' => 'sales.product.delete', 'uses' => 'App\Http\Controllers\SaleController@destroyproduct']);
 Route::get('transactions/{type}', ['as' => 'transactions.type', 'uses' => 'App\Http\Controllers\TransactionController@type']);
 Route::get('transactions/{type}/create', ['as' => 'transactions.create', 'uses' => 'App\Http\Controllers\TransactionController@create']);
 Route::post('transactions/store', ['as' => 'transactions.store', 'uses' => 'App\Http\Controllers\TransactionController@store']);
@@ -127,7 +130,7 @@ Route::post('transactions/update/{transaction}', ['as' => 'transaction.update', 
 Route::delete('transactions/delete/{transaction}', ['as' => 'transaction.delete', 'uses' => 'App\Http\Controllers\TransactionController@destroy']);
 
 
-Route::get('profile', ['as' => 'profile', 'uses' => 'App\Http\Controllers\ProfileController@index']);   
-Route::get('staff/view', ['as' => 'staffs', 'uses' => 'App\Http\Controllers\UserController@index']);   
+Route::get('profile', ['as' => 'profile', 'uses' => 'App\Http\Controllers\ProfileController@index']);
+Route::get('staff/view', ['as' => 'staffs', 'uses' => 'App\Http\Controllers\UserController@index']);
 Route::post('staff/{id}/view', ['as' => 'staffs.update', 'uses' => 'App\Http\Controllers\UserController@update']);
 

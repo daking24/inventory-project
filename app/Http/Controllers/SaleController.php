@@ -36,7 +36,7 @@ class SaleController extends Controller
     public function createProductSale(Sale $sale)
     {
         $products = Product::all();
-
+        // $soldProduct = SoldProduct::all();
         $user = Auth::user();
         $role = $user->getRoleNames()->first();
         return view('sales.create', ['sale' => $sale, 'products' => $products,
@@ -133,7 +133,7 @@ class SaleController extends Controller
         }
 
         foreach ($sale->products as $sold_product) {
-            $sold_product->product->stock -= $sold_product->qty;
+            $sold_product->product->stock -= $sold_product->quantity;
             $sold_product->product->save();
         }
 
@@ -142,7 +142,7 @@ class SaleController extends Controller
         $sale->save();
         $sale->client->save();
 
-        return redirect()->route('sales.receipt', $sale)->withStatus('The sale has been successfully completed.');
+        return redirect()->route('sales.receipt', $sale)->withStatus('The Sale has been successfully completed.');
 
     }
 
@@ -155,6 +155,22 @@ class SaleController extends Controller
                 ->route('sales.product.create', ['sale' => $sale])
                 ->withStatus('Product successfully registered.');
 
+    }
+
+        public function updateproduct(Request $request, Sale $sale, SoldProduct $soldproduct)
+    {
+        $request->merge(['total_amount' => $request->get('unit_price') * $request->get('quantity')]);
+
+        $soldproduct->update($request->all());
+
+        return redirect()->route('sales.product.create', $sale)->withStatus('Product successfully modified.');
+    }
+
+    public function destroyproduct(Sale $sale, SoldProduct $soldproduct)
+    {
+        $soldproduct->delete();
+
+        return back()->withStatus('The product has been disposed of successfully.');
     }
 
 }

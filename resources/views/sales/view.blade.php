@@ -12,7 +12,7 @@
       <!-- Top Buttons Start -->
       <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
         <!-- Add New Button Start -->
-        <a href="{{ route('sales.receipt', $sale->id) }}" type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto ">
+        <a href="{{ route('sales.receipts.printFormat', $sale->id) }}" type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto ">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none"
             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
             class="acorn-icons acorn-icons-bin undefined">
