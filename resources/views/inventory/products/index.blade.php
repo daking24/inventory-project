@@ -6,9 +6,11 @@
         <div class="col-12 col-sm-6">
             <h1 class="mb-0 pb-0 display-4">Products</h1>
         </div>
-        <div class="col-12 col-sm-6 d-flex align-items-start justify-content-end">
+        <div class="col-12 col-sm-6 d-flex align-items-start gap-1 justify-content-end">
                     <!-- Tour Button Start -->
             <a type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createProduct">Register Product</a>
+            <a href="{{ route('product-receipt') }}" type="button" class="btn btn-outline-info">Print Product Receipt</a>
+
             {{-- <a href="{{ route('client-create') }}" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#expensesRegister">Register Sale</a> --}}
             <!-- Tour Button End -->
         </div>
@@ -35,7 +37,7 @@
             <tbody>
             @foreach ($products as $item)
             <tr>
-            
+
                 <td><a href="{{ route('category-view', $item->category) }}">{{ $item->category->name }}</a></td>
                 <td>{{ $item->name }}</td>
                 <td>₦{{ $item->base_price }}</td>
@@ -60,7 +62,7 @@
                 </div>
                 </td>
             </tr>
-            
+
 @include('inventory.products.modal.edit')
 @include('inventory.products.modal.delete')
             @endforeach

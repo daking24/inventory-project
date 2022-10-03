@@ -18,37 +18,42 @@
       <br>Plateaau State
       <br><b>Tel: 08037019120, 08045125920<br> Mail: Austinkc@gmail.com</b>
       <br><b>{{ date('d/m/Y h:i A') }}</b>
+      {{-- get time in 12 hour format --}}
+
     </p>
     <table>
       <thead>
         <tr>
-          <th class="quantity">Q.</th>
           <th class="description">Product</th>
+          <th class="quantity">Stk.</th>
           <th class="price">C/P</th>
-          <th class="t-price">Price</th>
+          <th class="t-price">Total</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($sale->products as $sold_product)
+        @foreach ($products as $product)
           <tr>
-            <td class="quantity">
-              <center>{{ $sold_product->quantity }}</center>
-            </td>
+
             <td class="description"><a style="text-decoration: none; color: black;"
-                href="{{ route('product-view', $sold_product->product) }}">{{ $sold_product->product->name }}</a></td>
-            <td class="price">₦{{ $sold_product->product->selling_price }}</td>
-            <td class="t-price">₦{{ $sold_product->total_amount }}</td>
+                href="{{ route('product-view', $product->id) }}">{{ $product->name }}</a></td>
+                <td class="quantity">
+              <center>{{ $product->stock + $product->stock_defective }}</center>
+            </td>
+            <td class="price">₦{{ $product->selling_price }}</td>
+            <td class="t-price">₦{{ $product->selling_price * ($product->stock + $product->stock_defective) }}.0</td>
           </tr>
-        @endforeach
+          @endforeach
       </tbody>
     </table>
     <hr>
     <table class="total">
       <tbody>
         <tr>
-          <th scope="row" colspan="2" class="description" style="font-size: 1.5rem">Total:</th>
-          <td class="quantity"></td>
-          <th scope="row" colspan="1" class="price">₦{{ __($sale->products->sum('total_amount')) }}.00</th>
+          <th scope="row" colspan="2" class="description">Total Stock:</th>
+
+          <th scope="row" colspan="1" class="price">{{ $products->sum('stock') + $products->sum('stock_defective') }}</th>
+          {{-- <th scope="row" colspan="1" class="t-price">₦{{ __($products->sum('selling_price')) }}</th> --}}
+
         </tr>
       </tbody>
     </table>

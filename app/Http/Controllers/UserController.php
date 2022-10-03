@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -17,7 +18,9 @@ class UserController extends Controller
         // Get Users where role id from spatie/permissions is 2
         $staff= User::role('Sales Manager')->get();
         // dd($staff);
-        return view('staff.index', compact('staff'));
+        $user= Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('staff.index', compact('staff', 'role', 'user'));
     }
 
     /**

@@ -51,6 +51,7 @@ Route::prefix('admin')->group(function() {
     Route::prefix('/transactions')->group(function()
     {
         Route::get('/transfers', [TransferController::class, 'index'])->name('transfer');
+        Route::delete('/transfer/{transfer}/delete', [TransferController::class, 'destroy'])->name('transfer.delete');
         Route::get('/sales', [SaleController::class, 'index'])->name('sales');
         Route::get('sales/{sale}', ['as' => 'sales.product.create', 'uses' => 'App\Http\Controllers\SaleController@createProductSale']);
         Route::get('/sales/{sale}/view', [SaleController::class, 'show'])->name('sales-view');
@@ -80,6 +81,8 @@ Route::prefix('admin')->group(function() {
         Route::get('/categories/{product_categories}/view', [ProductCategoriesController::class, 'show'])->name('category-view');
         Route::get('/products', [ProductsController::class, 'index'])->name('inventory-product');
         Route::get('/products/view/{products}', [ProductsController::class, 'show'])->name('product-view');
+        // route for product receipt
+        Route::get('/products/receipt', [ProductsController::class, 'getProducts'])->name('product-receipt');
         Route::get('/stats', [InventoryStatsController::class, 'index'])->name('inventory-stats');
 
 

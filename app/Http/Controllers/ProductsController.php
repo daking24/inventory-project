@@ -25,6 +25,14 @@ class ProductsController extends Controller
         return view('inventory.products.index', compact('categories','products', 'user', 'role'));
     }
 
+    // function to get products and pass to receipt view
+    public function getProducts()
+    {
+        $products = Product::where('is_active', true)->get();
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
+        return view('inventory.products.receipt', compact('products', 'user', 'role'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +40,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
 
