@@ -84,6 +84,7 @@
                       <span class="d-none d-xxl-inline-block">View</span>
                     </a>
                   @endif
+                  @role('Admin Manager')
                   <button class="btn btn-sm btn-icon btn-icon-start btn-outline-danger ms-1" data-bs-toggle="modal" data-bs-target="#deleteSale{{ $sale->id }}" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                       fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -99,6 +100,7 @@
                     <span class="d-none d-xxl-inline-block">Delete</span>
                   </button>
                 </div>
+                @endrole
               </td>
             </tr>
   @include('sales.modal.delete-sale')

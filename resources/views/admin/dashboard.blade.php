@@ -10,7 +10,7 @@
         <div class="card-header ">
             <div class="row">
                 <div class="col-sm-6 text-left">
-                    <h2 class="card-title">Welcome Sales agent, proceed woth your sale Transaction</h2>
+                    <h2 class="card-title">Welcome Sales agent, proceed with your transactions</h2>
                 </div>
             </div>
         </div>
