@@ -15,10 +15,10 @@
           <div class="mb-3">
             <label for="receiver_method" class="form-label">Select Product</label>
             <select id="receiver_method" name="product_id" class="select-products">
-              <option disabled >Choose...</option>
+              <option selected >Choose...</option>
               @foreach ($products as $item)
                 @if ($item['id'] == old('product_id'))
-                  <option value="{{ $item['id'] }}" selected>[{{ $item->category->name }}] {{ $item->name }} </option>
+                  <option value="{{ $item['id'] }}">[{{ $item->category->name }}] {{ $item->name }} </option>
                 @else
                   <option value="{{ $item['id'] }}">[{{ $item->category->name }}] {{ $item->name }} </option>
                 @endif

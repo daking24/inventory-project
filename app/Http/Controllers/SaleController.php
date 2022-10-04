@@ -118,7 +118,13 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        // delete the sale
+        $soldProducts = SoldProduct::where('sale_id', $sale->id)->get();
+        foreach($soldProducts as $soldProduct) {
+            $product = Product::find($soldProduct->product_id);
+            $product->stock += $soldProduct->quantity;
+            $product->save();
+            $soldProduct->delete();
+        }
         $sale->delete();
         return redirect()->route('sales')->withStatus('Sale deleted successfully.');
     }
