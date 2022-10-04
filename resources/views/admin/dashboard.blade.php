@@ -1,6 +1,25 @@
 @extends('layouts.app', ['pageSlug' => 'dashboard', 'page' => 'Dashboard', 'section' => ''])
 
+
 @section('content')
+
+@role('Sales Manager')
+
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="card-header ">
+            <div class="row">
+                <div class="col-sm-6 text-left">
+                    <h2 class="card-title">Welcome Sales agent, proceed woth your sale Transaction</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@endrole
+@role('Admin Manager')
     <div class="row mb-3">
         <div class="col-12">
             <div class="card card-chart">
@@ -45,7 +64,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="row mb-3">
         <div class="col-lg-4">
             <div class="card card-chart">
@@ -87,7 +106,9 @@
             </div>
         </div>
     </div>
+</div>
 
+@endrole
 @endsection
 
 @push('js')

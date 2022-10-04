@@ -44,9 +44,9 @@ Route::get('/admin-dashboard', [DashboardController::class, 'adminIndex'])->name
 Route::get('/sales-dashboard', [DashboardController::class, 'saleIndex'])->name('sale-dashboard');
 Route::post('sale/store', ['as' => 'sales.store', 'uses' => 'App\Http\Controllers\SaleController@store']);
 Route::get('/', [LoginController::class, 'Index'])->name('login');
+Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 Route::prefix('admin')->group(function() {
     Route::post('/login-post', [LoginController::class, 'Login'])->name('loginPost');
-
 
     Route::prefix('/transactions')->group(function()
     {

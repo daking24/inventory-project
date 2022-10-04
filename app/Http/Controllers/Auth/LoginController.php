@@ -40,4 +40,11 @@ class LoginController extends Controller
     {
         return view('profile.profile');
     }
+
+    public function Logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+          
+    }
 }
