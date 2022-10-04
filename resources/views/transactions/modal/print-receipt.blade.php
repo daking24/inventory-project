@@ -15,7 +15,9 @@
                 <br>No. 39 Rwangpam Street,
                 <br>Ahmadu Bello Way, Jos,
                 <br>Plateaau State
-                <br><b>Tel: 08037019120, 08045125920<br> Mail: Austinkc@gmail.com</b></p>
+                <br><b>Tel: 08037019120, 08045125920<br> Mail: Austinkc@gmail.com</b>
+                <br><b>{{ date('d/m/Y h:i A') }}</b>
+            </p>
 
                 <p class="centered">Receipt for {{ $time }}</p>
             <table>
@@ -42,7 +44,7 @@
                             </tr>
                         @endforeach
                     @endforeach
-                        
+
                 </tbody>
             </table>
             <hr>
