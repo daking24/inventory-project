@@ -118,7 +118,9 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        //
+        // delete the sale
+        $sale->delete();
+        return redirect()->route('sales')->withStatus('Sale deleted successfully.');
     }
 
     public function finalizeSale(Sale $sale)
