@@ -10,13 +10,13 @@
                 @csrf
                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="Name" value="{{ $item->name }}">
+                    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="Name" value="{{ $item->name }}" required>
                     <label>Name</label>
                 </div>@include('alerts.feedback', ['field' => 'name'])
                 </div>
                 <div class="mb-5{{ $errors->has('product_category_id') ? ' has-danger' : '' }}">
                     <label class="form-label">Category</label>
-                    <select class="select2{{ $item->id }}{{ $errors->has('product_category_id') ? ' is-invalid' : '' }}" name="product_category_id">
+                    <select class="select2{{ $item->id }}{{ $errors->has('product_category_id') ? ' is-invalid' : '' }}" name="product_category_id" required>
                         <option >Choose ...</option>
                         @foreach ($categories as $category)
                             @if($category['id'] == old('product_category_id') or $category['id'] == $item->product_category_id)
@@ -28,11 +28,11 @@
                     </select>@include('alerts.feedback', ['field' => 'product_category_id'])
                 </div>
                 <div class="form-floating mb-3{{ $errors->has('description') ? ' has-danger' : '' }}">
-                    <input type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" placeholder="Description" value="{{ $item->description }}">
+                    <input type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" placeholder="Description" value="{{ $item->description }}" >
                     <label>Description</label>@include('alerts.feedback', ['field' => 'description'])
                 </div>
                 <div class="form-floating mb-3{{ $errors->has('stock') ? ' has-danger' : '' }}">
-                    <input type="number" class="form-control{{ $errors->has('stock') ? ' is-invalid' : '' }}" name="stock" placeholder="Stock" value="{{ $item->stock }}">
+                    <input type="number" class="form-control{{ $errors->has('stock') ? ' is-invalid' : '' }}" name="stock" placeholder="Stock" value="{{ $item->stock }}" required>
                     <label>Stock</label>@include('alerts.feedback', ['field' => 'stock'])
                 </div>
 
@@ -42,11 +42,11 @@
                 </div>
 
                 <div class="form-floating mb-3{{ $errors->has('base_price') ? ' has-danger' : '' }}">
-                    <input type="number" class="form-control{{ $errors->has('base_price') ? ' is-invalid' : '' }}" name="base_price" placeholder="Cost Price" value="{{ old('base_price', $item->base_price) }}">
+                    <input type="number" class="form-control{{ $errors->has('base_price') ? ' is-invalid' : '' }}" name="base_price" placeholder="Cost Price" value="{{ old('base_price', $item->base_price) }}" required>
                     <label>Cost Price</label>@include('alerts.feedback', ['field' => 'base_price'])
                 </div>
                 <div class="form-floating mb-3{{ $errors->has('selling_price') ? ' has-danger' : '' }}">
-                    <input type="number" class="form-control{{ $errors->has('selling_price') ? ' is-invalid' : '' }}" name="selling_price" placeholder="Selling Price" value="{{ $item->selling_price }}">
+                    <input type="number" class="form-control{{ $errors->has('selling_price') ? ' is-invalid' : '' }}" name="selling_price" placeholder="Selling Price" value="{{ $item->selling_price }}" required>
                     <label>Selling Price</label>@include('alerts.feedback', ['field' => 'selling_price'])
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary">Update</button>

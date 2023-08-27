@@ -25,7 +25,7 @@ class ReceiptController extends Controller
         $role = $user->getRoleNames()->first();
         return view('inventory.receipts.index',[
             'provider' => Provider::all(),
-            'receipts' => Receipt::all(),
+            'receipts' => Receipt::paginate(25),
             'user' => $user,
             'role' => $role,
         ]);

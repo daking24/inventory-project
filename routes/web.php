@@ -41,12 +41,12 @@ use App\Http\Controllers\{
 // })->name('home');
 
 Route::get('/', [LoginController::class, 'Index'])->name('login');
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
-    Route::prefix('admin')->group(function() {
         Route::post('/login-post', [LoginController::class, 'Login'])->name('loginPost');
         Route::get('/admin-dashboard', [DashboardController::class, 'adminIndex'])->name('admin-dashboard');
         Route::get('/sales-dashboard', [DashboardController::class, 'saleIndex'])->name('sale-dashboard');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
+    Route::prefix('admin')->group(function() {
         Route::post('sale/store', ['as' => 'sales.store', 'uses' => 'App\Http\Controllers\SaleController@store']);
 
 
@@ -139,5 +139,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profile', ['as' => 'profile', 'uses' => 'App\Http\Controllers\ProfileController@index']);
     Route::get('staff/view', ['as' => 'staffs', 'uses' => 'App\Http\Controllers\UserController@index']);
     Route::post('staff/{id}/view', ['as' => 'staffs.update', 'uses' => 'App\Http\Controllers\UserController@update']);
+    Route::post('admin/{id}/update', ['as' => 'admin.update', 'uses' => 'App\Http\Controllers\UserController@adminUpdate']);
 
 });

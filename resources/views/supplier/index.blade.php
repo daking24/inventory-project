@@ -95,6 +95,11 @@
         </tbody>
       </table>
     </div>
+    <div class="card-footer py-4">
+        <nav class="d-flex justify-content-end" aria-label="...">
+            {{ $provider->links() }}
+        </nav>
+    </div>
   </div>
 
   {{-- Create Client Modal --}}

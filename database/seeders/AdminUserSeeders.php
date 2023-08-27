@@ -32,13 +32,13 @@ class AdminUserSeeders extends Seeder
         // Create roles and assign created permissions
         $role1 = Role::create(['name' => 'Admin Manager']);
         $role2 = Role::create(['name' => 'Sales Manager']);
-     
+
         $permissions = Permission::pluck('id','id')->all();
-   
+
         $role1->syncPermissions($permissions);
         // $role2->givePermissionTo('role-list', 'role-edit');
 
-     
+
         $user1->assignRole([$role1->id]);
         $user2->assignRole([$role2->id]);
 

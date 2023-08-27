@@ -18,7 +18,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $provider = Provider::all();
+        $provider = Provider::paginate(25);
         $user = User::find(Auth::user()->id);
         $role = $user->getRoleNames()->first();
         return view('supplier.index', compact('provider', 'user', 'role'));
@@ -96,7 +96,11 @@ class ProviderController extends Controller
     public function destroy(Provider $provider)
     {
         // delete the provider
-        $provider->delete();
-        return redirect()->route('supplier')->withStatus('Successfully Deleted a Vendor');
+        if ($provider->transactions()->count() > 0 || $provider->receipts()->count() > 0) {
+            return redirect()->route('supplier')->withStatus('Cannot delete a supplier with transactions or receipts');
+        } else {
+            $provider->delete();
+            return redirect()->route('supplier')->withStatus('Successfully Deleted a Supplier');
+        }
     }
 }

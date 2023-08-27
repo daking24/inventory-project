@@ -19,7 +19,7 @@ class ProductsController extends Controller
     public function index()
     {
         $categories = ProductCategory::where('is_active', true)->get();
-        $products = Product::paginate(25)->where('is_active', true);
+        $products = Product::where('is_active', true)->paginate(25);
         $user = Auth::user();
         $role = $user->getRoleNames()->first();
         return view('inventory.products.index', compact('categories','products', 'user', 'role'));
@@ -40,7 +40,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        
+
     }
 
 
@@ -115,10 +115,15 @@ class ProductsController extends Controller
     public function destroy(Product $product)
     {
         // dd($product);
-        $product->delete();
-
-        return redirect()
-            ->route('inventory-product')
-            ->withStatus('Product removed successfully.');
+        if ($product->solds()->count() > 0) {
+            return redirect()
+                ->route('inventory-product')
+                ->withStatus('Product has solds, cannot delete.');
+        } else {
+            $product->delete();
+            return redirect()
+                ->route('inventory-product')
+                ->withStatus('Product deleted successfully.');
+        }
     }
 }

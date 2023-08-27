@@ -121,6 +121,8 @@ class TransferController extends Controller
     public function destroy(Transfer $transfer)
     {
         // delete transfer
+        $transaction = Transaction::where('transfer_id', '=',$transfer->id);
+        $transaction->delete();
         $transfer->delete();
         return redirect()
             ->route('transfer')

@@ -15,8 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Get Users where role id from spatie/permissions is 2
-        $staff= User::role('Sales Manager')->get();
+        
+        $staff= User::role('Sales Manager')->paginate(25);
         // dd($staff);
         $user= Auth::user();
         $role = $user->getRoleNames()->first();
@@ -95,4 +95,14 @@ class UserController extends Controller
     {
     }
 
+    public function adminUpdate(Request $request, $id)
+    {
+        // Update Admin Password
+        //dd($request->all());
+        $user = User::find($id);
+        $password = $request->password;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect()->route('profile')->withStatus("Successfully changed password.Your new password is ${password}");
+    }
 }

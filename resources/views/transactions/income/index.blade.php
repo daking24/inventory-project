@@ -14,7 +14,7 @@
       </div>
     </div>
   </div>
-    @include('alerts.success')
+  @include('alerts.success')
   <div class="card mb-5">
     <div class="card-body">
 
@@ -77,8 +77,8 @@
                     </button>
                   </div>
 
-  @include('transactions.income.modal.edit')
-  @include('transactions.income.modal.delete')
+                  @include('transactions.income.modal.edit')
+                  @include('transactions.income.modal.delete')
                 @endif
               </td>
             </tr>
@@ -91,6 +91,11 @@
           @endforelse
         </tbody>
       </table>
+    </div>
+    <div class="card-footer py-4">
+        <nav class="d-flex justify-content-end" aria-label="...">
+            {{ $transactions->links() }}
+        </nav>
     </div>
   </div>
 

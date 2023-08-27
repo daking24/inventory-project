@@ -19,7 +19,7 @@ class ProductCategoriesController extends Controller
     {
         $user = Auth::user();
         $role = $user->getRoleNames()->first();
-        $categories = ProductCategory::get();
+        $categories = ProductCategory::paginate(25);
         return view('inventory.categories.index', compact('categories', 'user', 'role'));
     }
 
@@ -93,7 +93,11 @@ class ProductCategoriesController extends Controller
     public function destroy(ProductCategory $category)
     {
         //delete category
-        $category->delete();
-        return redirect()->route('inventory-category')->withStatus('Category Deleted Succesfully');
+        if ($category->products->count() > 0) {
+            return redirect()->route('inventory-category')->withStatus('Category has products in it, cannot delete');
+        } else {
+            $category->delete();
+            return redirect()->route('inventory-category')->withStatus('Category Deleted Succesfully');
+        }
     }
 }
