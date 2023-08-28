@@ -39,65 +39,65 @@ th.price {
 }
 
 .ticket {
-    width: 155px;
-    max-width: 155px;
+    width: 250px;
+    max-width: 250px;
 }
 
 .ticket-product{
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
 
 }
 
 .ticket-product td {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
 }
 
 .ticket-product .total {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
     text-align: right;
 }
 
 .ticket-product .t-price {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
     text-align: right;
 }
 
 .ticket-product .price {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
     text-align: center;
 }
 
 .ticket-product .quantity {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
     text-align: center;
 }
 
 .ticket-product .description {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
     text-align: center;
 }
 .ticket-product .total .description {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
     text-align: right;
 }
 
 .ticket-product .total .price {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
     text-align: right;
 }
 
 .ticket-product .total .t-price {
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
     text-align: right;
 }
 

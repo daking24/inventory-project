@@ -38,7 +38,7 @@
               <td>{{ __($data->where('type', 'expense')->sum('amount')) }}</td>
               <td>{{ __($data->where('type', 'payment')->sum('amount')) }}</td>
               <td>
-                {{ __($data->where('payment_method_id', optional($methods->where('name', 'Cash')->first())->id)->sum('amount')) }}
+                {{ __($data->where('payment_methods_id', optional($methods->where('name', 'Cash')->first())->id)->sum('amount')) }}
               </td>
               <td>{{ __($data->sum('amount')) }}</td>
 
@@ -152,13 +152,12 @@
               @forelse($methods as $method)
                 <tr>
                   <th scope="row"><a href="{{ route('method-view', $method) }}">{{ $method->name }}</a></th>
-                  <td>{{ __($transactionsperiods['Year']->where('payment_method_id', $method->id)->count()) }}</td>
-                  <td>{{ __($transactionsperiods['Year']->where('payment_method_id', $method->id)->sum('amount')) }}</td>
+                  <td>{{ __($transactionsperiods['Year']->where('payment_methods_id', $method->id)->count()) }}</td>
+                  <td>{{ __($transactionsperiods['Year']->where('payment_methods_id', $method->id)->sum('amount')) }}</td>
                   <td>
                     <div class="d-flex align-items-center justify-content-end">
-                      <a href="{{ route('method-view', $method) }}"
-                        class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
-                        data-bs-target="#transfersEdit" type="button">
+                      <a href="{{ route('method-view', $method->id) }}"
+                        class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                           fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                           stroke-linejoin="round" class="acorn-icons acorn-icons-eye mb-3 d-inline-block text-primary">

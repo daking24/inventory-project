@@ -13,6 +13,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('profile') }}">Profile</a></li>
                     </ul>
     </nav>
+    @include('alerts.success')
                 </div>
                 <!-- Title End -->
 
@@ -56,10 +57,11 @@
                                 <i data-acorn-icon="activity" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">Overview</span>
                             </a>
-                            <a class="nav-link px-0 border-bottom border-separator-light" href="{{ route('sales') }}" role="tab">
+                            <a class="nav-link px-0 border-bottom border-separator-light" href=""  data-bs-toggle="modal" data-bs-target="#editAdmin{{ $user->id }}" role="tab">
                                 <i data-acorn-icon="lock-off" class="me-2" data-acorn-size="17"></i>
-                                <span class="align-middle">Sales</span>
+                                <span class="align-middle">Change Password</span>
                             </a>
+                            @include('profile.change-password')
                             <a class="nav-link px-0 border-bottom border-separator-light" href="{{ route('inventory-product') }}" role="tab">
                                 <i data-acorn-icon="office" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">Products</span>
@@ -100,7 +102,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <div class="card hover-border-primary">
+                                <a href="{{ route('sales') }}" class="card hover-border-primary">
                                     <div class="card-body">
                                         <div class="heading mb-0 d-flex justify-content-between lh-1-25 mb-3">
                                             <span>Sales</span>
@@ -109,7 +111,7 @@
                                         <div class="text-small text-muted mb-1">ALL</div>
                                         <div class="cta-1 text-primary">{{ $salesCount }}</div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="card hover-border-primary">

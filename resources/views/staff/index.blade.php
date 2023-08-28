@@ -33,7 +33,7 @@
                     <td>Not Avaiable</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-end">
-                    
+
                     <a href="#" data-bs-toggle="modal" data-bs-target="#editStaff{{ $item->id }}"
                         class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
@@ -48,7 +48,7 @@
                         </svg>
                         <span class="d-none d-xxl-inline-block">Edit</span>
                       </a>
-                      
+
                     @include('staff.modal.edit')
                 </div>
                     </td>
@@ -65,6 +65,11 @@
             @endforelse
             </tbody>
         </table>
+    </div>
+    <div class="card-footer py-4">
+        <nav class="d-flex justify-content-end" aria-label="...">
+            {{ $staff->links() }}
+        </nav>
     </div>
 </div>
 @endsection

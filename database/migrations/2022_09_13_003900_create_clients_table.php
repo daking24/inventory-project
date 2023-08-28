@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->timestamp('last_purchase')->nullable();
-            $table->unsignedInteger('total_purchase')->default(0);
-            $table->unsignedDecimal('total_paid')->default(0.00);
+            $table->string('total_purchase', 30)->default('0');
+            $table->string('total_paid', 30)->default('0.00');
             $table->timestamps();
             $table->boolean('is_active')->default(true);
             $table->decimal('balance', 30, 0)->default(0.00);

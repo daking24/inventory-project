@@ -118,15 +118,21 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        $soldProducts = SoldProduct::where('sale_id', $sale->id)->get();
-        foreach($soldProducts as $soldProduct) {
-            $product = Product::find($soldProduct->product_id);
-            $product->stock += $soldProduct->quantity;
-            $product->save();
-            $soldProduct->delete();
-        }
-        $sale->delete();
-        return redirect()->route('sales')->withStatus('Sale deleted successfully.');
+        $soldProducts = SoldProduct::where('sale_id','=' ,$sale->id)->get();
+        // dd($soldProducts);
+        // if the sold products are more than 0, delete them else do not delete sale and return error
+        
+            foreach($soldProducts as $soldProduct) {
+            $product = Product::find($soldProduct->product->id);
+            // dd($product);
+                $product->stock += $soldProduct->quantity;
+                // dd($product);
+                $product->save();
+                $soldProduct->delete();
+            }
+            $sale->delete();
+            return redirect()->route('sales')->withStatus('Sale deleted successfully.');
+        
     }
 
     public function finalizeSale(Sale $sale)
@@ -137,7 +143,7 @@ class SaleController extends Controller
         foreach ($sale->products as $sold_product) {
             $product_name = $sold_product->product->name;
             $product_stock = $sold_product->product->stock;
-            if($sold_product->qty > $product_stock) return back()->withError("The product '$product_name' does not have enough stock. Only has $product_stock units.");
+            if($sold_product->quantity > $product_stock) return back()->withError("The product '$product_name' does not have enough stock. Only has $product_stock units.");
         }
 
         foreach ($sale->products as $sold_product) {

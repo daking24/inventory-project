@@ -43,7 +43,8 @@
               <td class="td-actions text-right">
 
                 <div class="d-flex align-items-center justify-content-end">
-                  <a href="{{ route('transaction.edit', $transaction->id) }}" id="editPayment{{ $transaction->id }}" class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
+                  <a href="{{ route('transaction.edit', $transaction->id) }}" id="editPayment{{ $transaction->id }}"
+                    class="btn btn-sm btn-icon btn-icon-start btn-outline-info ms-1" data-bs-toggle="modal"
                     data-bs-target="#paymentEdit{{ $transaction->id }}" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                       fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -57,8 +58,8 @@
                     </svg>
                     <span class="d-none d-xxl-inline-block">Edit</span>
                   </a>
-                  <button class="btn btn-sm btn-icon btn-icon-start btn-outline-danger ms-1" type="button" data-bs-toggle="modal"
-                    data-bs-target="#paymentDelete{{ $transaction->id }}">
+                  <button class="btn btn-sm btn-icon btn-icon-start btn-outline-danger ms-1" type="button"
+                    data-bs-toggle="modal" data-bs-target="#paymentDelete{{ $transaction->id }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20"
                       fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                       stroke-linejoin="round" class="acorn-icons acorn-icons-bin undefined">
@@ -76,19 +77,24 @@
               </td>
             </tr>
 
-  @include('transactions.payment.modal.edit')
-  @include('transactions.payment.modal.delete')
-            @empty
+            @include('transactions.payment.modal.edit')
+            @include('transactions.payment.modal.delete')
+          @empty
             <tr>
-                <th scope="row" colspan="7" class="text-center">
-                    <span class="text-center text-warning">
-                        No Data Available
-                    </span>
-                </th>
+              <th scope="row" colspan="7" class="text-center">
+                <span class="text-center text-warning">
+                  No Data Available
+                </span>
+              </th>
             </tr>
           @endforelse
         </tbody>
       </table>
+    </div>
+    <div class="card-footer py-4">
+        <nav class="d-flex justify-content-end" aria-label="...">
+            {{ $transactions->links() }}
+        </nav>
     </div>
   </div>
   @include('transactions.payment.modal.create')

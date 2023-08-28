@@ -15,7 +15,7 @@ class LoginController extends Controller
     //route auth.login
     public function Index()
     {
-        return view('auth\login');
+        return view('auth.login');
 
     }
 
@@ -31,10 +31,13 @@ class LoginController extends Controller
             }elseif ($user->hasRole('Sales Manager')){
                 return redirect()->route('admin-dashboard');                # code...
             }
+        } else {
+            return back()->withError('Invalid Credentials');
         }
-    
-    
+
+
     }
+
 
     public function profile()
     {
@@ -45,6 +48,6 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect()->route('login');
-          
+
     }
 }

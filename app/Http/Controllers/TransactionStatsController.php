@@ -45,7 +45,7 @@ class TransactionStatsController extends Controller
         $role = $user->getRoleNames()->first();
         // dd($role);
         return view('transactions.statistics', [
-            'clients'               => Client::where('balance', '!=', '0.00')->get(),
+            'clients'               => Client::where('balance', '!=', '0.00')->latest()->take(5)->get(),
             'salesperiods'          => $salesperiods,
             'transactionsperiods'   => $transactionsperiods,
             'date'                  => Carbon::now(),

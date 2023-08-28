@@ -11,13 +11,14 @@
 
 <body>
   <div class="container ticket-product">
-    <img src="{{ asset('akc-logo2-1.png') }}" alt="Logo">
+    <img src="{{ asset('akclogo-cropped.svg') }}" alt="Logo">
     <p class="centered">RECEIPT FROM AUSTIN KC Ent.
       <br>No. 39 Rwangpam Street,
       <br>Ahmadu Bello Way, Jos,
       <br>Plateaau State
       <br><b>Tel: 08037019120, 08045125920<br> Mail: Austinkc@gmail.com</b>
-      <br><b>{{ date('d/m/Y h:i A') }}</b>
+      <br><b>{{\Carbon\Carbon::now()->addHour(1)}} </b>
+      <br><b>Customer: {{ $sale->client->name }}</b>
     </p>
     <table>
       <thead>
@@ -36,7 +37,7 @@
             </td>
             <td class="description"><a style="text-decoration: none; color: black;"
                 href="{{ route('product-view', $sold_product->product) }}">{{ $sold_product->product->name }}</a></td>
-            <td class="price">₦{{ $sold_product->product->selling_price }}</td>
+            <td class="t-price">₦{{ $sold_product->product->selling_price }}</td>
             <td class="t-price">₦{{ $sold_product->total_amount }}</td>
           </tr>
         @endforeach

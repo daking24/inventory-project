@@ -11,7 +11,7 @@
 
 <body>
   <div class="container ticket-product">
-    <img src="{{ asset('akc-logo2-1.png') }}" alt="Logo">
+    <img src="{{ asset('akclogo-cropped.svg') }}" alt="Logo">
     <p class="centered">RECEIPT FROM AUSTIN KC Ent.
       <br>No. 39 Rwangpam Street,
       <br>Ahmadu Bello Way, Jos,
@@ -25,9 +25,7 @@
       <thead>
         <tr>
           <th class="description">Product</th>
-          <th class="quantity">Stk.</th>
-          <th class="price">C/P</th>
-          <th class="t-price">Total</th>
+          <th class="t-price">Stk.</th>
         </tr>
       </thead>
       <tbody>
@@ -36,11 +34,7 @@
 
             <td class="description"><a style="text-decoration: none; color: black;"
                 href="{{ route('product-view', $product->id) }}">{{ $product->name }}</a></td>
-                <td class="quantity">
-              <center>{{ $product->stock + $product->stock_defective }}</center>
-            </td>
-            <td class="price">₦{{ $product->selling_price }}</td>
-            <td class="t-price">₦{{ $product->selling_price * ($product->stock + $product->stock_defective) }}.0</td>
+            <td class="t-price">{{ $product->stock + $product->stock_defective }}</td>
           </tr>
           @endforeach
       </tbody>

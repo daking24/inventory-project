@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+                            <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -9,14 +9,15 @@
     </head>
     <body>
 
-        <div class="container ticket">
-            <img src="{{ asset('akc-logo2-1.png') }}" alt="Logo">
+        <div class="container ticket-product">
+            <img src="{{ asset('akclogo-cropped.svg') }}" alt="Logo">
             <p class="centered">RECEIPT FROM Austin KC Ent.
                 <br>No. 39 Rwangpam Street,
                 <br>Ahmadu Bello Way, Jos,
                 <br>Plateaau State
                 <br><b>Tel: 08037019120, 08045125920<br> Mail: Austinkc@gmail.com</b>
-                <br><b>{{ date('d/m/Y h:i A') }}</b>
+                <br><b>{{\Carbon\Carbon::now()->addHour(1)}} </b>
+
             </p>
 
                 <p class="centered">Receipt for {{ $time }}</p>
@@ -25,16 +26,19 @@
                     <tr>
                         <th class="quantity">Q.</th>
                         <th class="description">Product</th>
-                        <th class="price">Price</th>
+                        <th class="t-price">Price</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{-- {{ dd($passedSales) }} --}}
                     @foreach ($passedSales as $item => $sale)
                     <tr>
-                        <td colspan="2" class="description">Sale</td>
-                        <td class="quantity"></td>
+                        <td colspan="2" class="description" style="text-align: left;">Sale</td>
                         <td class="price">{{ $item+1 }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="description" style="text-align: left;">Client</td>
+                        <td colspan="2" class="t-price">{{ $sale->client->name}}</td>
                     </tr>
                         @foreach ($sale->products as $sold_product)
                             <tr>
